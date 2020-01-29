@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(
         children: <Widget>[
-          ListTile(
-            title: Text('home'),
-            onTap: () {},
-          ),
+          ListTile(title: Text('user'), onTap: () {}),
         ],
       ),
     );

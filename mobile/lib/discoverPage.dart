@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class DiscoverPage extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(
         children: <Widget>[
           ListTile(
-            title: Text('home'),
+            title: Text('discover'),
             onTap: () {},
           ),
         ],
