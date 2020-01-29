@@ -18,9 +18,32 @@ class HomePage extends StatelessWidget {
       ),
       appBar: AppBar(
         title: Text('welcome to bolt!'),
+        bottom: TabBar(
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.home),
+            ),
+            Tab(
+              icon: Icon(Icons.search),
+            ),
+            Tab(
+              icon: Icon(Icons.person),
+            )
+          ],
+        ),
       ),
-      body: Card(
-        child: Text('hello'),
+      body: TabBarView(
+        children: <Widget>[
+          Card(
+            child: Text('home'),
+          ),
+          Card(
+            child: Text('search'),
+          ),
+          Card(
+            child: Text('user'),
+          ),
+        ],
       ),
     );
   }
