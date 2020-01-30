@@ -4,6 +4,7 @@ import './homePage.dart';
 import './discoverPage.dart';
 import './profilePage.dart';
 import './menu.dart';
+import './styles.dart';
 
 void main() => runApp(App());
 
@@ -17,6 +18,14 @@ class AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'bolt',
+      theme: ThemeData(
+        primaryColor: Colors.grey[50],
+        accentColor: Colors.purple,
+        brightness: Brightness.dark,
+        textTheme: TextTheme(
+          body1: BodyTextStyle(),
+        ),
+      ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -45,10 +54,6 @@ class AppState extends State<App> {
             ],
           ),
         ),
-      ),
-      theme: ThemeData(
-        primaryColor: Colors.grey,
-        accentColor: Colors.purple,
       ),
     );
   }

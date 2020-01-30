@@ -7,7 +7,15 @@ class DiscoverPage extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           ListTile(
-            title: Text('discover'),
+            title: Text('user 1'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('user 2'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('user 3'),
             onTap: () {},
           ),
         ],
