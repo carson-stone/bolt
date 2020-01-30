@@ -1,0 +1,22 @@
+{
+  "name": "bolt",
+  "version": "1.0.0",
+  "description": "bolt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "cd backend && nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carson-stone/bolt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carson-stone/bolt/issues"
+  },
+  "homepage": "https://github.com/carson-stone/bolt#readme",
+  "dependencies": {}
+}

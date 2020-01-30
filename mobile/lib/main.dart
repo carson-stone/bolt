@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import './homePage.dart';
 import './discoverPage.dart';
@@ -15,6 +16,11 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
+  Future getFeed() async {
+    String url = 'http://localhost:6000';
+    var response = await http.get(url);
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'bolt',
@@ -36,7 +42,7 @@ class AppState extends State<App> {
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.flash_on),
-                onPressed: () {},
+                onPressed: getFeed,
               ),
             ],
             bottom: TabBar(
