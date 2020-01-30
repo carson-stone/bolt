@@ -24,6 +24,7 @@ class AppState extends State<App> {
         brightness: Brightness.dark,
         textTheme: TextTheme(
           body1: BodyTextStyle(),
+          body2: EmphasizedBodyTextStyle(),
         ),
       ),
       home: DefaultTabController(
@@ -32,6 +33,12 @@ class AppState extends State<App> {
           drawer: Menu(),
           appBar: AppBar(
             title: Text('welcome to bolt!'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.flash_on),
+                onPressed: () {},
+              ),
+            ],
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
