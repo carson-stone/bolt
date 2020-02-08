@@ -4,8 +4,8 @@
   "description": "bolt",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "backend": "cd backend && nodemon server.js"
+    "backend": "cd backend && nodemon server.js",
+    "frontend": "cd mobile && flutter run"
   },
   "repository": {
     "type": "git",
