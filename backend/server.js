@@ -28,6 +28,8 @@ router.route('/').get((req, res) => {
 });
 
 app.use('/', router);
+const userRouter = require('./routers/userRouter.js');
+app.use('/users', userRouter);
 
 const port = process.env.PORT || 5000;
 

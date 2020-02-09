@@ -16,7 +16,30 @@ class DiscoverPage extends StatelessWidget {
           ),
           ListTile(
             title: Text('user 3'),
-            onTap: () {},
+            onTap: () {
+              // set up button
+              Widget okButton = FlatButton(
+                child: Text("OK"),
+                onPressed: () {},
+              );
+
+              // set up AlertDialog
+              AlertDialog alert = AlertDialog(
+                title: Text("My title"),
+                content: Text("This is my message."),
+                actions: [
+                  okButton,
+                ],
+              );
+
+              // show dialog
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return alert;
+                },
+              );
+            },
           ),
         ],
       ),
