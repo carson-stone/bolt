@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './registerPage.dart';
+import './loginPage.dart';
 
 class Menu extends StatelessWidget {
   @override
@@ -14,7 +15,14 @@ class Menu extends StatelessWidget {
               child: Text('bolt'),
             ),
           ),
-          ListTile(title: Text('login'), onTap: () {}),
+          ListTile(
+              title: Text('login'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              }),
           ListTile(
               title: Text('register'),
               onTap: () {

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 let app = express();
+app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors());
 
@@ -27,8 +28,8 @@ router.route('/').get((req, res) => {
   res.json('got feed');
 });
 
-app.use('/', router);
 const userRouter = require('./routers/userRouter.js');
+app.use('/', router);
 app.use('/users', userRouter);
 
 const port = process.env.PORT || 5000;

@@ -4,13 +4,13 @@ import 'dart:convert';
 
 import './menu.dart';
 
-class RegisterPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
-  void register(BuildContext context) async {
-    String url = 'http://localhost:6000/users/register';
+  void login(BuildContext context) async {
+    String url = 'http://localhost:6000/users/login';
     var response = await http.post(url, body: {'username': 'carson'});
-    if (jsonDecode(response.body) == 'user added') {
+    if (jsonDecode(response.body) == 'user authenticated') {
       Navigator.pop(context);
     }
   }
@@ -20,7 +20,7 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       endDrawer: Menu(),
       appBar: AppBar(
-        title: Text('register'),
+        title: Text('login'),
       ),
       body: Center(
         child: Form(
@@ -42,10 +42,10 @@ class RegisterPage extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    register(context);
+                    login(context);
                   }
                 },
-                child: Text('register'),
+                child: Text('log in'),
               ),
             ],
           ),

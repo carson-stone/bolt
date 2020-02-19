@@ -17,4 +17,18 @@ router.route('/register').post((req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
+router.route('/login').post((req, res) => {
+  console.log('authenticating user');
+  const { username } = req.body;
+  User.findOne({ username: username })
+    .then(user => {
+      if (user === null) {
+        res.json('user login failed');
+      } else {
+        res.json('user authenticated');
+      }
+    })
+    .catch(err => res.status(400).json(err));
+});
+
 module.exports = router;
