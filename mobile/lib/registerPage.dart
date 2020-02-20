@@ -4,12 +4,18 @@ import 'dart:convert';
 
 import './menu.dart';
 
-class RegisterPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+class RegisterPage extends StatefulWidget {
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
 
-  void register(BuildContext context) async {
+class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
+  final usernameController = TextEditingController();
+
+  void register(BuildContext context, String username) async {
     String url = 'http://localhost:6000/users/register';
-    var response = await http.post(url, body: {'username': 'carson'});
+    var response = await http.post(url, body: {'username': username});
     if (jsonDecode(response.body) == 'user added') {
       Navigator.pop(context);
     }
@@ -32,6 +38,7 @@ class RegisterPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.body2,
               ),
               TextFormField(
+                controller: usernameController,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter a value';
@@ -42,7 +49,7 @@ class RegisterPage extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    register(context);
+                    register(context, usernameController.text);
                   }
                 },
                 child: Text('register'),
@@ -52,5 +59,11 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    super.dispose();
   }
 }

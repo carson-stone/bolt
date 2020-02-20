@@ -4,12 +4,18 @@ import 'dart:convert';
 
 import './menu.dart';
 
-class LoginPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 
-  void login(BuildContext context) async {
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final usernameController = TextEditingController();
+
+  void login(BuildContext context, String username) async {
     String url = 'http://localhost:6000/users/login';
-    var response = await http.post(url, body: {'username': 'carson'});
+    var response = await http.post(url, body: {'username': username});
     if (jsonDecode(response.body) == 'user authenticated') {
       Navigator.pop(context);
     }
@@ -32,6 +38,7 @@ class LoginPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.body2,
               ),
               TextFormField(
+                controller: usernameController,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter a value';
@@ -42,7 +49,7 @@ class LoginPage extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    login(context);
+                    login(context, usernameController.text);
                   }
                 },
                 child: Text('log in'),
@@ -52,5 +59,11 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    super.dispose();
   }
 }
