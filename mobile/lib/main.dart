@@ -10,12 +10,21 @@ import './styles.dart';
 void main() => runApp(App());
 
 class App extends StatefulWidget {
-  State createState() {
-    return new AppState();
-  }
+  @override
+  _AppState createState() => _AppState();
 }
 
-class AppState extends State<App> {
+class _AppState extends State<App> {
+  bool loggedIn = false;
+  Map<String, dynamic> user = {'name': 'bolt'};
+
+  void setLoggedIn(bool logIn, String username) {
+    setState(() {
+      loggedIn = logIn;
+      user['name'] = username;
+    });
+  }
+
   Future getFeed() async {
     String url = 'http://localhost:6000';
     var response = await http.get(url);
@@ -59,9 +68,9 @@ class AppState extends State<App> {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          drawer: Menu(),
+          drawer: Menu(loggedIn, setLoggedIn, username: user['name']),
           appBar: AppBar(
-            title: Text('welcome to bolt!'),
+            title: Text('bolt'),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.flash_on),

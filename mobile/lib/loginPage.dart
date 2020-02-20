@@ -5,11 +5,20 @@ import 'dart:convert';
 import './menu.dart';
 
 class LoginPage extends StatefulWidget {
+  Function setLoggedIn;
+
+  LoginPage(this.setLoggedIn);
+  LoginPage.fromAnotherPage();
+
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState(setLoggedIn);
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Function setLoggedIn;
+
+  _LoginPageState(this.setLoggedIn);
+
   final _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
 
@@ -17,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
     String url = 'http://localhost:6000/users/login';
     var response = await http.post(url, body: {'username': username});
     if (jsonDecode(response.body) == 'user authenticated') {
+      setLoggedIn(true, username);
+      Navigator.pop(context);
       Navigator.pop(context);
     }
   }
@@ -24,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Menu(),
+      endDrawer: Menu.fromAnotherPage(),
       appBar: AppBar(
         title: Text('login'),
       ),

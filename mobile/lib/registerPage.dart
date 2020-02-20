@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import './menu.dart';
+import './LoginPage.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Menu(),
+      endDrawer: Menu.fromAnotherPage(),
       appBar: AppBar(
         title: Text('register'),
       ),
