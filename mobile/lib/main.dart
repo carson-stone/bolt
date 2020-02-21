@@ -17,7 +17,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   bool loggedIn = false;
-  Map<String, dynamic> user = {'name': 'bolt', 'feed': []};
+  Map<String, dynamic> user = {'name': 'bolt', 'feed': [], 'id': ''};
 
   void setLoggedIn(bool logIn, String username, String id) async {
     List feed = [];
@@ -80,7 +80,7 @@ class _AppState extends State<App> {
             children: <Widget>[
               HomePage(user['feed']),
               DiscoverPage(),
-              ProfilePage(),
+              ProfilePage(user['id']),
             ],
           ),
         ),
