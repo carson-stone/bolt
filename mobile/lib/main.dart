@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import './homePage.dart';
 import './discoverPage.dart';
@@ -16,41 +17,22 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   bool loggedIn = false;
-  Map<String, dynamic> user = {'name': 'bolt'};
+  Map<String, dynamic> user = {'name': 'bolt', 'feed': []};
 
-  void setLoggedIn(bool logIn, String username) {
+  void setLoggedIn(bool logIn, String username) async {
+    List feed = [];
+
+    if (logIn) {
+      String url = "http://localhost:6000/users/${username}/feed";
+      var feedData = await http.get(url);
+      feed = jsonDecode(feedData.body);
+    }
+
     setState(() {
       loggedIn = logIn;
       user['name'] = username;
+      user['feed'] = feed;
     });
-  }
-
-  Future getFeed() async {
-    String url = 'http://localhost:6000';
-    var response = await http.get(url);
-
-    // // set up button
-    // Widget okButton = FlatButton(
-    //   child: Text("OK"),
-    //   onPressed: () {},
-    // );
-
-    // // set up AlertDialog
-    // AlertDialog alert = AlertDialog(
-    //   title: Text("My title"),
-    //   content: Text("This is my message."),
-    //   actions: [
-    //     okButton,
-    //   ],
-    // );
-
-    // // show dialog
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return alert;
-    //   },
-    // );
   }
 
   Widget build(BuildContext context) {
@@ -75,8 +57,7 @@ class _AppState extends State<App> {
               IconButton(
                 icon: Icon(Icons.flash_on),
                 onPressed: () {
-                  getFeed();
-                  print('ok');
+                  print('pressed flash icon');
                 },
               ),
             ],
@@ -96,7 +77,7 @@ class _AppState extends State<App> {
           ),
           body: TabBarView(
             children: <Widget>[
-              HomePage(),
+              HomePage(user['feed']),
               DiscoverPage(),
               ProfilePage(),
             ],

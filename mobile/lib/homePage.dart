@@ -1,28 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  List content = [];
+
+  HomePage(this.content);
+
+  @override
+  _HomePageState createState() => _HomePageState(content);
+}
+
+class _HomePageState extends State<HomePage> {
+  List content = [];
+
+  _HomePageState(this.content);
+
+  @override
   Widget build(BuildContext context) {
+    content = widget.content;
     return ListView(
-      children: List.generate(5, (index) {
+      children: List.generate(content.length, (index) {
         return Container(
           padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
-              Image.network(
-                  'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'),
+              Image.network(content[index]['imageUrl']),
               Column(
                 children: [
                   Container(
                     width: double.infinity,
                     child: Text(
-                      'username',
+                      content[index]['username'],
                       style: Theme.of(context).textTheme.body2,
                     ),
                   ),
                   Container(
                     width: double.infinity,
                     child: Text(
-                      'some description',
+                      content[index]['description'],
                       style: Theme.of(context).textTheme.body1,
                     ),
                   ),

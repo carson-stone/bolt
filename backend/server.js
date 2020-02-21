@@ -24,8 +24,8 @@ connection.once('open', () => {
 });
 
 router.route('/').get((req, res) => {
-  console.log('requested feed');
-  res.json('got feed');
+  console.log('request made to route path');
+  res.json('route path request');
 });
 
 const userRouter = require('./routers/userRouter.js');
