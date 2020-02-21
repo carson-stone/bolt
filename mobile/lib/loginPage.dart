@@ -25,8 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   void login(BuildContext context, String username) async {
     String url = 'http://localhost:6000/users/login';
     var response = await http.post(url, body: {'username': username});
-    if (jsonDecode(response.body) == 'user authenticated') {
-      setLoggedIn(true, username);
+    if (json.decode(response.body).startsWith('user authenticated')) {
+      setLoggedIn(true, username, json.decode(response.body).split(':')[1]);
       Navigator.pop(context);
       Navigator.pop(context);
     }

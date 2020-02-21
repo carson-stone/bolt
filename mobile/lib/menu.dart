@@ -69,7 +69,7 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text('log out'),
               onTap: () {
-                setLoggedIn(false, 'bolt');
+                setLoggedIn(false, 'bolt', '');
                 Navigator.pop(context);
               },
             ),

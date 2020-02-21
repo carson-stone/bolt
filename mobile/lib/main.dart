@@ -19,11 +19,11 @@ class _AppState extends State<App> {
   bool loggedIn = false;
   Map<String, dynamic> user = {'name': 'bolt', 'feed': []};
 
-  void setLoggedIn(bool logIn, String username) async {
+  void setLoggedIn(bool logIn, String username, String id) async {
     List feed = [];
 
     if (logIn) {
-      String url = "http://localhost:6000/users/${username}/feed";
+      String url = "http://localhost:6000/users/${id}/feed";
       var feedData = await http.get(url);
       feed = jsonDecode(feedData.body);
     }
@@ -31,6 +31,7 @@ class _AppState extends State<App> {
     setState(() {
       loggedIn = logIn;
       user['name'] = username;
+      user['id'] = id;
       user['feed'] = feed;
     });
   }
