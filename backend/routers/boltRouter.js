@@ -10,8 +10,8 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
   console.log(`adding bolt for user with id=${req.user_id}`);
-  const { user_id } = req.body;
-  new Bolt({ user_id })
+  const { user_id, description, imageUrl } = req.body;
+  new Bolt({ user_id, description, imageUrl })
     .save()
     .then(() => res.json('bolt added'))
     .catch(err => res.status(400).json(err));
