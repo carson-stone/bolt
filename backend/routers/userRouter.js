@@ -33,36 +33,18 @@ router.route('/login').post((req, res) => {
 });
 
 router.route('/:id/feed').get((req, res) => {
-  console.log(`getting feed for ${req.params.id}`);
-  User.findById(req.params.id)
-    .then(user =>
-      res.json([
-        {
-          imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-          username: 'carson',
-          description: 'from carson'
-        },
-        {
-          imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-          username: 'mike',
-          description: 'from mike'
-        },
-        {
-          imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-          username: 'carson',
-          description: 'from carson'
-        },
-        {
-          imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-          username: 'mike',
-          description: 'from mike'
-        }
-      ])
-    )
+  const id = req.params.id;
+  let feed = [];
+  console.log(`getting feed for ${id}`);
+
+  User.findById(id)
+    .then(async user => {
+      for (followed of user.following) {
+        let bolts = await Bolt.find({ user_id: followed });
+        feed.push(...bolts);
+      }
+      res.json(feed);
+    })
     .catch(error => res.status(400).json('error: ' + error));
 });
 
@@ -70,6 +52,16 @@ router.route('/:id/bolts').get((req, res) => {
   console.log(`getting bolts for ${req.params.id}`);
   Bolt.find({ user_id: req.params.id })
     .then(bolts => res.json(bolts))
+    .catch(error => res.json('error: ' + error));
+});
+
+router.route('/follow').post((req, res) => {
+  console.log(`making ${req.body.id} follow ${req.body.followed}`);
+  User.findByIdAndUpdate(
+    { _id: req.body.id },
+    { $push: { following: req.body.followed } }
+  )
+    .then(() => res.json('uccessfully followed'))
     .catch(error => res.json('error: ' + error));
 });
 
