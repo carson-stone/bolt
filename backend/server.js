@@ -29,8 +29,10 @@ router.route('/').get((req, res) => {
 });
 
 const userRouter = require('./routers/userRouter.js');
+const boltRouter = require('./routers/boltRouter.js');
 app.use('/', router);
 app.use('/users', userRouter);
+app.use('/bolts', boltRouter);
 
 const port = process.env.PORT || 5000;
 

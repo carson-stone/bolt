@@ -25,40 +25,44 @@ router.route('/login').post((req, res) => {
       if (user === null) {
         res.json('user login failed');
       } else {
-        res.json('user authenticated');
+        res.json(`user authenticated:${user._id}`);
       }
     })
     .catch(err => res.status(400).json(err));
 });
 
-router.route('/:username/feed').get((req, res) => {
-  console.log(`getting feed for ${req.params.username}`);
-  res.json([
-    {
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-      username: 'carson',
-      description: 'from carson'
-    },
-    {
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-      username: 'mike',
-      description: 'from mike'
-    },
-    {
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-      username: 'carson',
-      description: 'from carson'
-    },
-    {
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
-      username: 'mike',
-      description: 'from mike'
-    }
-  ]);
+router.route('/:id/feed').get((req, res) => {
+  console.log(`getting feed for ${req.params.id}`);
+  User.findById(req.params.id)
+    .then(user =>
+      res.json([
+        {
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
+          username: 'carson',
+          description: 'from carson'
+        },
+        {
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
+          username: 'mike',
+          description: 'from mike'
+        },
+        {
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
+          username: 'carson',
+          description: 'from carson'
+        },
+        {
+          imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/f/fb/K2_2006.jpg',
+          username: 'mike',
+          description: 'from mike'
+        }
+      ])
+    )
+    .catch(error => res.status(400).json('error: ' + error));
 });
 
 module.exports = router;
