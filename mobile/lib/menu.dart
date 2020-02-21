@@ -70,7 +70,7 @@ class _MenuState extends State<Menu> {
               title: Text('log out'),
               onTap: () {
                 setLoggedIn(false, 'bolt', '');
-                Navigator.pop(context);
+                Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
               },
             ),
           ];

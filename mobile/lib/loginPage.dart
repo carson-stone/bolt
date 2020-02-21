@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
       setLoggedIn(true, username, json.decode(response.body).split(':')[1]);
       Navigator.pop(context);
       Navigator.pop(context);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
     }
   }
 

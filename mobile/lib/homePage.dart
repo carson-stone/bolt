@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 
 class HomePage extends StatefulWidget {
   List content = [];
 
   HomePage(this.content);
+  HomePage.fromLogin();
 
   @override
   _HomePageState createState() => _HomePageState(content);
