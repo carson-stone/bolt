@@ -25,7 +25,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Menu.fromAnotherPage(),
       appBar: AppBar(
         title: Text('register'),
       ),
