@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String id, username;
-  int followingCount = 0;
+  int followingCount = 0, followerCount = 0;
   var user = {};
   List bolts = [];
 
@@ -38,6 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       user = userData;
       followingCount = user['following'].length;
+      followerCount = user['followers'].length;
       bolts = usersBolts;
     });
   }
@@ -61,16 +62,26 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Container(
                   child: Text(
-                    '13' + ' followers',
+                    '$followerCount followers',
                     style: Theme.of(context).textTheme.body2,
                   ),
                 ),
+                ...List.generate(followerCount, (i) {
+                  return Container(
+                    child: Text(user['followers'][i]['username']),
+                  );
+                }),
                 Container(
                   child: Text(
                     'following $followingCount',
                     style: Theme.of(context).textTheme.body2,
                   ),
                 ),
+                ...List.generate(followingCount, (i) {
+                  return Container(
+                    child: Text(user['following'][i]['username']),
+                  );
+                }),
               ],
             ),
           ),

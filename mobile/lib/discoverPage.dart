@@ -3,22 +3,23 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class DiscoverPage extends StatefulWidget {
-  String id;
+  String id, username;
   Function updateFeed;
   List users = [];
 
-  DiscoverPage(this.id, this.updateFeed);
+  DiscoverPage(this.id, this.username, this.updateFeed);
 
   @override
-  _DiscoverPageState createState() => _DiscoverPageState(id, updateFeed);
+  _DiscoverPageState createState() =>
+      _DiscoverPageState(id, username, updateFeed);
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
-  String id;
+  String id, username;
   Function updateFeed;
   List users = [];
 
-  _DiscoverPageState(this.id, this.updateFeed);
+  _DiscoverPageState(this.id, this.username, this.updateFeed);
 
   void getUsers() async {
     String url = 'http://localhost:6000/users/';
@@ -28,15 +29,20 @@ class _DiscoverPageState extends State<DiscoverPage> {
     });
   }
 
-  void follow(String followed) async {
+  void follow(String followedId, String followedUsername) async {
     String url = 'http://localhost:6000/users/follow';
-    await http.post(url, body: {'id': id, 'followed': followed});
+    await http.post(url, body: {
+      'id': id,
+      'username': username,
+      'followedId': followedId,
+      'followedUsername': followedUsername
+    });
     updateFeed(id);
   }
 
-  void unfollow(String unfollowed) async {
+  void unfollow(String unfollowedId) async {
     String url = 'http://localhost:6000/users/unfollow';
-    await http.post(url, body: {'id': id, 'unfollowed': unfollowed});
+    await http.post(url, body: {'id': id, 'unfollowedId': unfollowedId});
     updateFeed(id);
   }
 
@@ -55,7 +61,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                         color: Theme.of(context).accentColor,
                         child: Text("Follow"),
                         onPressed: () {
-                          follow(users[index]['_id']);
+                          follow(users[index]['_id'], users[index]['username']);
                           Navigator.pop(context);
                         },
                       );

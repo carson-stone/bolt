@@ -18,8 +18,8 @@ router.route('/:id').get((req, res) => {
 });
 
 router.route('/register').post((req, res) => {
-  console.log('adding user');
   const { username } = req.body;
+  console.log(`adding user ${username}`);
   new User({ username })
     .save()
     .then(() => res.json('user added'))
@@ -48,7 +48,7 @@ router.route('/:id/feed').get((req, res) => {
   User.findById(id)
     .then(async user => {
       for (followed of user.following) {
-        let bolts = await Bolt.find({ user_id: followed });
+        let bolts = await Bolt.find({ user_id: followed.id });
         feed.push(...bolts);
       }
       res.json(feed);
@@ -64,19 +64,34 @@ router.route('/:id/bolts').get((req, res) => {
 });
 
 router.route('/follow').post((req, res) => {
-  console.log(`making ${req.body.id} follow ${req.body.followed}`);
+  const { id, followedId, username, followedUsername } = req.body;
+  console.log(`making ${username} follow ${followedUsername}`);
   User.findByIdAndUpdate(
-    { _id: req.body.id },
-    { $push: { following: req.body.followed } }
+    { _id: id },
+    { $push: { following: { id: followedId, username: followedUsername } } }
   )
-    .then(() => res.json('successfully followed'))
+    .then(() =>
+      User.findByIdAndUpdate(
+        { _id: followedId },
+        { $push: { followers: { id: id, username: username } } }
+      ).then(() => res.json('successfully followed'))
+    )
     .catch(error => res.json('error: ' + error));
 });
 
 router.route('/unfollow').post((req, res) => {
-  const { id, unfollowed } = req.body;
-  console.log(`making ${id} unfollow ${unfollowed}`);
-  User.findByIdAndUpdate({ _id: id }, { $pull: { following: unfollowed } })
+  const { id, unfollowedId } = req.body;
+  console.log(`making ${id} unfollow ${unfollowedId}`);
+  User.findByIdAndUpdate(
+    { _id: id },
+    { $pull: { 'following.id': unfollowedId } }
+  )
+    .then(() =>
+      User.findByIdAndUpdate(
+        { _id: unfollowedId },
+        { $pull: { 'followers.id': id } }
+      )
+    )
     .then(() => res.json('successfully unfollowed'))
     .catch(error => res.json('error: ' + error));
 });

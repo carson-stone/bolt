@@ -13,8 +13,26 @@ const userSchema = new Schema(
     },
     following: [
       {
-        type: String,
-        required: false
+        id: {
+          type: String,
+          required: false
+        },
+        username: {
+          type: String,
+          required: false
+        }
+      }
+    ],
+    followers: [
+      {
+        id: {
+          type: String,
+          required: false
+        },
+        username: {
+          type: String,
+          required: false
+        }
       }
     ]
   },
