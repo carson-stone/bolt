@@ -21,7 +21,10 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('bolt', style: TextStyle(fontSize: 42)),
+              Text(
+                'bolt',
+                style: TextStyle(fontSize: 42),
+              ),
               SizedBox(
                 width: 200,
                 height: 100,

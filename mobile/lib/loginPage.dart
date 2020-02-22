@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import './menu.dart';
-
 class LoginPage extends StatefulWidget {
   Function setLoggedIn;
 
@@ -35,33 +33,70 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('login'),
+        title: Text('Login'),
       ),
       body: Center(
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 'username',
                 style: Theme.of(context).textTheme.body2,
               ),
-              TextFormField(
-                controller: usernameController,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a value';
-                  }
-                  return null;
-                },
+              Container(
+                padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
+                child: TextFormField(
+                  controller: usernameController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter a value';
+                    }
+                    return null;
+                  },
+                ),
               ),
-              RaisedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    login(context, usernameController.text);
-                  }
-                },
-                child: Text('log in'),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                'password',
+                style: Theme.of(context).textTheme.body2,
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
+                child: TextFormField(
+                  controller: usernameController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter a value';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 200,
+              ),
+              SizedBox(
+                width: 200,
+                height: 50,
+                child: RaisedButton(
+                  color: Theme.of(context).accentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      login(context, usernameController.text);
+                    }
+                  },
+                ),
               ),
             ],
           ),
