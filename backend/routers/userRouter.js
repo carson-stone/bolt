@@ -61,7 +61,7 @@ router.route('/follow').post((req, res) => {
     { _id: req.body.id },
     { $push: { following: req.body.followed } }
   )
-    .then(() => res.json('uccessfully followed'))
+    .then(() => res.json('successfully followed'))
     .catch(error => res.json('error: ' + error));
 });
 

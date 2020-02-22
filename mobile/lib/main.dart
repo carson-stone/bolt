@@ -20,13 +20,23 @@ class _AppState extends State<App> {
   bool loggedIn = false;
   Map<String, dynamic> user = {'name': 'bolt', 'feed': [], 'id': ''};
 
+  Future<List> updateFeed(String id) async {
+    String url = "http://localhost:6000/users/${id}/feed";
+    var feedData = await http.get(url);
+    var feed = jsonDecode(feedData.body);
+    if (loggedIn) {
+      setState(() {
+        user['feed'] = feed;
+      });
+    }
+    return feed;
+  }
+
   void setLoggedIn(bool logIn, String username, String id) async {
     List feed = [];
 
     if (logIn) {
-      String url = "http://localhost:6000/users/${id}/feed";
-      var feedData = await http.get(url);
-      feed = jsonDecode(feedData.body);
+      feed = await updateFeed(id);
     }
 
     setState(() {
@@ -70,7 +80,7 @@ class _AppState extends State<App> {
               body: TabBarView(
                 children: <Widget>[
                   HomePage(user['feed']),
-                  DiscoverPage(),
+                  DiscoverPage(user['id'], updateFeed),
                   ProfilePage(user['id']),
                 ],
               ),
