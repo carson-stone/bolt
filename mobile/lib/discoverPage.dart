@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class DiscoverPage extends StatelessWidget {
+class DiscoverPage extends StatefulWidget {
   String id;
   Function updateFeed;
 
   DiscoverPage(this.id, this.updateFeed);
+
+  @override
+  _DiscoverPageState createState() => _DiscoverPageState(id, updateFeed);
+}
+
+class _DiscoverPageState extends State<DiscoverPage> {
+  String id;
+  Function updateFeed;
+
+  _DiscoverPageState(this.id, this.updateFeed);
+
+  Future getUsers() async {
+    String url = 'http://localhost:6000/users/';
+    var result = await http.get(url);
+    return json.decode(result.body);
+  }
 
   void follow(String followed) async {
     String url = 'http://localhost:6000/users/follow';
@@ -31,7 +47,9 @@ class DiscoverPage extends StatelessWidget {
           ),
           ListTile(
             title: Text('user 2'),
-            onTap: () {},
+            onTap: () async {
+              print(await getUsers());
+            },
           ),
           ListTile(
             title: Text('nick'),
