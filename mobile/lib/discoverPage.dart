@@ -8,9 +8,15 @@ class DiscoverPage extends StatelessWidget {
 
   DiscoverPage(this.id, this.updateFeed);
 
-  void follow(String followed) {
+  void follow(String followed) async {
     String url = 'http://localhost:6000/users/follow';
-    http.post(url, body: {'id': id, 'followed': followed});
+    await http.post(url, body: {'id': id, 'followed': followed});
+    updateFeed(id);
+  }
+
+  void unfollow(String unfollowed) async {
+    String url = 'http://localhost:6000/users/unfollow';
+    await http.post(url, body: {'id': id, 'unfollowed': unfollowed});
     updateFeed(id);
   }
 
@@ -30,24 +36,28 @@ class DiscoverPage extends StatelessWidget {
           ListTile(
             title: Text('nick'),
             onTap: () {
-              // set up button
-              Widget okButton = FlatButton(
+              // set up buttons
+              Widget followButton = FlatButton(
                 color: Theme.of(context).accentColor,
-                child: Text("Yes"),
+                child: Text("Follow"),
                 onPressed: () {
                   follow('5e50904dcab45d20c70d9c8b');
+                  Navigator.pop(context);
+                },
+              );
+              Widget unfollowButton = FlatButton(
+                child: Text("Unfollow"),
+                onPressed: () {
+                  unfollow('5e50904dcab45d20c70d9c8b');
                   Navigator.pop(context);
                 },
               );
 
               // set up AlertDialog
               AlertDialog alert = AlertDialog(
-                title: Text("Follow nick?"),
-                content:
-                    Text("You will be able to see their bolts on your feed."),
-                actions: [
-                  okButton,
-                ],
+                title: Text("nick"),
+                content: Text("What would you like to do?"),
+                actions: [followButton, unfollowButton],
               );
 
               // show dialog
