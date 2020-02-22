@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => Scaffold(
+                            backgroundColor: Colors.black,
                             body: Container(
                               padding: EdgeInsets.all(10),
                               alignment: Alignment.center,
