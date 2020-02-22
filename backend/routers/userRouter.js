@@ -65,4 +65,12 @@ router.route('/follow').post((req, res) => {
     .catch(error => res.json('error: ' + error));
 });
 
+router.route('/unfollow').post((req, res) => {
+  const { id, unfollowed } = req.body;
+  console.log(`making ${id} unfollow ${unfollowed}`);
+  User.findByIdAndUpdate({ _id: id }, { $pull: { following: unfollowed } })
+    .then(() => res.json('successfully unfollowed'))
+    .catch(error => res.json('error: ' + error));
+});
+
 module.exports = router;
