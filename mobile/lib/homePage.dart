@@ -1,3 +1,6 @@
+import 'package:bolt/loginPage.dart';
+import 'package:bolt/profilePage.dart';
+import 'package:bolt/registerPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -62,7 +65,23 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(14.0),
-                child: Image.network(content[index]['imageUrl']),
+                child: GestureDetector(
+                  child: Image.network(content[index]['imageUrl']),
+                  onLongPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                            appBar: AppBar(
+                              title: Text(
+                                  content[index]['username'] + "'s profile"),
+                            ),
+                            body: ProfilePage(content[index]['user_id'],
+                                content[index]['username']),
+                          ),
+                        ));
+                  },
+                ),
               ),
               Column(
                 children: [

@@ -37,8 +37,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
     setState(() {
       user = userData;
-      followingCount = user['following'].length;
-      followerCount = user['followers'].length;
+      followingCount = userData['following'].length;
+      followerCount = userData['followers'].length;
       bolts = usersBolts;
     });
   }
