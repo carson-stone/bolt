@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
         return Container(
           padding: EdgeInsets.all(10),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.network(content[index]['imageUrl']),
               Column(
