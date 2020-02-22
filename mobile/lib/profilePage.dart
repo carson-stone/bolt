@@ -55,10 +55,9 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  child: Text(
-                    username,
-                    style: Theme.of(context).textTheme.body2,
-                  ),
+                  color: Theme.of(context).accentColor,
+                  child:
+                      Text(username, style: Theme.of(context).textTheme.body2),
                 ),
                 Container(
                   child: Text(
