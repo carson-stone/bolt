@@ -9,6 +9,14 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
+router.route('/:id').get((req, res) => {
+  const id = req.params.id;
+  console.log(`getting user ${id}`);
+  User.findById(id)
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json(err));
+});
+
 router.route('/register').post((req, res) => {
   console.log('adding user');
   const { username } = req.body;

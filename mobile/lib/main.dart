@@ -81,7 +81,7 @@ class _AppState extends State<App> {
                 children: <Widget>[
                   HomePage(user['feed']),
                   DiscoverPage(user['id'], updateFeed),
-                  ProfilePage(user['id']),
+                  ProfilePage(user['id'], user['name']),
                 ],
               ),
             ),

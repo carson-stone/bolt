@@ -3,20 +3,22 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
-  String id = '';
+  String id, username;
   List bolts = [];
 
-  ProfilePage(this.id);
+  ProfilePage(this.id, this.username);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState(id);
+  _ProfilePageState createState() => _ProfilePageState(id, username);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String id;
+  String id, username;
+  int followingCount = 0;
+  var user = {};
   List bolts = [];
 
-  _ProfilePageState(this.id);
+  _ProfilePageState(this.id, this.username);
 
   @override
   void initState() {
@@ -25,11 +27,18 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void getBolts() async {
-    String url = 'http://localhost:6000/users/$id/bolts';
+    String url = 'http://localhost:6000/users/$id';
     var res = await http.get(url);
-    List data = json.decode(res.body);
+    var userData = json.decode(res.body);
+
+    url = 'http://localhost:6000/users/$id/bolts';
+    res = await http.get(url);
+    List usersBolts = json.decode(res.body);
+
     setState(() {
-      bolts = data;
+      user = userData;
+      followingCount = user['following'].length;
+      bolts = usersBolts;
     });
   }
 
@@ -37,27 +46,56 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Center(
       child: ListView(
-        children: List.generate(bolts.length, (index) {
-          return Container(
+        children: <Widget>[
+          Container(
             padding: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Image.network(bolts[index]['imageUrl']),
-                Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      child: Text(
-                        bolts[index]['description'],
-                        style: Theme.of(context).textTheme.body1,
-                      ),
-                    ),
-                  ],
+                Container(
+                  child: Text(
+                    username,
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    '13' + ' followers',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    'following $followingCount',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
                 ),
               ],
             ),
-          );
-        }),
+          ),
+          ...List.generate(bolts.length, (index) {
+            return Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: <Widget>[
+                  Image.network(bolts[index]['imageUrl']),
+                  Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          bolts[index]['description'],
+                          style: Theme.of(context).textTheme.body1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
       ),
     );
   }
