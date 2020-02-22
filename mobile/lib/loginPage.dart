@@ -27,8 +27,6 @@ class _LoginPageState extends State<LoginPage> {
     var response = await http.post(url, body: {'username': username});
     if (json.decode(response.body).startsWith('user authenticated')) {
       setLoggedIn(true, username, json.decode(response.body).split(':')[1]);
-      Navigator.pop(context);
-      Navigator.pop(context);
       Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
     }
   }
