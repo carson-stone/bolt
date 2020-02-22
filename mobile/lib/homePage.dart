@@ -60,7 +60,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.network(content[index]['imageUrl']),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(14.0),
+                child: Image.network(content[index]['imageUrl']),
+              ),
               Column(
                 children: [
                   Container(

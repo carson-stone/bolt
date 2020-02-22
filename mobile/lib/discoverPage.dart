@@ -1,3 +1,4 @@
+import 'package:bolt/profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -72,11 +73,32 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           Navigator.pop(context);
                         },
                       );
+                      Widget gotToProfileButton = FlatButton(
+                        child: Text("Go to profile"),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Scaffold(
+                                  appBar: AppBar(
+                                    title: Text(users[index]['username'] +
+                                        "'s profile"),
+                                  ),
+                                  body: ProfilePage(users[index]['_id'],
+                                      users[index]['username']),
+                                ),
+                              ));
+                        },
+                      );
 
                       AlertDialog alert = AlertDialog(
                         title: Text(users[index]['username']),
                         content: Text("What would you like to do?"),
-                        actions: [followButton, unfollowButton],
+                        actions: [
+                          followButton,
+                          unfollowButton,
+                          gotToProfileButton
+                        ],
                       );
 
                       showDialog(

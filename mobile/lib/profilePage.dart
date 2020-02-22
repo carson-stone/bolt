@@ -89,7 +89,10 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: EdgeInsets.all(10),
               child: Column(
                 children: <Widget>[
-                  Image.network(bolts[index]['imageUrl']),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(14.0),
+                    child: Image.network(bolts[index]['imageUrl']),
+                  ),
                   Column(
                     children: [
                       Container(
