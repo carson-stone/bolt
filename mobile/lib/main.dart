@@ -94,7 +94,7 @@ class _AppState extends State<App> {
         primaryColor: Colors.grey[50],
         accentColor: Colors.purple,
         brightness: Brightness.dark,
-        textTheme: TextTheme(
+        textTheme: Typography.whiteMountainView.copyWith(
           body1: BodyTextStyle(),
           body2: EmphasizedBodyTextStyle(),
         ),

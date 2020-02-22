@@ -5,6 +5,7 @@ import 'dart:convert';
 class DiscoverPage extends StatefulWidget {
   String id;
   Function updateFeed;
+  List users = [];
 
   DiscoverPage(this.id, this.updateFeed);
 
@@ -15,13 +16,16 @@ class DiscoverPage extends StatefulWidget {
 class _DiscoverPageState extends State<DiscoverPage> {
   String id;
   Function updateFeed;
+  List users = [];
 
   _DiscoverPageState(this.id, this.updateFeed);
 
-  Future getUsers() async {
+  void getUsers() async {
     String url = 'http://localhost:6000/users/';
     var result = await http.get(url);
-    return json.decode(result.body);
+    setState(() {
+      users = json.decode(result.body);
+    });
   }
 
   void follow(String followed) async {
@@ -41,51 +45,97 @@ class _DiscoverPageState extends State<DiscoverPage> {
     return Center(
       child: ListView(
         children: <Widget>[
-          ListTile(
-            title: Text('user 1'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('user 2'),
-            onTap: () async {
-              print(await getUsers());
-            },
-          ),
-          ListTile(
-            title: Text('nick'),
-            onTap: () {
-              // set up buttons
-              Widget followButton = FlatButton(
-                color: Theme.of(context).accentColor,
-                child: Text("Follow"),
-                onPressed: () {
-                  follow('5e50904dcab45d20c70d9c8b');
-                  Navigator.pop(context);
-                },
-              );
-              Widget unfollowButton = FlatButton(
-                child: Text("Unfollow"),
-                onPressed: () {
-                  unfollow('5e50904dcab45d20c70d9c8b');
-                  Navigator.pop(context);
-                },
-              );
+          ...List.generate(
+              users.length,
+              (index) => ListTile(
+                    title: Text(users[index]['username'],
+                        style: Theme.of(context).textTheme.body2),
+                    onTap: () {
+                      Widget followButton = FlatButton(
+                        color: Theme.of(context).accentColor,
+                        child: Text("Follow"),
+                        onPressed: () {
+                          follow(users[index]['_id']);
+                          Navigator.pop(context);
+                        },
+                      );
+                      Widget unfollowButton = FlatButton(
+                        child: Text("Unfollow"),
+                        onPressed: () {
+                          unfollow(users[index]['_id']);
+                          Navigator.pop(context);
+                        },
+                      );
 
-              // set up AlertDialog
-              AlertDialog alert = AlertDialog(
-                title: Text("nick"),
-                content: Text("What would you like to do?"),
-                actions: [followButton, unfollowButton],
-              );
+                      AlertDialog alert = AlertDialog(
+                        title: Text(users[index]['username']),
+                        content: Text("What would you like to do?"),
+                        actions: [followButton, unfollowButton],
+                      );
 
-              // show dialog
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => alert,
-              );
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => alert,
+                      );
+                    },
+                  )),
+          RaisedButton(
+            color: Theme.of(context).accentColor,
+            child: Text(
+              "Get Users",
+              style: Theme.of(context).textTheme.title,
+            ),
+            onPressed: () {
+              getUsers();
             },
           ),
         ],
+        // children: <Widget>[
+        //   ListTile(
+        //     title: Text('user 1'),
+        //     onTap: () {},
+        //   ),
+        //   ListTile(
+        //     title: Text('user 2'),
+        //     onTap: () {
+        //       getUsers();
+        //     },
+        //   ),
+        //   ListTile(
+        //     title: Text('nick'),
+        //     onTap: () {
+        //       // set up buttons
+        //       Widget followButton = FlatButton(
+        //         color: Theme.of(context).accentColor,
+        //         child: Text("Follow"),
+        //         onPressed: () {
+        //           follow('5e50904dcab45d20c70d9c8b');
+        //           Navigator.pop(context);
+        //         },
+        //       );
+        //       Widget unfollowButton = FlatButton(
+        //         child: Text("Unfollow"),
+        //         onPressed: () {
+        //           unfollow('5e50904dcab45d20c70d9c8b');
+        //           Navigator.pop(context);
+        //         },
+        //       );
+
+        //       // set up AlertDialog
+        //       AlertDialog alert = AlertDialog(
+        //         title: Text("nick"),
+        //         content: Text("What would you like to do?"),
+        //         actions: [followButton, unfollowButton],
+        //       );
+
+        //       // show dialog
+        //       showDialog(
+        //         context: context,
+        //         builder: (BuildContext context) => alert,
+        //       );
+        //     },
+        //   ),
+        // ],
       ),
     );
   }
