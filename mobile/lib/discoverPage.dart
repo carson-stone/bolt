@@ -90,52 +90,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
             },
           ),
         ],
-        // children: <Widget>[
-        //   ListTile(
-        //     title: Text('user 1'),
-        //     onTap: () {},
-        //   ),
-        //   ListTile(
-        //     title: Text('user 2'),
-        //     onTap: () {
-        //       getUsers();
-        //     },
-        //   ),
-        //   ListTile(
-        //     title: Text('nick'),
-        //     onTap: () {
-        //       // set up buttons
-        //       Widget followButton = FlatButton(
-        //         color: Theme.of(context).accentColor,
-        //         child: Text("Follow"),
-        //         onPressed: () {
-        //           follow('5e50904dcab45d20c70d9c8b');
-        //           Navigator.pop(context);
-        //         },
-        //       );
-        //       Widget unfollowButton = FlatButton(
-        //         child: Text("Unfollow"),
-        //         onPressed: () {
-        //           unfollow('5e50904dcab45d20c70d9c8b');
-        //           Navigator.pop(context);
-        //         },
-        //       );
-
-        //       // set up AlertDialog
-        //       AlertDialog alert = AlertDialog(
-        //         title: Text("nick"),
-        //         content: Text("What would you like to do?"),
-        //         actions: [followButton, unfollowButton],
-        //       );
-
-        //       // show dialog
-        //       showDialog(
-        //         context: context,
-        //         builder: (BuildContext context) => alert,
-        //       );
-        //     },
-        //   ),
-        // ],
       ),
     );
   }
