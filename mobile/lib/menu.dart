@@ -1,29 +1,41 @@
+import 'package:bolt/profilePage.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
   Function setLoggedIn;
-  String username;
+  String username, id;
 
   Menu.fromAnotherPage();
 
-  Menu(this.setLoggedIn, {this.username});
+  Menu(this.setLoggedIn, {this.username, this.id});
 
   @override
-  _MenuState createState() => _MenuState(setLoggedIn, username);
+  _MenuState createState() => _MenuState(setLoggedIn, username, id);
 }
 
 class _MenuState extends State<Menu> {
   Function setLoggedIn;
-  String username;
+  String username, id;
 
-  _MenuState(this.setLoggedIn, this.username);
+  _MenuState(this.setLoggedIn, this.username, this.id);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> children = <Widget>[
       DrawerHeader(
-        child: Container(
-          child: Text(username),
+        child: GestureDetector(
+          child: Container(
+            child: Text(
+              username,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+              ),
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            DefaultTabController.of(context).animateTo(2); //go to profile
+          },
         ),
       ),
       ListTile(

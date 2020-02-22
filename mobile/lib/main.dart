@@ -52,7 +52,7 @@ class _AppState extends State<App> {
         ? DefaultTabController(
             length: 3,
             child: Scaffold(
-              drawer: Menu(setLoggedIn, username: user['name']),
+              drawer: Menu(setLoggedIn, username: user['name'], id: user['id']),
               appBar: AppBar(
                 title: Text('bolt'),
                 actions: <Widget>[
