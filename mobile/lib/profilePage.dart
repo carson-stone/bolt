@@ -112,6 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Container(
+                    padding: EdgeInsets.all(10),
                     width: double.infinity,
                     child: Text(
                       bolts[index]['description'],
