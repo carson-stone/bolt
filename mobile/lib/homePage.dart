@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                           builder: (context) => BoltDetail(
                               content[index]['username'],
-                              content[index]['imageUrl']),
+                              content[index]['imageUrl'],
+                              content[index]['user_id']),
                         ));
                   },
                   onLongPress: () {

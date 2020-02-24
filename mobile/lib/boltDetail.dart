@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BoltDetail extends StatelessWidget {
-  String username, imageUrl;
+import './profilePage.dart';
 
-  BoltDetail(this.username, this.imageUrl);
+class BoltDetail extends StatelessWidget {
+  String username, imageUrl, user_id;
+
+  BoltDetail(this.username, this.imageUrl, this.user_id);
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,27 @@ class BoltDetail extends StatelessWidget {
                 ),
               ),
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14.0),
-              child: GestureDetector(
-                child: Image.network(imageUrl),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+            GestureDetector(
+              onLongPress: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                        appBar: AppBar(
+                          title: Text('$username\'s profile'),
+                        ),
+                        body: ProfilePage(user_id, username),
+                      ),
+                    ));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(14.0),
+                child: GestureDetector(
+                  child: Image.network(imageUrl),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
           ],
