@@ -55,7 +55,7 @@ class BoltDetail extends StatelessWidget {
               height: 100,
               child: Container(
                 padding: EdgeInsets.all(10),
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.topLeft,
                 child: Text(
                   description,
                   style: Theme.of(context).textTheme.body1,

@@ -107,25 +107,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bolts[index]['imageUrl'],
                                   id,
                                   bolts[index]['description']),
-                              // builder: (context) => BoltDetail(
-                              //     content[index]['username'],
-                              //     content[index]['imageUrl'],
-                              //     content[index]['user_id'],
-                              //     content[index]['description']),
                             ));
                       },
                     ),
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        child: Text(
-                          bolts[index]['description'],
-                          style: Theme.of(context).textTheme.body1,
-                        ),
-                      ),
-                    ],
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      bolts[index]['description'],
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   ),
                 ],
               ),
