@@ -44,7 +44,8 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => BoltDetail(
                               content[index]['username'],
                               content[index]['imageUrl'],
-                              content[index]['user_id']),
+                              content[index]['user_id'],
+                              content[index]['description']),
                         ));
                   },
                   onLongPress: () {

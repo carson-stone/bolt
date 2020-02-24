@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import './profilePage.dart';
 
 class BoltDetail extends StatelessWidget {
-  String username, imageUrl, user_id;
+  String username, imageUrl, user_id, description;
 
-  BoltDetail(this.username, this.imageUrl, this.user_id);
+  BoltDetail(this.username, this.imageUrl, this.user_id, this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +48,17 @@ class BoltDetail extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                   },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 100,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  description,
+                  style: Theme.of(context).textTheme.body1,
                 ),
               ),
             ),
