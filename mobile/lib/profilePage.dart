@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import './boltDetail.dart';
+
 class ProfilePage extends StatefulWidget {
   String id, username;
   List bolts = [];
@@ -94,7 +96,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(14.0),
-                    child: Image.network(bolts[index]['imageUrl']),
+                    child: GestureDetector(
+                      child: Image.network(bolts[index]['imageUrl']),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BoltDetail(
+                                  username,
+                                  bolts[index]['imageUrl'],
+                                  id,
+                                  bolts[index]['description']),
+                              // builder: (context) => BoltDetail(
+                              //     content[index]['username'],
+                              //     content[index]['imageUrl'],
+                              //     content[index]['user_id'],
+                              //     content[index]['description']),
+                            ));
+                      },
+                    ),
                   ),
                   Column(
                     children: [
