@@ -84,12 +84,18 @@ router.route('/unfollow').post((req, res) => {
   console.log(`making ${id} unfollow ${unfollowedId}`);
   User.findByIdAndUpdate(
     { _id: id },
-    { $pull: { 'following.id': unfollowedId } }
+    {
+      $pull: {
+        following: {
+          id: unfollowedId
+        }
+      }
+    }
   )
     .then(() =>
       User.findByIdAndUpdate(
         { _id: unfollowedId },
-        { $pull: { 'followers.id': id } }
+        { $pull: { followers: { id: id } } }
       )
     )
     .then(() => res.json('successfully unfollowed'))

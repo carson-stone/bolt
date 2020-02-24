@@ -41,9 +41,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
     updateFeed(id);
   }
 
-  void unfollow(String unfollowedId) async {
+  void unfollow(String unfollowedId, String unfollowedUsername) async {
     String url = 'http://localhost:6000/users/unfollow';
-    await http.post(url, body: {'id': id, 'unfollowedId': unfollowedId});
+    await http.post(url, body: {
+      'id': id,
+      'username': username,
+      'unfollowedId': unfollowedId,
+      'unfollowedUsername': unfollowedUsername
+    });
     updateFeed(id);
   }
 
@@ -69,7 +74,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       Widget unfollowButton = FlatButton(
                         child: Text("Unfollow"),
                         onPressed: () {
-                          unfollow(users[index]['_id']);
+                          unfollow(
+                              users[index]['_id'], users[index]['username']);
                           Navigator.pop(context);
                         },
                       );
