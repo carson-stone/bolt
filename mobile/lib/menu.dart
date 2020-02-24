@@ -1,5 +1,6 @@
-import 'package:bolt/profilePage.dart';
 import 'package:flutter/material.dart';
+
+import './aboutPage.dart';
 
 class Menu extends StatefulWidget {
   Function setLoggedIn;
@@ -40,7 +41,10 @@ class _MenuState extends State<Menu> {
       ),
       ListTile(
         title: Text('about bolt'),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AboutPage()));
+        },
       ),
       ListTile(
         title: Text('log out'),
