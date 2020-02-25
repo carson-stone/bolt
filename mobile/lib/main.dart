@@ -52,21 +52,24 @@ class _AppState extends State<App> {
         ? DefaultTabController(
             length: 3,
             child: Scaffold(
-              drawer: Menu(setLoggedIn, username: user['name'], id: user['id']),
+              backgroundColor: Color.fromARGB(255, 33, 34, 39),
+              // drawer: Menu(setLoggedIn, username: user['name'], id: user['id']),
               appBar: AppBar(
-                title: Text('bolt'),
-                bottom: TabBar(
-                  tabs: <Widget>[
-                    Tab(
-                      icon: Icon(Icons.home),
-                    ),
-                    Tab(
-                      icon: Icon(Icons.search),
-                    ),
-                    Tab(
-                      icon: Icon(Icons.person),
-                    )
-                  ],
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(0),
+                  child: TabBar(
+                    tabs: <Widget>[
+                      Tab(
+                        icon: Icon(Icons.home),
+                      ),
+                      Tab(
+                        icon: Icon(Icons.search),
+                      ),
+                      Tab(
+                        icon: Icon(Icons.person),
+                      )
+                    ],
+                  ),
                 ),
               ),
               body: TabBarView(
@@ -83,8 +86,10 @@ class _AppState extends State<App> {
     return MaterialApp(
       title: 'bolt',
       theme: ThemeData(
-        primaryColor: Colors.grey[50],
+        // primaryColor: Colors.grey[50],
         accentColor: Colors.purple,
+        primaryColor: Colors.grey[50],
+        // primaryColor: Color.fromARGB(255, 20, 20, 20),
         brightness: Brightness.dark,
         textTheme: Typography.whiteMountainView.copyWith(
           body1: BodyTextStyle(),

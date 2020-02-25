@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import './boltDetail.dart';
 import './camera.dart';
+import './aboutPage.dart';
 
 class ProfilePage extends StatefulWidget {
   String id, username;
@@ -131,6 +132,13 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                FlatButton(
+                  child: Text('about page'),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutPage()));
+                  },
+                ),
                 SizedBox(
                   height: 50,
                   child: Container(
