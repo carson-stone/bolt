@@ -26,30 +26,15 @@ class _CameraState extends State<Camera> {
     });
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getPictures();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    var bodyWidget = picture == null
-        ? Container(
-            child: Text('no image'),
-          )
-        : Image.file(picture);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('About'),
-      ),
-      body: bodyWidget,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          getPictures();
-        },
-        child: Icon(Icons.camera),
+    return FloatingActionButton(
+      onPressed: () {
+        getPictures();
+      },
+      child: Icon(
+        Icons.flash_on,
+        size: 35,
       ),
     );
   }

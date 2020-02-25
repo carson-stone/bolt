@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import './boltDetail.dart';
+import './camera.dart';
 
 class ProfilePage extends StatefulWidget {
   String id, username;
@@ -47,6 +48,80 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget boltWidget = bolts.length == 0
+        ? Container(
+            padding: EdgeInsets.all(10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(14.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 400,
+                    child: Container(
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      width: 80,
+                      height: 80,
+                      child: Camera(),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'add a bolt',
+                      style: Theme.of(context).textTheme.body1,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : Column(
+            children: <Widget>[
+              ...List.generate(bolts.length, (index) {
+                return Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14.0),
+                        child: GestureDetector(
+                          child: Image.network(bolts[index]['imageUrl']),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BoltDetail(
+                                      username,
+                                      bolts[index]['imageUrl'],
+                                      id,
+                                      bolts[index]['description']),
+                                ));
+                          },
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        width: double.infinity,
+                        child: Text(
+                          bolts[index]['description'],
+                          style: Theme.of(context).textTheme.body1,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              })
+            ],
+          );
+
     return Center(
       child: ListView(
         children: <Widget>[
@@ -86,43 +161,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Text(user['following'][i]['username']),
                   );
                 }),
+                boltWidget,
               ],
             ),
           ),
-          ...List.generate(bolts.length, (index) {
-            return Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(14.0),
-                    child: GestureDetector(
-                      child: Image.network(bolts[index]['imageUrl']),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BoltDetail(
-                                  username,
-                                  bolts[index]['imageUrl'],
-                                  id,
-                                  bolts[index]['description']),
-                            ));
-                      },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    width: double.infinity,
-                    child: Text(
-                      bolts[index]['description'],
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
         ],
       ),
     );

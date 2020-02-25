@@ -55,14 +55,6 @@ class _AppState extends State<App> {
               drawer: Menu(setLoggedIn, username: user['name'], id: user['id']),
               appBar: AppBar(
                 title: Text('bolt'),
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.flash_on),
-                    onPressed: () {
-                      print('pressed flash icon');
-                    },
-                  ),
-                ],
                 bottom: TabBar(
                   tabs: <Widget>[
                     Tab(
