@@ -86,10 +86,10 @@ class _AppState extends State<App> {
     return MaterialApp(
       title: 'bolt',
       theme: ThemeData(
-        // primaryColor: Colors.grey[50],
         accentColor: Colors.purple,
-        primaryColor: Colors.grey[50],
-        // primaryColor: Color.fromARGB(255, 20, 20, 20),
+        backgroundColor: Color.fromARGB(255, 33, 34, 39),
+        primaryColor: Color.fromARGB(255, 33, 34, 39),
+        // primaryColor: Color.fromARGB(255, 61, 62, 63),
         brightness: Brightness.dark,
         textTheme: Typography.whiteMountainView.copyWith(
           body1: BodyTextStyle(),
