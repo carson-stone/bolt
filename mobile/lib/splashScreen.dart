@@ -60,10 +60,11 @@ class SplashScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
-                    border: Border.all(color: Colors.purple, width: 4),
+                    border: Border.all(
+                        color: Theme.of(context).accentColor, width: 4),
                   ),
                   child: RaisedButton(
-                    color: Colors.grey[850],
+                    color: Theme.of(context).backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40),
                     ),
