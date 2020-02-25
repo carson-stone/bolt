@@ -10,7 +10,7 @@ class BoltDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         padding: EdgeInsets.all(10),
         alignment: Alignment.center,
@@ -34,8 +34,12 @@ class BoltDetail extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Scaffold(
+                        backgroundColor: Theme.of(context).backgroundColor,
                         appBar: AppBar(
-                          title: Text('$username\'s profile'),
+                          title: Text(
+                            '$username\'s profile',
+                            style: Theme.of(context).textTheme.title,
+                          ),
                         ),
                         body: ProfilePage(user_id, username),
                       ),

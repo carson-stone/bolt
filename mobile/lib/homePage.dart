@@ -53,9 +53,12 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => Scaffold(
+                            backgroundColor: Theme.of(context).backgroundColor,
                             appBar: AppBar(
                               title: Text(
-                                  content[index]['username'] + "'s profile"),
+                                content[index]['username'] + "'s profile",
+                                style: Theme.of(context).textTheme.title,
+                              ),
                             ),
                             body: ProfilePage(content[index]['user_id'],
                                 content[index]['username']),

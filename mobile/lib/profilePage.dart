@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Text(
                       'add a bolt',
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.body2,
                     ),
                   ],
                 ),
@@ -155,7 +155,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ...List.generate(followerCount, (i) {
                   return Container(
-                    child: Text(user['followers'][i]['username']),
+                    child: Text(
+                      user['followers'][i]['username'],
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   );
                 }),
                 Container(
@@ -166,7 +169,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ...List.generate(followingCount, (i) {
                   return Container(
-                    child: Text(user['following'][i]['username']),
+                    child: Text(
+                      user['following'][i]['username'],
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   );
                 }),
                 boltWidget,
