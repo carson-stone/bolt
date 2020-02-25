@@ -34,7 +34,10 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(
+          'Login',
+          style: Theme.of(context).textTheme.title,
+        ),
       ),
       body: Center(
         child: Form(
@@ -50,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                 child: TextFormField(
                   controller: usernameController,
+                  style: Theme.of(context).textTheme.body1,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please enter a value';
@@ -68,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                 child: TextFormField(
+                  style: Theme.of(context).textTheme.body1,
                   controller: usernameController,
                   validator: (value) {
                     if (value.isEmpty) {

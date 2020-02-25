@@ -10,79 +10,72 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.grey[50],
-        accentColor: Colors.purple,
-      ),
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'bolt',
-                style: TextStyle(fontSize: 42),
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'bolt',
+              style: Theme.of(context).textTheme.headline,
+            ),
+            SizedBox(
+              width: 200,
+              height: 100,
+            ),
+            SizedBox(
+              width: 200,
+              height: 50,
+              child: RaisedButton(
+                color: Theme.of(context).accentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Text(
+                  'Login',
+                  style: Theme.of(context).textTheme.button,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage(setLoggedIn)));
+                },
               ),
-              SizedBox(
-                width: 200,
-                height: 100,
-              ),
-              SizedBox(
-                width: 200,
-                height: 50,
+            ),
+            SizedBox(
+              width: 200,
+              height: 50,
+            ),
+            SizedBox(
+              width: 200,
+              height: 50,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  border: Border.all(
+                      color: Theme.of(context).accentColor, width: 4),
+                ),
                 child: RaisedButton(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).backgroundColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40),
                   ),
                   child: Text(
-                    'Login',
-                    style: TextStyle(fontSize: 22),
+                    'Register',
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => LoginPage(setLoggedIn)));
+                            builder: (context) => RegisterPage()));
                   },
                 ),
               ),
-              SizedBox(
-                width: 200,
-                height: 50,
-              ),
-              SizedBox(
-                width: 200,
-                height: 50,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    border: Border.all(
-                        color: Theme.of(context).accentColor, width: 4),
-                  ),
-                  child: RaisedButton(
-                    color: Theme.of(context).backgroundColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: Text(
-                      'Register',
-                      style: TextStyle(fontSize: 22),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

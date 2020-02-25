@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -91,8 +92,16 @@ class _AppState extends State<App> {
         primaryColor: Color.fromARGB(255, 33, 34, 39),
         brightness: Brightness.dark,
         textTheme: Typography.whiteMountainView.copyWith(
-          body1: BodyTextStyle(),
-          body2: EmphasizedBodyTextStyle(),
+          body1:
+              GoogleFonts.quicksand(fontSize: 20, fontWeight: FontWeight.w500),
+          body2:
+              GoogleFonts.quicksand(fontSize: 22, fontWeight: FontWeight.w500),
+          button:
+              GoogleFonts.quicksand(fontSize: 22, fontWeight: FontWeight.w500),
+          headline:
+              GoogleFonts.quicksand(fontSize: 65, fontWeight: FontWeight.w500),
+          title:
+              GoogleFonts.quicksand(fontSize: 24, fontWeight: FontWeight.w500),
         ),
       ),
       home: homeWidget,

@@ -24,7 +24,10 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text(
+          'Register',
+          style: Theme.of(context).textTheme.title,
+        ),
       ),
       body: Center(
         child: Form(
@@ -39,6 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Container(
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                 child: TextFormField(
+                  style: Theme.of(context).textTheme.body1,
                   controller: usernameController,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -58,6 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Container(
                 padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
                 child: TextFormField(
+                  style: Theme.of(context).textTheme.body1,
                   controller: usernameController,
                   validator: (value) {
                     if (value.isEmpty) {
