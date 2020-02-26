@@ -16,13 +16,19 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset(
+              'assets/transparent-bolt.png',
+              height: 250,
+            ),
+            SizedBox(
+              height: 100,
+            ),
             Text(
               'bolt',
               style: Theme.of(context).textTheme.headline,
             ),
             SizedBox(
-              width: 200,
-              height: 100,
+              height: 50,
             ),
             SizedBox(
               width: 200,
@@ -45,7 +51,6 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 200,
               height: 50,
             ),
             SizedBox(
