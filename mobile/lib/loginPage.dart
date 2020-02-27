@@ -33,76 +33,94 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        title: Text(
-          'Login',
-          style: Theme.of(context).textTheme.title,
-        ),
-      ),
       body: Center(
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            alignment: Alignment.center,
             children: <Widget>[
-              Text(
-                'username',
-                style: Theme.of(context).textTheme.body2,
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
-                child: TextFormField(
-                  controller: usernameController,
-                  style: Theme.of(context).textTheme.body1,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter a value';
-                    }
-                    return null;
+              Align(
+                alignment: Alignment(-0.8, -0.8),
+                child: GestureDetector(
+                  child: Icon(Icons.arrow_back_ios),
+                  onTap: () {
+                    Navigator.pop(context);
                   },
                 ),
               ),
-              SizedBox(
-                height: 50,
-              ),
-              Text(
-                'password',
-                style: Theme.of(context).textTheme.body2,
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(70, 15, 70, 15),
-                child: TextFormField(
-                  style: Theme.of(context).textTheme.body1,
-                  controller: usernameController,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter a value';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 200,
-              ),
-              SizedBox(
-                width: 200,
-                height: 50,
-                child: RaisedButton(
-                  color: Theme.of(context).accentColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 50,
+                    child: Image.asset('assets/transparent-bolt.png'),
                   ),
-                  child: Text(
-                    'Login',
-                    style: TextStyle(fontSize: 22),
+                  SizedBox(
+                    height: 150,
                   ),
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      login(context, usernameController.text);
-                    }
-                  },
-                ),
+                  Text(
+                    'username',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                    child: TextFormField(
+                      controller: usernameController,
+                      style: Theme.of(context).textTheme.body1,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter a value';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 120,
+                  ),
+                  Text(
+                    'password',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                    child: TextFormField(
+                      style: Theme.of(context).textTheme.body1,
+                      controller: usernameController,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter a value';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 150,
+                  ),
+                  SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          login(context, usernameController.text);
+                        }
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
               ),
             ],
           ),

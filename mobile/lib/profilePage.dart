@@ -51,7 +51,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     Widget boltWidget = bolts.length == 0
         ? Container(
-            padding: EdgeInsets.all(10),
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -88,7 +87,6 @@ class _ProfilePageState extends State<ProfilePage> {
             children: <Widget>[
               ...List.generate(bolts.length, (index) {
                 return Container(
-                  padding: EdgeInsets.all(10),
                   child: Column(
                     children: <Widget>[
                       ClipRRect(
