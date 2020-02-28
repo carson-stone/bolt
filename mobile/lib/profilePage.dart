@@ -107,37 +107,25 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           )
-        : Column(
-            children: <Widget>[
-              ...List.generate(bolts.length, (index) {
-                return Container(
-                  child: Column(
-                    children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: GestureDetector(
-                          child: Image.network(
-                            bolts[index]['imageUrl'],
-                            height: 400,
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BoltDetail(
-                                      username,
-                                      bolts[index]['imageUrl'],
-                                      id,
-                                      bolts[index]['description']),
-                                ));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              })
-            ],
+        : ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: GestureDetector(
+              child: Container(
+                child: Image.network(
+                  bolts[0]['imageUrl'],
+                  // height: 400,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BoltDetail(username,
+                          bolts[0]['imageUrl'], id, bolts[0]['description']),
+                    ));
+              },
+            ),
           );
 
     return Container(
