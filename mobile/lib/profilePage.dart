@@ -79,7 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: SizedBox(
-                    width: double.infinity,
+                    // width: double.infinity,
+                    width: 400,
                     height: 400,
                     child: Container(
                       color: Theme.of(context).canvasColor,
@@ -87,6 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       width: 115,
@@ -206,7 +208,28 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(
             height: 50,
           ),
-          boltWidget,
+          Container(
+            height: 400,
+            alignment: Alignment.center,
+            child: PageView(
+              controller: PageController(
+                initialPage: 0,
+              ),
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                boltWidget,
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  height: 250,
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'sndfksndfk kjdsnfk jnsdfjknfkj n wdwn kdn kn knk en rkerngk enfkj n wdwn kdn kn knk en rkerngk enf',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
           SizedBox(
             height: 60,
           ),
