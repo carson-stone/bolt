@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -26,17 +27,23 @@ class _ProfilePageState extends State<ProfilePage> {
 
   _ProfilePageState(this.id, this.username);
 
-  Widget sparkWidget(context, {child}) => ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: SizedBox(
-          height: 80,
-          width: 80,
-          child: Container(
+  Widget sparkWidget(context, {child}) {
+    var ch = child != null
+        ? child
+        : Container(
             color: Theme.of(context).canvasColor,
             child: Text(''),
-          ),
-        ),
-      );
+          );
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: SizedBox(
+        height: 80,
+        width: 80,
+        child: ch,
+      ),
+    );
+  }
 
   Widget hotnessWidget() => Container(
         height: 50,
@@ -69,8 +76,82 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  var randomizedProfilePics = [
+    [
+      //red backgrounds
+      Color.fromARGB(255, 224, 60, 76),
+      'assets/transparent-bolt.png',
+    ],
+    [
+      Color.fromARGB(255, 224, 60, 76),
+      'assets/transparent-bolt-black.png',
+    ],
+    [
+      Color.fromARGB(255, 224, 60, 76),
+      'assets/transparent-bolt-white.png',
+    ],
+    [
+      Color.fromARGB(255, 224, 60, 76),
+      'assets/transparent-bolt-purple.png',
+    ],
+    [
+      //blue backgrounds
+      Color.fromARGB(255, 90, 183, 244),
+      'assets/transparent-bolt-red.png',
+    ],
+    [
+      Color.fromARGB(255, 90, 183, 244),
+      'assets/transparent-bolt-black.png',
+    ],
+    [
+      Color.fromARGB(255, 90, 183, 244),
+      'assets/transparent-bolt-white.png',
+    ],
+    [
+      Color.fromARGB(255, 90, 183, 244),
+      'assets/transparent-bolt-purple.png',
+    ],
+    [
+      //white backgrounds
+      Colors.white,
+      'assets/transparent-bolt-red.png',
+    ],
+    [
+      Colors.white,
+      'assets/transparent-bolt-black.png',
+    ],
+    [
+      Colors.white,
+      'assets/transparent-bolt.png',
+    ],
+    [
+      Colors.white,
+      'assets/transparent-bolt-purple.png',
+    ],
+    [
+      //purple backgrounds
+      Color.fromARGB(255, 133, 54, 170),
+      'assets/transparent-bolt-red.png',
+    ],
+    [
+      Color.fromARGB(255, 133, 54, 170),
+      'assets/transparent-bolt-black.png',
+    ],
+    [
+      Color.fromARGB(255, 133, 54, 170),
+      'assets/transparent-bolt.png',
+    ],
+    [
+      Color.fromARGB(255, 133, 54, 170),
+      'assets/transparent-bolt-white.png',
+    ],
+  ]; // [background color, bolt color path]
+
   @override
   Widget build(BuildContext context) {
+    Random randomGen = Random();
+    int randomColorIndex = randomGen.nextInt(randomizedProfilePics.length);
+
     Widget boltWidget = bolts.length == 0
         ? Container(
             child: Stack(
@@ -170,7 +251,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(
                   width: 25,
                 ),
-                sparkWidget(context),
+                sparkWidget(
+                  context,
+                  child: Container(
+                    color: randomizedProfilePics[randomColorIndex][0],
+                    padding: EdgeInsets.all(12),
+                    child: Image.asset(
+                      randomizedProfilePics[randomColorIndex][1],
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: 25,
                 ),
