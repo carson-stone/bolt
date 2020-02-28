@@ -29,12 +29,14 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      backgroundColor: Colors.white,
+      // backgroundColor: Theme.of(context).canvasColor,
       onPressed: () {
         getPictures();
       },
-      child: Icon(
-        Icons.flash_on,
-        size: 35,
+      child: Image.asset(
+        'assets/transparent-bolt.png',
+        height: 80,
       ),
     );
   }

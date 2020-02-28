@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -23,6 +25,26 @@ class _ProfilePageState extends State<ProfilePage> {
   List bolts = [];
 
   _ProfilePageState(this.id, this.username);
+
+  Widget sparkWidget(context, {child}) => ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: SizedBox(
+          height: 80,
+          width: 80,
+          child: Container(
+            color: Theme.of(context).canvasColor,
+            child: Text(''),
+          ),
+        ),
+      );
+
+  Widget hotnessWidget() => Container(
+        height: 50,
+        padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+        child: Image.asset(
+          'assets/transparent-bolt.png',
+        ),
+      );
 
   @override
   void initState() {
@@ -55,28 +77,28 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: Alignment.center,
               children: <Widget>[
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(14.0),
+                  borderRadius: BorderRadius.circular(20),
                   child: SizedBox(
                     width: double.infinity,
                     height: 400,
                     child: Container(
-                      color: Colors.grey[700],
+                      color: Theme.of(context).canvasColor,
                     ),
                   ),
                 ),
                 Column(
                   children: <Widget>[
                     Container(
-                      width: 80,
-                      height: 80,
+                      width: 115,
+                      height: 115,
                       child: Camera(),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      'add a bolt',
-                      style: Theme.of(context).textTheme.body2,
+                      '+ add bolt',
+                      style: Theme.of(context).textTheme.title,
                     ),
                   ],
                 ),
@@ -90,9 +112,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     children: <Widget>[
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(14.0),
+                        borderRadius: BorderRadius.circular(20),
                         child: GestureDetector(
-                          child: Image.network(bolts[index]['imageUrl']),
+                          child: Image.network(
+                            bolts[index]['imageUrl'],
+                            height: 400,
+                          ),
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -106,14 +131,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        width: double.infinity,
-                        child: Text(
-                          bolts[index]['description'],
-                          style: Theme.of(context).textTheme.body1,
-                        ),
-                      ),
                     ],
                   ),
                 );
@@ -121,61 +138,86 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           );
 
-    return Center(
-      child: ListView(
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(10),
-            alignment: Alignment.centerLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: EdgeInsets.only(bottom: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                FlatButton(
-                  child: Text('about page'),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AboutPage()));
-                  },
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: 180,
+                      height: 35,
+                      child: Text(
+                        'User\'s Name',
+                        style: Theme.of(context).textTheme.body2,
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        '@' + username,
+                        style: Theme.of(context).textTheme.body1,
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        hotnessWidget(),
+                        hotnessWidget(),
+                        hotnessWidget(),
+                        hotnessWidget(),
+                        hotnessWidget(),
+                      ],
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 50,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(username,
-                        style: Theme.of(context).textTheme.body2),
+                  width: 25,
+                ),
+                sparkWidget(context),
+                SizedBox(
+                  width: 25,
+                ),
+                SizedBox(
+                  width: 30,
+                  child: Icon(
+                    Icons.settings,
+                    size: 30,
+                    color: Theme.of(context).splashColor,
                   ),
                 ),
-                Container(
-                  child: Text(
-                    '$followerCount followers',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                ),
-                ...List.generate(followerCount, (i) {
-                  return Container(
-                    child: Text(
-                      user['followers'][i]['username'],
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  );
-                }),
-                Container(
-                  child: Text(
-                    'following $followingCount',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                ),
-                ...List.generate(followingCount, (i) {
-                  return Container(
-                    child: Text(
-                      user['following'][i]['username'],
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  );
-                }),
-                boltWidget,
               ],
             ),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).accentColor,
+                  width: 1,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          boltWidget,
+          SizedBox(
+            height: 60,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              sparkWidget(context),
+              sparkWidget(context),
+              sparkWidget(context),
+              sparkWidget(context),
+            ],
           ),
         ],
       ),
