@@ -30,7 +30,6 @@ class _CameraState extends State<Camera> {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: Colors.white,
-      // backgroundColor: Theme.of(context).canvasColor,
       onPressed: () {
         getPictures();
       },

@@ -1,7 +1,5 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -22,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String id, username;
   int followingCount = 0, followerCount = 0;
+  double detailHeight;
   var user = {};
   List bolts = [];
 
@@ -55,6 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
+    detailHeight = 400;
     super.initState();
     getBolts();
   }
@@ -160,7 +160,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: SizedBox(
-                    // width: double.infinity,
                     width: 400,
                     height: 400,
                     child: Container(
@@ -188,24 +187,26 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           )
-        : ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: GestureDetector(
-              child: Container(
-                child: Image.network(
-                  bolts[0]['imageUrl'],
-                  // height: 400,
-                  fit: BoxFit.cover,
+        : Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: GestureDetector(
+                child: Hero(
+                  tag: 'bolt',
+                  child: Image.network(
+                    bolts[0]['imageUrl'],
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BoltDetail(username,
+                            bolts[0]['imageUrl'], id, bolts[0]['description']),
+                      ));
+                },
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BoltDetail(username,
-                          bolts[0]['imageUrl'], id, bolts[0]['description']),
-                    ));
-              },
             ),
           );
 
