@@ -20,7 +20,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String id, username;
   int followingCount = 0, followerCount = 0;
-  double detailHeight;
   var user = {};
   List bolts = [];
 
@@ -54,7 +53,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    detailHeight = 400;
     super.initState();
     getBolts();
   }

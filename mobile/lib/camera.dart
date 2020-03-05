@@ -1,3 +1,4 @@
+import 'package:bolt/addingBolt.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,6 +25,9 @@ class _CameraState extends State<Camera> {
     setState(() {
       picture = newPicture;
     });
+
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => AddingBolt(newPicture)));
   }
 
   @override

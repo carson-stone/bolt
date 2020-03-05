@@ -1,38 +1,37 @@
 import 'package:flutter/material.dart';
 
-import './profilePage.dart';
+class AddingBolt extends StatefulWidget {
+  var bolt;
 
-class BoltDetail extends StatelessWidget {
-  String username, imageUrl, user_id, description;
+  AddingBolt(this.bolt);
 
-  BoltDetail(this.username, this.imageUrl, this.user_id, this.description);
+  @override
+  _AddingBoltState createState() => _AddingBoltState(bolt);
+}
 
-  Widget hotnessWidget() => Container(
-        height: 50,
-        padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-        child: Image.asset(
-          'assets/transparent-bolt.png',
-        ),
-      );
+class _AddingBoltState extends State<AddingBolt> {
+  var bolt;
+
+  _AddingBoltState(this.bolt);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 40, 10, 0),
+      padding: EdgeInsets.fromLTRB(10, 40, 10, 10),
       color: Theme.of(context).backgroundColor,
       child: Column(
         children: <Widget>[
           Container(
             height: 775,
-            padding: EdgeInsets.only(bottom: 10),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
             width: double.infinity,
             child: GestureDetector(
               child: Hero(
                 tag: 'bolt',
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    imageUrl,
+                  child: Image.file(
+                    bolt,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -43,7 +42,6 @@ class BoltDetail extends StatelessWidget {
             ),
           ),
           Container(
-            // margin: EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
@@ -57,18 +55,29 @@ class BoltDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Text(
-                    username,
+                    'add this bolt?',
                     style: Theme.of(context).textTheme.body2,
                   ),
                 ),
-                Row(
-                  children: <Widget>[
-                    hotnessWidget(),
-                    hotnessWidget(),
-                    hotnessWidget(),
-                    hotnessWidget(),
-                    hotnessWidget(),
-                  ],
+                FlatButton(
+                  child: Text(
+                    'yes',
+                    style: Theme.of(context)
+                        .textTheme
+                        .body2
+                        .copyWith(color: Theme.of(context).accentColor),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                ),
+                FlatButton(
+                  child: Text(
+                    'no',
+                    style: Theme.of(context)
+                        .textTheme
+                        .body2
+                        .copyWith(color: Theme.of(context).accentColor),
+                  ),
+                  onPressed: () => Navigator.pop(context),
                 ),
               ],
             ),
