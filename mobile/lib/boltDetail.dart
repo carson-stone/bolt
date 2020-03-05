@@ -74,18 +74,31 @@ class BoltDetail extends StatelessWidget {
     //   ),
     // );
     return Container(
-      padding: EdgeInsets.only(top: 35),
+      padding: EdgeInsets.only(top: 30),
+      color: Theme.of(context).backgroundColor,
       child: Column(
         children: <Widget>[
           Container(
-            color: Theme.of(context).backgroundColor,
+            height: 775,
+            width: double.infinity,
             padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).accentColor,
+                  width: 1,
+                ),
+              ),
+            ),
             child: GestureDetector(
               child: Hero(
                 tag: 'bolt',
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.network(imageUrl),
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               onTap: () {
