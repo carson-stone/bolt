@@ -228,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 180,
                       height: 35,
                       child: Text(
-                        'User\'s Name',
+                        username,
                         style: Theme.of(context).textTheme.body2,
                       ),
                     ),
