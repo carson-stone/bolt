@@ -324,10 +324,34 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              sparkWidget(context),
-              sparkWidget(context),
-              sparkWidget(context),
-              sparkWidget(context),
+              sparkWidget(
+                context,
+                child: Image.network(
+                  'https://upload.wikimedia.org/wikipedia/commons/9/95/Trapper_Mountain_7530%27.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              sparkWidget(
+                context,
+                child: Image.network(
+                  'https://static.seattletimes.com/wp-content/uploads/2018/09/09052018_K2_182653-1020x665.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              sparkWidget(
+                context,
+                child: Image.network(
+                  'https://ichef.bbci.co.uk/images/ic/640x360/p0659ssc.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              sparkWidget(
+                context,
+                child: Image.network(
+                  'https://3.bp.blogspot.com/-ePUyYcIsyuM/UQfToV8iKFI/AAAAAAAAgqs/OMdAD5WoOSg/s1600/snowy-mountains-vijayendra-bapte.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ],
           ),
         ],
