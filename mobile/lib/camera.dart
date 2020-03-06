@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Camera extends StatefulWidget {
+  String id, username;
+
+  Camera(this.id, this.username);
+
   @override
-  _CameraState createState() => _CameraState();
+  _CameraState createState() => _CameraState(id, username);
 }
 
 class _CameraState extends State<Camera> {
   var picture;
+  String id, username;
+
+  _CameraState(this.id, this.username);
 
   void getPictures() async {
     var newPicture;
@@ -26,8 +33,12 @@ class _CameraState extends State<Camera> {
       picture = newPicture;
     });
 
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => AddingBolt(newPicture)));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddingBolt(newPicture, id, username),
+      ),
+    );
   }
 
   @override
