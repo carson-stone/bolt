@@ -33,38 +33,49 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(14.0),
-                child: GestureDetector(
-                  child: Image.network(content[index]['imageUrl']),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BoltDetail(
-                              content[index]['username'],
-                              content[index]['imageUrl'],
-                              content[index]['user_id'],
-                              content[index]['description']),
-                        ));
-                  },
-                  onLongPress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Scaffold(
-                            backgroundColor: Theme.of(context).backgroundColor,
-                            appBar: AppBar(
-                              title: Text(
-                                content[index]['username'] + "'s profile",
-                                style: Theme.of(context).textTheme.title,
+              Container(
+                height: 400,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14.0),
+                  child: GestureDetector(
+                    child: Hero(
+                      tag: 'bolt',
+                      child: Image.network(
+                        content[index]['imageUrl'],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BoltDetail(
+                                content[index]['username'],
+                                content[index]['imageUrl'],
+                                content[index]['user_id'],
+                                content[index]['description']),
+                          ));
+                    },
+                    onLongPress: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                              backgroundColor:
+                                  Theme.of(context).backgroundColor,
+                              appBar: AppBar(
+                                title: Text(
+                                  content[index]['username'] + "'s profile",
+                                  style: Theme.of(context).textTheme.title,
+                                ),
                               ),
+                              body: ProfilePage(content[index]['user_id'],
+                                  content[index]['username']),
                             ),
-                            body: ProfilePage(content[index]['user_id'],
-                                content[index]['username']),
-                          ),
-                        ));
-                  },
+                          ));
+                    },
+                  ),
                 ),
               ),
               Column(

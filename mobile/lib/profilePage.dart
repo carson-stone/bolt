@@ -185,26 +185,28 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           )
-        : Container(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: GestureDetector(
-                child: Hero(
-                  tag: 'bolt',
-                  child: Image.network(
-                    bolts[0]['imageUrl'],
-                    fit: BoxFit.cover,
-                  ),
+        : ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: GestureDetector(
+              child: Hero(
+                tag: 'bolt',
+                child: Image.network(
+                  bolts[0]['imageUrl'],
+                  fit: BoxFit.cover,
                 ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BoltDetail(username,
-                            bolts[0]['imageUrl'], id, bolts[0]['description']),
-                      ));
-                },
               ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BoltDetail(
+                        username,
+                        bolts[0]['imageUrl'],
+                        id,
+                        bolts[0]['description'],
+                      ),
+                    ));
+              },
             ),
           );
 
