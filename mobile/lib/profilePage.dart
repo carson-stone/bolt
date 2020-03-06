@@ -150,6 +150,21 @@ class _ProfilePageState extends State<ProfilePage> {
     Random randomGen = Random();
     int randomColorIndex = randomGen.nextInt(randomizedProfilePics.length);
 
+    Widget profilePic = user['profilePic'] == null
+        ? Container(
+            color: randomizedProfilePics[randomColorIndex][0],
+            padding: EdgeInsets.all(12),
+            child: Image.asset(
+              randomizedProfilePics[randomColorIndex][1],
+            ),
+          )
+        : Container(
+            child: Image.network(
+              user['profilePic'],
+              fit: BoxFit.cover,
+            ),
+          );
+
     Widget boltWidget = bolts.length == 0
         ? Container(
             child: Stack(
@@ -254,13 +269,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 sparkWidget(
                   context,
-                  child: Container(
-                    color: randomizedProfilePics[randomColorIndex][0],
-                    padding: EdgeInsets.all(12),
-                    child: Image.asset(
-                      randomizedProfilePics[randomColorIndex][1],
-                    ),
-                  ),
+                  child: profilePic,
                 ),
                 SizedBox(
                   width: 25,
