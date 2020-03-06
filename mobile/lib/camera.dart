@@ -31,6 +31,10 @@ class _CameraState extends State<Camera> {
       );
     }
 
+    if (newPicture == null) {
+      return;
+    }
+
     setState(() {
       picture = newPicture;
     });
