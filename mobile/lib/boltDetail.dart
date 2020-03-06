@@ -18,7 +18,7 @@ class BoltDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 40, 10, 0),
+      padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
       color: Theme.of(context).backgroundColor,
       child: Column(
         children: <Widget>[
@@ -30,7 +30,7 @@ class BoltDetail extends StatelessWidget {
               child: Hero(
                 tag: 'bolt',
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     imageUrl,
                     fit: BoxFit.cover,

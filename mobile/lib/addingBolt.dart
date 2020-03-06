@@ -23,7 +23,7 @@ class _AddingBoltState extends State<AddingBolt> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 40, 10, 10),
+      padding: EdgeInsets.fromLTRB(0, 40, 0, 10),
       color: Theme.of(context).backgroundColor,
       child: Column(
         children: <Widget>[
@@ -34,7 +34,7 @@ class _AddingBoltState extends State<AddingBolt> {
             child: Hero(
               tag: 'bolt',
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 child: Image.file(
                   bolt,
                   fit: BoxFit.cover,
