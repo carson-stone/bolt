@@ -55,11 +55,24 @@ class BoltDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  child: Text(
-                    username,
-                    style: Theme.of(context).textTheme.body2,
+                GestureDetector(
+                  child: Container(
+                    child: Text(
+                      username,
+                      style: Theme.of(context).textTheme.body2,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                            appBar: AppBar(),
+                            body: ProfilePage(user_id, username),
+                          ),
+                        ));
+                  },
                 ),
                 Row(
                   children: <Widget>[
