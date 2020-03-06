@@ -171,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Container(
                       width: 115,
                       height: 115,
-                      child: Camera(id, username),
+                      child: Camera(id, username, getBolts),
                     ),
                     SizedBox(
                       height: 20,

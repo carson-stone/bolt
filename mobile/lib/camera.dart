@@ -4,18 +4,20 @@ import 'package:image_picker/image_picker.dart';
 
 class Camera extends StatefulWidget {
   String id, username;
+  Function getBolts;
 
-  Camera(this.id, this.username);
+  Camera(this.id, this.username, this.getBolts);
 
   @override
-  _CameraState createState() => _CameraState(id, username);
+  _CameraState createState() => _CameraState(id, username, getBolts);
 }
 
 class _CameraState extends State<Camera> {
   var picture;
   String id, username;
+  Function getBolts;
 
-  _CameraState(this.id, this.username);
+  _CameraState(this.id, this.username, this.getBolts);
 
   void getPictures() async {
     var newPicture;
@@ -36,7 +38,7 @@ class _CameraState extends State<Camera> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddingBolt(newPicture, id, username),
+        builder: (context) => AddingBolt(newPicture, id, username, getBolts),
       ),
     );
   }

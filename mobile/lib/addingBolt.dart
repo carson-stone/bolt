@@ -4,18 +4,21 @@ import 'package:http/http.dart' as http;
 class AddingBolt extends StatefulWidget {
   var bolt;
   String userID, username;
+  Function getBolts;
 
-  AddingBolt(this.bolt, id, this.username) : this.userID = id;
+  AddingBolt(this.bolt, id, this.username, this.getBolts) : this.userID = id;
 
   @override
-  _AddingBoltState createState() => _AddingBoltState(bolt, userID, username);
+  _AddingBoltState createState() =>
+      _AddingBoltState(bolt, userID, username, getBolts);
 }
 
 class _AddingBoltState extends State<AddingBolt> {
   var bolt;
   String userID, username;
+  Function getBolts;
 
-  _AddingBoltState(this.bolt, this.userID, this.username);
+  _AddingBoltState(this.bolt, this.userID, this.username, this.getBolts);
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +77,7 @@ class _AddingBoltState extends State<AddingBolt> {
                         'user_id': userID,
                         'description': 'a bolt'
                       });
+                      getBolts();
                       Navigator.pop(context);
                     }),
                 FlatButton(
