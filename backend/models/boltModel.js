@@ -14,12 +14,20 @@ const boltSchema = new Schema(
     },
     description: {
       type: String,
-      required: true
+      required: false
     },
     imageUrl: {
       type: String,
       required: true
-    }
+    },
+    sparks: [
+      {
+        bolt_id: {
+          type: String
+        },
+        required: false
+      }
+    ]
   },
   {
     timestamps: true

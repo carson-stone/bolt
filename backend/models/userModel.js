@@ -9,7 +9,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      minlength: 3
+      minlength: 4
     },
     following: [
       {
@@ -34,7 +34,21 @@ const userSchema = new Schema(
           required: false
         }
       }
-    ]
+    ],
+    name: {
+      type: String,
+      required: false
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    phone: {
+      type: String,
+      required: true,
+      trim: true
+    }
   },
   {
     timestamps: true
