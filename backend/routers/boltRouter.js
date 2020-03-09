@@ -17,6 +17,14 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
+router.route('/add/spark').post((req, res) => {
+  const { spark_id, bolt_id } = req.body;
+  console.log(`adding spark with id=${spark_id} to bolt wiht id=${bolt_id}`);
+  Bolt.findByIdAndUpdate(bolt_id, { $push: { sparks: { bolt_id: spark_id } } })
+    .then(() => res.json('spark added'))
+    .catch(error => res.status(400).json(error));
+});
+
 router.route('/:id').get((req, res) => {
   console.log(`getting bolt with id=${req.params.id}`);
   Bolt.findById(req.params.id)
