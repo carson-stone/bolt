@@ -282,10 +282,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 SizedBox(
                   width: 30,
-                  child: Icon(
-                    Icons.settings,
-                    size: 30,
-                    color: Theme.of(context).splashColor,
+                  child: GestureDetector(
+                    child: Icon(
+                      Icons.settings,
+                      size: 30,
+                      color: Theme.of(context).splashColor,
+                    ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AboutPage(),
+                      ),
+                    ),
                   ),
                 ),
               ],
