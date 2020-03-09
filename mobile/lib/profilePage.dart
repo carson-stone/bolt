@@ -362,40 +362,57 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         height: 80,
                       ),
-                      //testing something
-                      // DefaultTabController(
-                      //   length: 3,
-                      //   child: Scaffold(
-                      //     appBar: AppBar(
-                      //       // bottom: PreferredSize(
-                      //       //   preferredSize: Size.fromHeight(0),
-                      //       // child: TabBar(
-                      //       bottom: TabBar(
-                      //         tabs: [
-                      //           Tab(icon: Icon(Icons.directions_car)),
-                      //           Tab(icon: Icon(Icons.directions_transit)),
-                      //           Tab(icon: Icon(Icons.directions_bike)),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     // ),
-                      //     body: TabBarView(
-                      //       children: <Widget>[
-                      //         Text('1'),
-                      //         Text('2'),
-                      //         Text('3'),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      Container(
-                        height: 320,
-                        child: ListView(
-                          children: List.generate(
-                            25,
-                            (index) => ListTile(
-                              title: Text('sdfdsfsdf  ' + index.toString()),
+                      Expanded(
+                        child: DefaultTabController(
+                          length: 2,
+                          child: Scaffold(
+                            appBar: AppBar(
+                              bottom: TabBar(
+                                tabs: <Widget>[
+                                  Tab(
+                                    child: Text(
+                                      'following',
+                                      style: Theme.of(context).textTheme.body2,
+                                    ),
+                                  ),
+                                  Tab(
+                                    child: Text(
+                                      'followers',
+                                      style: Theme.of(context).textTheme.body2,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
+                            body: TabBarView(
+                              children: <Widget>[
+                                ListView(
+                                  children: List.generate(
+                                    user['following'].length,
+                                    (index) => ListTile(
+                                      title: Text(
+                                        user['following'][index]['username'],
+                                        style:
+                                            Theme.of(context).textTheme.body1,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                ListView(
+                                  children: List.generate(
+                                    user['followers'].length,
+                                    (index) => ListTile(
+                                      title: Text(
+                                        user['followers'][index]['username'],
+                                        style:
+                                            Theme.of(context).textTheme.body1,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            backgroundColor: Theme.of(context).backgroundColor,
                           ),
                         ),
                       ),
