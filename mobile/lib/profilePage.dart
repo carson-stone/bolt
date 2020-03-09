@@ -55,6 +55,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     getBolts();
+    followingCount = 0;
+    followerCount = 0;
   }
 
   void getBolts() async {
@@ -388,7 +390,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               children: <Widget>[
                                 ListView(
                                   children: List.generate(
-                                    user['following'].length,
+                                    followingCount,
                                     (index) => ListTile(
                                       title: Text(
                                         user['following'][index]['username'],
@@ -400,7 +402,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 ListView(
                                   children: List.generate(
-                                    user['followers'].length,
+                                    followerCount,
                                     (index) => ListTile(
                                       title: Text(
                                         user['followers'][index]['username'],
