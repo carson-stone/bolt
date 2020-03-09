@@ -202,26 +202,30 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         : ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: GestureDetector(
-              child: Hero(
-                tag: 'bolt',
-                child: Image.network(
-                  bolts[0]['imageUrl'],
-                  fit: BoxFit.cover,
+            child: Container(
+              width: double.infinity,
+              height: 400,
+              child: GestureDetector(
+                child: Hero(
+                  tag: 'bolt',
+                  child: Image.network(
+                    bolts[0]['imageUrl'],
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BoltDetail(
+                          username,
+                          bolts[0]['imageUrl'],
+                          id,
+                          bolts[0]['description'],
+                        ),
+                      ));
+                },
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BoltDetail(
-                        username,
-                        bolts[0]['imageUrl'],
-                        id,
-                        bolts[0]['description'],
-                      ),
-                    ));
-              },
             ),
           );
 
@@ -297,7 +301,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 60,
           ),
           Container(
-            height: 400,
+            height: 600,
             alignment: Alignment.center,
             child: PageView(
               controller: PageController(
@@ -305,54 +309,101 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                boltWidget,
+                Column(
+                  children: <Widget>[
+                    boltWidget,
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        sparkWidget(
+                          context,
+                          child: Image.network(
+                            'https://upload.wikimedia.org/wikipedia/commons/9/95/Trapper_Mountain_7530%27.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        sparkWidget(
+                          context,
+                          child: Image.network(
+                            'https://static.seattletimes.com/wp-content/uploads/2018/09/09052018_K2_182653-1020x665.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        sparkWidget(
+                          context,
+                          child: Image.network(
+                            'https://ichef.bbci.co.uk/images/ic/640x360/p0659ssc.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        sparkWidget(
+                          context,
+                          child: Image.network(
+                            'https://3.bp.blogspot.com/-ePUyYcIsyuM/UQfToV8iKFI/AAAAAAAAgqs/OMdAD5WoOSg/s1600/snowy-mountains-vijayendra-bapte.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  height: 250,
                   alignment: Alignment.topCenter,
-                  child: Text(
-                    'sndfksndfk kjdsnfk jnsdfjknfkj n wdwn kdn kn knk en rkerngk enfkj n wdwn kdn kn knk en rkerngk enf',
-                    textAlign: TextAlign.center,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          'sndfksndfk kjdsnfk jnsdfjknfkj n wdwn kdn kn knk en rkerngk enfkj n wdwn kdn kn knk en rkerngk enf',
+                          textAlign: TextAlign.center,
+                        ),
+                        height: 80,
+                      ),
+                      //testing something
+                      // DefaultTabController(
+                      //   length: 3,
+                      //   child: Scaffold(
+                      //     appBar: AppBar(
+                      //       // bottom: PreferredSize(
+                      //       //   preferredSize: Size.fromHeight(0),
+                      //       // child: TabBar(
+                      //       bottom: TabBar(
+                      //         tabs: [
+                      //           Tab(icon: Icon(Icons.directions_car)),
+                      //           Tab(icon: Icon(Icons.directions_transit)),
+                      //           Tab(icon: Icon(Icons.directions_bike)),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     // ),
+                      //     body: TabBarView(
+                      //       children: <Widget>[
+                      //         Text('1'),
+                      //         Text('2'),
+                      //         Text('3'),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      Container(
+                        height: 320,
+                        child: ListView(
+                          children: List.generate(
+                            25,
+                            (index) => ListTile(
+                              title: Text('sdfdsfsdf  ' + index.toString()),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 60,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              sparkWidget(
-                context,
-                child: Image.network(
-                  'https://upload.wikimedia.org/wikipedia/commons/9/95/Trapper_Mountain_7530%27.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              sparkWidget(
-                context,
-                child: Image.network(
-                  'https://static.seattletimes.com/wp-content/uploads/2018/09/09052018_K2_182653-1020x665.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              sparkWidget(
-                context,
-                child: Image.network(
-                  'https://ichef.bbci.co.uk/images/ic/640x360/p0659ssc.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              sparkWidget(
-                context,
-                child: Image.network(
-                  'https://3.bp.blogspot.com/-ePUyYcIsyuM/UQfToV8iKFI/AAAAAAAAgqs/OMdAD5WoOSg/s1600/snowy-mountains-vijayendra-bapte.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
           ),
         ],
       ),
