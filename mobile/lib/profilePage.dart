@@ -369,21 +369,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           length: 2,
                           child: Scaffold(
                             appBar: AppBar(
-                              bottom: TabBar(
-                                tabs: <Widget>[
-                                  Tab(
-                                    child: Text(
-                                      'following',
-                                      style: Theme.of(context).textTheme.body2,
+                              bottom: PreferredSize(
+                                preferredSize: Size.fromHeight(0),
+                                child: TabBar(
+                                  tabs: <Widget>[
+                                    Tab(
+                                      child: Text(
+                                        'following',
+                                        style:
+                                            Theme.of(context).textTheme.body2,
+                                      ),
                                     ),
-                                  ),
-                                  Tab(
-                                    child: Text(
-                                      'followers',
-                                      style: Theme.of(context).textTheme.body2,
+                                    Tab(
+                                      child: Text(
+                                        'followers',
+                                        style:
+                                            Theme.of(context).textTheme.body2,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             body: TabBarView(
