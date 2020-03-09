@@ -398,7 +398,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     followingCount,
                                     (index) => ListTile(
                                       title: Text(
-                                        user['following'][index]['username'],
+                                        '@' +
+                                            user['following'][index]
+                                                ['username'],
                                         style:
                                             Theme.of(context).textTheme.body1,
                                       ),
@@ -410,7 +412,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     followerCount,
                                     (index) => ListTile(
                                       title: Text(
-                                        user['followers'][index]['username'],
+                                        '@' +
+                                            user['followers'][index]
+                                                ['username'],
                                         style:
                                             Theme.of(context).textTheme.body1,
                                       ),
