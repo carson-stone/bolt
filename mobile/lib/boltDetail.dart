@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import './profilePage.dart';
 
 class BoltDetail extends StatelessWidget {
-  String username, imageUrl, user_id, description;
+  String username, imageUrl, user_id, description, heroTag;
 
-  BoltDetail(this.username, this.imageUrl, this.user_id, this.description);
+  BoltDetail(this.username, this.imageUrl, this.user_id, this.description,
+      this.heroTag);
 
   Widget hotnessWidget() => Container(
         height: 50,
@@ -28,7 +29,7 @@ class BoltDetail extends StatelessWidget {
             width: double.infinity,
             child: GestureDetector(
               child: Hero(
-                tag: 'bolt',
+                tag: heroTag,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
@@ -43,7 +44,6 @@ class BoltDetail extends StatelessWidget {
             ),
           ),
           Container(
-            // margin: EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(

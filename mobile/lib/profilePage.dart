@@ -204,6 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 sparks[index]['imageUrl'],
                                 id,
                                 sparks[index]['description'],
+                                '',
                               ),
                             ));
                       },
@@ -287,6 +288,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           bolt['imageUrl'],
                           id,
                           bolt['description'],
+                          'bolt',
                         ),
                       ));
                 },
