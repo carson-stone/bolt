@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String id, username;
   int followingCount = 0, followerCount = 0;
   var user = {};
-  List bolts = [];
+  var bolt;
   List sparks = [];
 
   _ProfilePageState(this.id, this.username);
@@ -66,14 +66,14 @@ class _ProfilePageState extends State<ProfilePage> {
     var res = await http.get(url);
     var userData = json.decode(res.body);
 
-    url = 'http://localhost:6000/users/$id/bolts';
+    url = 'http://localhost:6000/users/$id/bolt';
     res = await http.get(url);
-    List usersBolts = json.decode(res.body);
+    var usersBolt = json.decode(res.body);
 
     List usersSparks = [];
     url = 'http://localhost:6000/bolts/';
-    for (int i = 0; i < usersBolts[0]['sparks'].length; ++i) {
-      res = await http.get(url + usersBolts[0]['sparks'][i]['bolt_id']);
+    for (int i = 0; i < usersBolt['sparks'].length; ++i) {
+      res = await http.get(url + usersBolt['sparks'][i]['bolt_id']);
       var spark = json.decode(res.body);
       usersSparks.add(spark);
     }
@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
       user = userData;
       followingCount = userData['following'].length;
       followerCount = userData['followers'].length;
-      bolts = usersBolts;
+      bolt = usersBolt;
       sparks = usersSparks;
     });
   }
@@ -230,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
 
-    Widget boltWidget = bolts.length == 0
+    Widget boltWidget = bolt == null
         ? Container(
             child: Stack(
               alignment: Alignment.center,
@@ -274,7 +274,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Hero(
                   tag: 'bolt',
                   child: Image.network(
-                    bolts[0]['imageUrl'],
+                    bolt['imageUrl'],
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -284,9 +284,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       MaterialPageRoute(
                         builder: (context) => BoltDetail(
                           username,
-                          bolts[0]['imageUrl'],
+                          bolt['imageUrl'],
                           id,
-                          bolts[0]['description'],
+                          bolt['description'],
                         ),
                       ));
                 },

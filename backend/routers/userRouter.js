@@ -56,10 +56,10 @@ router.route('/:id/feed').get((req, res) => {
     .catch(error => res.status(400).json('error: ' + error));
 });
 
-router.route('/:id/bolts').get((req, res) => {
-  console.log(`getting bolts for ${req.params.id}`);
+router.route('/:id/bolt').get((req, res) => {
+  console.log(`getting bolt for ${req.params.id}`);
   Bolt.find({ user_id: req.params.id })
-    .then(bolts => res.json(bolts))
+    .then(bolts => res.json(bolts[0]))
     .catch(error => res.json('error: ' + error));
 });
 
