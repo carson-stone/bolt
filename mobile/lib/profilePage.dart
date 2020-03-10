@@ -445,6 +445,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                         style:
                                             Theme.of(context).textTheme.body1,
                                       ),
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => Scaffold(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .backgroundColor,
+                                                appBar: AppBar(),
+                                                body: ProfilePage(
+                                                  user['following'][index]
+                                                      ['id'],
+                                                  user['following'][index]
+                                                      ['username'],
+                                                ),
+                                              ),
+                                            ));
+                                      },
                                     ),
                                   ),
                                 ),
@@ -459,6 +477,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                         style:
                                             Theme.of(context).textTheme.body1,
                                       ),
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => Scaffold(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .backgroundColor,
+                                                appBar: AppBar(),
+                                                body: ProfilePage(
+                                                  user['followers'][index]
+                                                      ['id'],
+                                                  user['followers'][index]
+                                                      ['username'],
+                                                ),
+                                              ),
+                                            ));
+                                      },
                                     ),
                                   ),
                                 ),
