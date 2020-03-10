@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,16 +23,17 @@ class _ProfilePageState extends State<ProfilePage> {
   int followingCount = 0, followerCount = 0;
   var user = {};
   List bolts = [];
+  var sparksImages;
 
   _ProfilePageState(this.id, this.username);
 
   Widget sparkWidget(context, {child}) {
-    var ch = child != null
-        ? child
-        : Container(
+    var ch = child == null
+        ? Container(
             color: Theme.of(context).canvasColor,
             child: Text(''),
-          );
+          )
+        : child;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
@@ -54,12 +56,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    getBolts();
+    getData();
     followingCount = 0;
     followerCount = 0;
   }
 
-  void getBolts() async {
+  void getData() async {
     String url = 'http://localhost:6000/users/$id';
     var res = await http.get(url);
     var userData = json.decode(res.body);
@@ -68,11 +70,20 @@ class _ProfilePageState extends State<ProfilePage> {
     res = await http.get(url);
     List usersBolts = json.decode(res.body);
 
+    List sparkImageUrls = [];
+    url = 'http://localhost:6000/bolts/';
+    for (int i = 0; i < usersBolts[0]['sparks'].length; ++i) {
+      res = await http.get(url + usersBolts[0]['sparks'][i]['bolt_id']);
+      var spark = json.decode(res.body);
+      sparkImageUrls.add(spark['imageUrl']);
+    }
+
     setState(() {
       user = userData;
       followingCount = userData['following'].length;
       followerCount = userData['followers'].length;
       bolts = usersBolts;
+      sparksImages = sparkImageUrls;
     });
   }
 
@@ -149,6 +160,45 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget sparksListWidget = sparksImages == null
+        ? Container(
+            height: 80,
+            alignment: Alignment.center,
+            child: Text(
+              'No sparks',
+              style: Theme.of(context).textTheme.body1,
+            ),
+          )
+        : sparksImages.length == 0
+            ? Container(
+                height: 80,
+                alignment: Alignment.center,
+                child: Text(
+                  'No sparks',
+                  style: Theme.of(context).textTheme.body1,
+                ),
+              )
+            : Container(
+                height: 80,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    sparksImages.length,
+                    (index) => Container(
+                      child: sparkWidget(
+                        context,
+                        child: Image.network(
+                          sparksImages[index],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    ),
+                  ),
+                ),
+              );
+
     Random randomGen = Random();
     int randomColorIndex = randomGen.nextInt(randomizedProfilePics.length);
 
@@ -188,7 +238,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Container(
                       width: 115,
                       height: 115,
-                      child: Camera(id, username, getBolts),
+                      child: Camera(id, username, getData),
                     ),
                     SizedBox(
                       height: 20,
@@ -325,39 +375,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                       height: 60,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        sparkWidget(
-                          context,
-                          child: Image.network(
-                            'https://upload.wikimedia.org/wikipedia/commons/9/95/Trapper_Mountain_7530%27.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        sparkWidget(
-                          context,
-                          child: Image.network(
-                            'https://static.seattletimes.com/wp-content/uploads/2018/09/09052018_K2_182653-1020x665.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        sparkWidget(
-                          context,
-                          child: Image.network(
-                            'https://ichef.bbci.co.uk/images/ic/640x360/p0659ssc.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        sparkWidget(
-                          context,
-                          child: Image.network(
-                            'https://3.bp.blogspot.com/-ePUyYcIsyuM/UQfToV8iKFI/AAAAAAAAgqs/OMdAD5WoOSg/s1600/snowy-mountains-vijayendra-bapte.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
+                    sparksListWidget,
                   ],
                 ),
                 Container(
