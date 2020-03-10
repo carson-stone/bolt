@@ -23,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   int followingCount = 0, followerCount = 0;
   var user = {};
   List bolts = [];
-  var sparksImages;
+  List sparks = [];
 
   _ProfilePageState(this.id, this.username);
 
@@ -70,12 +70,12 @@ class _ProfilePageState extends State<ProfilePage> {
     res = await http.get(url);
     List usersBolts = json.decode(res.body);
 
-    List sparkImageUrls = [];
+    List usersSparks = [];
     url = 'http://localhost:6000/bolts/';
     for (int i = 0; i < usersBolts[0]['sparks'].length; ++i) {
       res = await http.get(url + usersBolts[0]['sparks'][i]['bolt_id']);
       var spark = json.decode(res.body);
-      sparkImageUrls.add(spark['imageUrl']);
+      usersSparks.add(spark);
     }
 
     setState(() {
@@ -83,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
       followingCount = userData['following'].length;
       followerCount = userData['followers'].length;
       bolts = usersBolts;
-      sparksImages = sparkImageUrls;
+      sparks = usersSparks;
     });
   }
 
@@ -160,7 +160,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget sparksListWidget = sparksImages == null
+    Widget sparksListWidget = sparks == null
         ? Container(
             height: 80,
             alignment: Alignment.center,
@@ -169,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
               style: Theme.of(context).textTheme.body1,
             ),
           )
-        : sparksImages.length == 0
+        : sparks.length == 0
             ? Container(
                 height: 80,
                 alignment: Alignment.center,
@@ -183,13 +183,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: List.generate(
-                    sparksImages.length,
+                    sparks.length,
                     (index) => GestureDetector(
                       child: Container(
                         child: sparkWidget(
                           context,
                           child: Image.network(
-                            sparksImages[index],
+                            sparks[index]['imageUrl'],
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -201,9 +201,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             MaterialPageRoute(
                               builder: (context) => BoltDetail(
                                 username,
-                                sparksImages[0],
+                                sparks[index]['imageUrl'],
                                 id,
-                                'a description should be here',
+                                sparks[index]['description'],
                               ),
                             ));
                       },
