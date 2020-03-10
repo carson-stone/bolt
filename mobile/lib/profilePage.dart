@@ -182,18 +182,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 80,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: List.generate(
                     sparksImages.length,
-                    (index) => Container(
-                      child: sparkWidget(
-                        context,
-                        child: Image.network(
-                          sparksImages[index],
-                          fit: BoxFit.cover,
+                    (index) => GestureDetector(
+                      child: Container(
+                        child: sparkWidget(
+                          context,
+                          child: Image.network(
+                            sparksImages[index],
+                            fit: BoxFit.cover,
+                          ),
                         ),
+                        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       ),
-                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BoltDetail(
+                                username,
+                                sparksImages[0],
+                                id,
+                                'a description should be here',
+                              ),
+                            ));
+                      },
                     ),
                   ),
                 ),
