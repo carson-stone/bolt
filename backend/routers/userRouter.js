@@ -58,7 +58,7 @@ router.route('/:id/feed').get((req, res) => {
 
 router.route('/:id/bolt').get((req, res) => {
   console.log(`getting bolt for user ${req.params.id}`);
-  Bolt.find({ user_id: req.params.id })
+  Bolt.find({ user_id: req.params.id, parent_bolt_id: '' })
     .then(bolts => res.json(bolts[0]))
     .catch(error => res.status(400).json('error: ' + error));
 });
