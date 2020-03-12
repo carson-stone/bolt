@@ -41,13 +41,17 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: false,
       trim: true
     },
     phone: {
       type: String,
-      required: true,
+      required: false,
       trim: true
+    },
+    profilePic: {
+      type: String,
+      required: false
     }
   },
   {

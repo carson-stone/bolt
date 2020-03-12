@@ -9,9 +9,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  console.log(`adding bolt for user with id=${req.user_id}`);
-  const { user_id, username, description, imageUrl } = req.body;
-  new Bolt({ user_id, username, description, imageUrl })
+  console.log(`adding bolt for user with id=${req.body.user_id}`);
+  const { user_id, username, description, imageUrl, parent_bolt_id } = req.body;
+  new Bolt({ user_id, username, description, imageUrl, parent_bolt_id })
     .save()
     .then(() => res.json('bolt added'))
     .catch(err => res.status(400).json(err));
@@ -21,7 +21,11 @@ router.route('/add/spark').post((req, res) => {
   const { spark_id, bolt_id } = req.body;
   console.log(`adding spark with id=${spark_id} to bolt wiht id=${bolt_id}`);
   Bolt.findByIdAndUpdate(bolt_id, { $push: { sparks: { bolt_id: spark_id } } })
-    .then(() => res.json('spark added'))
+    .then(() => {
+      Bolt.findByIdAndUpdate(spark_id, { parent_bolt_id: bolt_id }).then(() => {
+        res.json('spark added');
+      });
+    })
     .catch(error => res.status(400).json(error));
 });
 

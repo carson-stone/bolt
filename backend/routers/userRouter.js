@@ -20,7 +20,7 @@ router.route('/:id').get((req, res) => {
 router.route('/register').post((req, res) => {
   const { username } = req.body;
   console.log(`adding user ${username}`);
-  new User({ username })
+  new User({ username, profilePic: '', phone: '', email: '' })
     .save()
     .then(() => res.json('user added'))
     .catch(err => res.status(400).json(err));
@@ -57,10 +57,17 @@ router.route('/:id/feed').get((req, res) => {
 });
 
 router.route('/:id/bolt').get((req, res) => {
-  console.log(`getting bolt for ${req.params.id}`);
+  console.log(`getting bolt for user ${req.params.id}`);
   Bolt.find({ user_id: req.params.id })
     .then(bolts => res.json(bolts[0]))
-    .catch(error => res.json('error: ' + error));
+    .catch(error => res.status(400).json('error: ' + error));
+});
+
+router.route('/:id/sparks').get((req, res) => {
+  console.log(`getting sparks for user ${req.params.id}`);
+  Bolt.find({ user_id: req.params.id, parent_bolt_id: { $ne: '' } })
+    .then(bolts => res.json(bolts))
+    .catch(error => res.status(400).json('error:' + error));
 });
 
 router.route('/follow').post((req, res) => {

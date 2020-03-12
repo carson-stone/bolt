@@ -20,6 +20,10 @@ const boltSchema = new Schema(
       type: String,
       required: true
     },
+    parent_bolt_id: {
+      type: String,
+      required: false
+    },
     sparks: [
       {
         bolt_id: {

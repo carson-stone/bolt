@@ -68,15 +68,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
     url = 'http://localhost:6000/users/$id/bolt';
     res = await http.get(url);
-    var usersBolt = json.decode(res.body);
+    var usersBolt = res.body == '' ? null : json.decode(res.body);
 
-    List usersSparks = [];
-    url = 'http://localhost:6000/bolts/';
-    for (int i = 0; i < usersBolt['sparks'].length; ++i) {
-      res = await http.get(url + usersBolt['sparks'][i]['bolt_id']);
-      var spark = json.decode(res.body);
-      usersSparks.add(spark);
-    }
+    url = 'http://localhost:6000/users/$id/sparks';
+    res = await http.get(url);
+    var usersSparks = json.decode(res.body);
 
     setState(() {
       user = userData;
@@ -160,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget sparksListWidget = sparks == null
+    Widget sparksListWidget = sparks.length == 0
         ? Container(
             height: 80,
             alignment: Alignment.center,
@@ -169,54 +165,45 @@ class _ProfilePageState extends State<ProfilePage> {
               style: Theme.of(context).textTheme.body1,
             ),
           )
-        : sparks.length == 0
-            ? Container(
-                height: 80,
-                alignment: Alignment.center,
-                child: Text(
-                  'No sparks',
-                  style: Theme.of(context).textTheme.body1,
-                ),
-              )
-            : Container(
-                height: 80,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    sparks.length,
-                    (index) => GestureDetector(
-                      child: Container(
-                        child: sparkWidget(
-                          context,
-                          child: Image.network(
-                            sparks[index]['imageUrl'],
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        : Container(
+            height: 80,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(
+                sparks.length,
+                (index) => GestureDetector(
+                  child: Container(
+                    child: sparkWidget(
+                      context,
+                      child: Image.network(
+                        sparks[index]['imageUrl'],
+                        fit: BoxFit.cover,
                       ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BoltDetail(
-                                username,
-                                sparks[index]['imageUrl'],
-                                id,
-                                sparks[index]['description'],
-                                '',
-                              ),
-                            ));
-                      },
                     ),
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BoltDetail(
+                            username,
+                            sparks[index]['imageUrl'],
+                            id,
+                            sparks[index]['description'],
+                            '',
+                          ),
+                        ));
+                  },
                 ),
-              );
+              ),
+            ),
+          );
 
     Random randomGen = Random();
     int randomColorIndex = randomGen.nextInt(randomizedProfilePics.length);
 
-    Widget profilePic = user['profilePic'] == null
+    Widget profilePic = user == {}
         ? Container(
             color: randomizedProfilePics[randomColorIndex][0],
             padding: EdgeInsets.all(12),
@@ -224,12 +211,21 @@ class _ProfilePageState extends State<ProfilePage> {
               randomizedProfilePics[randomColorIndex][1],
             ),
           )
-        : Container(
-            child: Image.network(
-              user['profilePic'],
-              fit: BoxFit.cover,
-            ),
-          );
+        : user['profilePic'] == ''
+            ? Container(
+                color: randomizedProfilePics[randomColorIndex][0],
+                padding: EdgeInsets.all(12),
+                child: Image.asset(
+                  randomizedProfilePics[randomColorIndex][1],
+                ),
+              )
+            : Container(
+                child: Image.network(
+                  // user['profilePic'],
+                  'https://i.telegraph.co.uk/multimedia/archive/03439/dude6_3439641b.jpg',
+                  fit: BoxFit.cover,
+                ),
+              );
 
     Widget boltWidget = bolt == null
         ? Container(
