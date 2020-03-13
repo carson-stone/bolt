@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => BoltDetail(
+                              content[index]['_id'],
                               content[index]['username'],
                               content[index]['imageUrl'],
                               content[index]['user_id'],

@@ -36,4 +36,17 @@ router.route('/:id').get((req, res) => {
     .catch(error => res.status(400).json('error: ' + error));
 });
 
+router.route('/:id/sparks').get((req, res) => {
+  console.log(`getting sparks for bolt with id=${req.params.id}`);
+  Bolt.findById(req.params.id)
+    .then(bolt => {
+      let spark_ids = [];
+      for (let spark of bolt['sparks']) {
+        spark_ids.push(spark['bolt_id']);
+      }
+      res.json(spark_ids);
+    })
+    .catch(error => res.status(400).json('error: ' + error));
+});
+
 module.exports = router;

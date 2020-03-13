@@ -187,6 +187,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => BoltDetail(
+                            sparks[index]['_id'],
                             username,
                             sparks[index]['imageUrl'],
                             id,
@@ -280,6 +281,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BoltDetail(
+                          bolt['_id'],
                           username,
                           bolt['imageUrl'],
                           id,
