@@ -64,7 +64,7 @@ class _BoltDetailState extends State<BoltDetail> {
       scrollDirection: Axis.horizontal,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+          padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
           color: Theme.of(context).backgroundColor,
           child: Column(
             children: <Widget>[
@@ -89,6 +89,7 @@ class _BoltDetailState extends State<BoltDetail> {
                 ),
               ),
               Container(
+                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                 decoration: BoxDecoration(
                   border: Border(
                     top: BorderSide(
@@ -138,7 +139,7 @@ class _BoltDetailState extends State<BoltDetail> {
         ...List.generate(
           sparks.length,
           (index) => Container(
-            padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+            padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
             color: Theme.of(context).backgroundColor,
             child: Column(
               children: <Widget>[
@@ -169,6 +170,7 @@ class _BoltDetailState extends State<BoltDetail> {
                   ),
                 ),
                 Container(
+                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                   decoration: BoxDecoration(
                     border: Border(
                       top: BorderSide(
