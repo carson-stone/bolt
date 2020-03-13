@@ -141,6 +141,7 @@ class _BoltDetailState extends State<BoltDetail> {
             Align(
               alignment: Alignment(0, 0.95),
               child: FloatingActionButton(
+                heroTag: null,
                 backgroundColor: Colors.white24,
                 // backgroundColor: Theme.of(context).splashColor,
                 child: Container(
@@ -241,6 +242,7 @@ class _BoltDetailState extends State<BoltDetail> {
               Align(
                 alignment: Alignment(0, 0.95),
                 child: FloatingActionButton(
+                  heroTag: null,
                   backgroundColor: Colors.white24,
                   // backgroundColor: Theme.of(context).splashColor,
                   child: Container(
