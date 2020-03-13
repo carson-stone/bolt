@@ -10,7 +10,6 @@ import './aboutPage.dart';
 
 class ProfilePage extends StatefulWidget {
   String id, username;
-  List bolts = [];
 
   ProfilePage(this.id, this.username);
 
@@ -184,17 +183,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BoltDetail(
-                            sparks[index]['_id'],
-                            username,
-                            sparks[index]['imageUrl'],
-                            id,
-                            sparks[index]['description'],
-                            '',
-                          ),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BoltDetail(
+                          sparks[index]['_id'],
+                          username,
+                          sparks[index]['imageUrl'],
+                          id,
+                          sparks[index]['description'],
+                          '',
+                          parentBoltId: sparks[index]['parent_bolt_id'],
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -278,17 +279,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BoltDetail(
-                          bolt['_id'],
-                          username,
-                          bolt['imageUrl'],
-                          id,
-                          bolt['description'],
-                          'bolt',
-                        ),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BoltDetail(
+                        bolt['_id'],
+                        username,
+                        bolt['imageUrl'],
+                        id,
+                        bolt['description'],
+                        'bolt',
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
@@ -477,21 +479,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                       onTap: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => Scaffold(
-                                                backgroundColor:
-                                                    Theme.of(context)
-                                                        .backgroundColor,
-                                                appBar: AppBar(),
-                                                body: ProfilePage(
-                                                  user['followers'][index]
-                                                      ['id'],
-                                                  user['followers'][index]
-                                                      ['username'],
-                                                ),
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Scaffold(
+                                              backgroundColor: Theme.of(context)
+                                                  .backgroundColor,
+                                              appBar: AppBar(),
+                                              body: ProfilePage(
+                                                user['followers'][index]['id'],
+                                                user['followers'][index]
+                                                    ['username'],
                                               ),
-                                            ));
+                                            ),
+                                          ),
+                                        );
                                       },
                                     ),
                                   ),
