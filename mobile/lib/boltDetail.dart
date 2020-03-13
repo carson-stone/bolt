@@ -63,162 +63,194 @@ class _BoltDetailState extends State<BoltDetail> {
       controller: controller,
       scrollDirection: Axis.horizontal,
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
-          color: Theme.of(context).backgroundColor,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 775,
-                padding: EdgeInsets.only(bottom: 10),
-                width: double.infinity,
-                child: GestureDetector(
-                  child: Hero(
-                    tag: heroTag,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: Theme.of(context).accentColor,
-                      width: 1,
-                    ),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    GestureDetector(
-                      child: Container(
-                        child: Text(
-                          username,
-                          style: Theme.of(context).textTheme.body2,
+        Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
+              color: Theme.of(context).backgroundColor,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 775,
+                    padding: EdgeInsets.only(bottom: 10),
+                    width: double.infinity,
+                    child: GestureDetector(
+                      child: Hero(
+                        tag: heroTag,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Scaffold(
-                                backgroundColor:
-                                    Theme.of(context).backgroundColor,
-                                appBar: AppBar(),
-                                body: ProfilePage(user_id, username),
-                              ),
-                            ));
+                        Navigator.pop(context);
                       },
                     ),
-                    Row(
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: Theme.of(context).accentColor,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        hotnessWidget(),
-                        hotnessWidget(),
-                        hotnessWidget(),
-                        hotnessWidget(),
-                        hotnessWidget(),
+                        GestureDetector(
+                          child: Container(
+                            child: Text(
+                              username,
+                              style: Theme.of(context).textTheme.body2,
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Scaffold(
+                                    backgroundColor:
+                                        Theme.of(context).backgroundColor,
+                                    appBar: AppBar(),
+                                    body: ProfilePage(user_id, username),
+                                  ),
+                                ));
+                          },
+                        ),
+                        Row(
+                          children: <Widget>[
+                            hotnessWidget(),
+                            hotnessWidget(),
+                            hotnessWidget(),
+                            hotnessWidget(),
+                            hotnessWidget(),
+                          ],
+                        ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment(0, 0.95),
+              child: FloatingActionButton(
+                backgroundColor: Colors.white24,
+                // backgroundColor: Theme.of(context).splashColor,
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Image.asset('assets/transparent-bolt.png'),
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+        ...List.generate(
+          sparks.length,
+          (index) => Stack(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
+                color: Theme.of(context).backgroundColor,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 775,
+                      padding: EdgeInsets.only(bottom: 10),
+                      width: double.infinity,
+                      child: GestureDetector(
+                        child: Hero(
+                          tag: heroTag,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              sparks[index]['imageUrl'],
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          controller.animateToPage(
+                            0,
+                            duration: Duration(
+                              milliseconds: 300,
+                            ),
+                            curve: Curves.easeOut,
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: Theme.of(context).accentColor,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Container(
+                              child: Text(
+                                sparks[index]['username'],
+                                style: Theme.of(context).textTheme.body2,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Scaffold(
+                                      backgroundColor:
+                                          Theme.of(context).backgroundColor,
+                                      appBar: AppBar(),
+                                      body: ProfilePage(
+                                        sparks[index]['user_id'],
+                                        sparks[index]['username'],
+                                      ),
+                                    ),
+                                  ));
+                            },
+                          ),
+                          Row(
+                            children: <Widget>[
+                              hotnessWidget(),
+                              hotnessWidget(),
+                              hotnessWidget(),
+                              hotnessWidget(),
+                              hotnessWidget(),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
+              Align(
+                alignment: Alignment(0, 0.95),
+                child: FloatingActionButton(
+                  backgroundColor: Colors.white24,
+                  // backgroundColor: Theme.of(context).splashColor,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    child: Image.asset('assets/transparent-bolt.png'),
+                  ),
+                  onPressed: () {},
+                ),
+              ),
             ],
-          ),
-        ),
-        ...List.generate(
-          sparks.length,
-          (index) => Container(
-            padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
-            color: Theme.of(context).backgroundColor,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 775,
-                  padding: EdgeInsets.only(bottom: 10),
-                  width: double.infinity,
-                  child: GestureDetector(
-                    child: Hero(
-                      tag: heroTag,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          sparks[index]['imageUrl'],
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    onTap: () {
-                      controller.animateToPage(
-                        0,
-                        duration: Duration(
-                          milliseconds: 300,
-                        ),
-                        curve: Curves.easeOut,
-                      );
-                    },
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(
-                        color: Theme.of(context).accentColor,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Container(
-                          child: Text(
-                            sparks[index]['username'],
-                            style: Theme.of(context).textTheme.body2,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Scaffold(
-                                  backgroundColor:
-                                      Theme.of(context).backgroundColor,
-                                  appBar: AppBar(),
-                                  body: ProfilePage(
-                                    sparks[index]['user_id'],
-                                    sparks[index]['username'],
-                                  ),
-                                ),
-                              ));
-                        },
-                      ),
-                      Row(
-                        children: <Widget>[
-                          hotnessWidget(),
-                          hotnessWidget(),
-                          hotnessWidget(),
-                          hotnessWidget(),
-                          hotnessWidget(),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ],
