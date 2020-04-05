@@ -39,6 +39,82 @@ class _LoginPageState extends State<LoginPage> {
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      child: Image.asset('assets/transparent-bolt.png'),
+                    ),
+                    SizedBox(
+                      height: 150,
+                    ),
+                    Text(
+                      'username',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        controller: usernameController,
+                        style: Theme.of(context).textTheme.body1,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 120,
+                    ),
+                    Text(
+                      'password',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.body1,
+                        controller: usernameController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 150,
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Theme.of(context).accentColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            login(context, usernameController.text);
+                          }
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                  ],
+                ),
+              ),
               Align(
                 alignment: Alignment(-0.8, -0.8),
                 child: GestureDetector(
@@ -47,80 +123,6 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pop(context);
                   },
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 50,
-                    child: Image.asset('assets/transparent-bolt.png'),
-                  ),
-                  SizedBox(
-                    height: 150,
-                  ),
-                  Text(
-                    'username',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      controller: usernameController,
-                      style: Theme.of(context).textTheme.body1,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 120,
-                  ),
-                  Text(
-                    'password',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.body1,
-                      controller: usernameController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 150,
-                  ),
-                  SizedBox(
-                    width: 200,
-                    height: 50,
-                    child: RaisedButton(
-                      color: Theme.of(context).accentColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 22),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          login(context, usernameController.text);
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                ],
               ),
             ],
           ),

@@ -29,6 +29,139 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      child: Image.asset('assets/transparent-bolt.png'),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Text(
+                      'username',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.body1,
+                        controller: usernameController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Text(
+                      'password',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.body1,
+                        controller: usernameController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Text(
+                      'confirm password',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.body1,
+                        controller: usernameController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Text(
+                      'email',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.body1,
+                        controller: usernameController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Text(
+                      'phone',
+                      style: Theme.of(context).textTheme.body2,
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.body1,
+                        controller: usernameController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: 50,
+                      child: RaisedButton(
+                        color: Theme.of(context).accentColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Text(
+                          'Register',
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            register(context, usernameController.text);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Align(
                 alignment: Alignment(-0.8, -0.8),
                 child: GestureDetector(
@@ -37,137 +170,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     Navigator.pop(context);
                   },
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 50,
-                    child: Image.asset('assets/transparent-bolt.png'),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Text(
-                    'username',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.body1,
-                      controller: usernameController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Text(
-                    'password',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.body1,
-                      controller: usernameController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Text(
-                    'confirm password',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.body1,
-                      controller: usernameController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Text(
-                    'email',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.body1,
-                      controller: usernameController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Text(
-                    'phone',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.body1,
-                      controller: usernameController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    width: 200,
-                    height: 50,
-                    child: RaisedButton(
-                      color: Theme.of(context).accentColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Text(
-                        'Register',
-                        style: TextStyle(fontSize: 22),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          register(context, usernameController.text);
-                        }
-                      },
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
