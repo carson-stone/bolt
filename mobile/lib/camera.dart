@@ -16,20 +16,19 @@ class _CameraState extends State<Camera> {
   var picture;
   String id, username;
   Function getData;
+  bool useCamera;
 
   _CameraState(this.id, this.username, this.getData);
 
-  void getPictures() async {
+  void selectImageFromSource() async {
     var newPicture;
-    newPicture = await ImagePicker.pickImage(
-      source: ImageSource.camera,
-    );
-
-    if (newPicture == null) {
-      newPicture = await ImagePicker.pickImage(
-        source: ImageSource.gallery,
-      );
-    }
+    newPicture = useCamera
+        ? await ImagePicker.pickImage(
+            source: ImageSource.camera,
+          )
+        : await ImagePicker.pickImage(
+            source: ImageSource.gallery,
+          );
 
     if (newPicture == null) {
       return;
@@ -47,12 +46,45 @@ class _CameraState extends State<Camera> {
     );
   }
 
+  void selectImageSource() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Select image source'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('camera'),
+              onPressed: () {
+                setState(() {
+                  useCamera = true;
+                });
+                selectImageFromSource();
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: Text('gallery'),
+              onPressed: () {
+                setState(() {
+                  useCamera = false;
+                });
+                selectImageFromSource();
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: Colors.white,
       onPressed: () {
-        getPictures();
+        selectImageSource();
       },
       child: Image.asset(
         'assets/transparent-bolt.png',
