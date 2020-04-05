@@ -69,7 +69,8 @@ class _HomePageState extends State<HomePage> {
                               backgroundColor:
                                   Theme.of(context).backgroundColor,
                               appBar: AppBar(),
-                              body: ProfilePage(content[index]['user_id'],
+                              body: ProfilePage.notFromMainView(
+                                  content[index]['user_id'],
                                   content[index]['username']),
                             ),
                           ));
