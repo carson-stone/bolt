@@ -481,6 +481,7 @@ class _BoltDetailState extends State<BoltDetail> {
                   ),
                 ],
               )
+            // oarent bolt id is not null
             : PageView(
                 scrollDirection: Axis.vertical,
                 controller: PageController(initialPage: 1),

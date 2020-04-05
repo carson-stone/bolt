@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
                               content[index]['user_id'],
                               content[index]['description'],
                               'bolt',
+                              parentBoltId: content[index]['parent_bolt_id'],
                             ),
                           ));
                     },
