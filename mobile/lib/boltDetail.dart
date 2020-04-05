@@ -133,7 +133,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                         backgroundColor:
                                             Theme.of(context).backgroundColor,
                                         appBar: AppBar(),
-                                        body: ProfilePage(
+                                        body: ProfilePage.notFromMainView(
                                           parentBolt['user_id'],
                                           parentBolt['username'],
                                         ),
@@ -235,7 +235,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                               backgroundColor: Theme.of(context)
                                                   .backgroundColor,
                                               appBar: AppBar(),
-                                              body: ProfilePage(
+                                              body: ProfilePage.notFromMainView(
                                                 sparks[index]['user_id'],
                                                 sparks[index]['username'],
                                               ),
@@ -339,8 +339,10 @@ class _BoltDetailState extends State<BoltDetail> {
                                               backgroundColor: Theme.of(context)
                                                   .backgroundColor,
                                               appBar: AppBar(),
-                                              body: ProfilePage(
-                                                  user_id, username),
+                                              body: ProfilePage.notFromMainView(
+                                                user_id,
+                                                username,
+                                              ),
                                             ),
                                           ));
                                     },
@@ -440,7 +442,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                               backgroundColor: Theme.of(context)
                                                   .backgroundColor,
                                               appBar: AppBar(),
-                                              body: ProfilePage(
+                                              body: ProfilePage.notFromMainView(
                                                 sparks[index]['user_id'],
                                                 sparks[index]['username'],
                                               ),
@@ -559,8 +561,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                                       Theme.of(context)
                                                           .backgroundColor,
                                                   appBar: AppBar(),
-                                                  body: ProfilePage(
-                                                      user_id, username),
+                                                  body: ProfilePage
+                                                      .notFromMainView(
+                                                    user_id,
+                                                    username,
+                                                  ),
                                                 ),
                                               ));
                                         },
@@ -664,7 +669,8 @@ class _BoltDetailState extends State<BoltDetail> {
                                                       Theme.of(context)
                                                           .backgroundColor,
                                                   appBar: AppBar(),
-                                                  body: ProfilePage(
+                                                  body: ProfilePage
+                                                      .notFromMainView(
                                                     sparks[index]['user_id'],
                                                     sparks[index]['username'],
                                                   ),

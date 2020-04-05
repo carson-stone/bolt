@@ -10,11 +10,15 @@ import './aboutPage.dart';
 
 class ProfilePage extends StatefulWidget {
   String id, username;
+  bool showAddBolt = true;
 
   ProfilePage(this.id, this.username);
+  ProfilePage.notFromMainView(this.id, this.username)
+      : this.showAddBolt = false;
 
   @override
-  _ProfilePageState createState() => _ProfilePageState(id, username);
+  _ProfilePageState createState() =>
+      _ProfilePageState(id, username, showAddBolt);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -23,8 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
   var user = {};
   var bolt;
   List sparks = [];
+  bool showAddBolt;
 
-  _ProfilePageState(this.id, this.username);
+  _ProfilePageState(this.id, this.username, this.showAddBolt);
 
   Widget sparkWidget(context, {child}) {
     var ch = child == null
@@ -230,40 +235,67 @@ class _ProfilePageState extends State<ProfilePage> {
               );
 
     Widget boltWidget = bolt == null
-        ? Container(
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: SizedBox(
-                    width: 400,
-                    height: 400,
-                    child: Container(
-                      color: Theme.of(context).canvasColor,
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        ? showAddBolt
+            ? Container(
+                child: Stack(
+                  alignment: Alignment.center,
                   children: <Widget>[
-                    Container(
-                      width: 115,
-                      height: 115,
-                      child: Camera(id, username, getData),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: SizedBox(
+                        width: 400,
+                        height: 400,
+                        child: Container(
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      '+ add bolt',
-                      style: Theme.of(context).textTheme.title,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          width: 115,
+                          height: 115,
+                          child: Camera(id, username, getData),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          '+ add bolt',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          )
+              )
+            : Container(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: SizedBox(
+                        width: 400,
+                        height: 400,
+                        child: Container(
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'no bolt',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
         : ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
