@@ -51,10 +51,21 @@ class _CameraState extends State<Camera> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Select image source'),
+          backgroundColor: Theme.of(context).canvasColor,
+          title: Text(
+            'Select image source',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
           actions: <Widget>[
             FlatButton(
-              child: Text('camera'),
+              child: Text(
+                'camera',
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                ),
+              ),
               onPressed: () {
                 setState(() {
                   useCamera = true;
@@ -64,7 +75,12 @@ class _CameraState extends State<Camera> {
               },
             ),
             FlatButton(
-              child: Text('gallery'),
+              child: Text(
+                'gallery',
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                ),
+              ),
               onPressed: () {
                 setState(() {
                   useCamera = false;
