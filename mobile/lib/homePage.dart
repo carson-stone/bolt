@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                   child: GestureDetector(
                     child: Hero(
                       tag: 'bolt',
-                      child: Image.network(
+                      child: Image.asset(
                         content[index]['imageUrl'],
                         fit: BoxFit.cover,
                       ),
