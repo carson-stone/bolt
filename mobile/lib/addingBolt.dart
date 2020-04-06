@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
 
 class AddingBolt extends StatefulWidget {
   var bolt;
@@ -68,15 +71,39 @@ class _AddingBoltState extends State<AddingBolt> {
                           .body2
                           .copyWith(color: Theme.of(context).accentColor),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       String url = 'http://localhost:6000/bolts/add';
-                      http.post(url, body: {
-                        'imageUrl':
-                            'https://i.pinimg.com/originals/23/ea/f4/23eaf478ef5045c041b415bab66220c9.jpg',
-                        'username': username,
-                        'user_id': userID,
-                        'description': 'a bolt'
-                      });
+
+                      // testing stuff out
+                      final mimeTypeData =
+                          lookupMimeType(bolt.path, headerBytes: [0xFF, 0xD8])
+                              .split('/');
+                      final imageUploadRequest =
+                          http.MultipartRequest('POST', Uri.parse(url));
+                      final file = await http.MultipartFile.fromPath(
+                          'image', bolt.path,
+                          contentType:
+                              MediaType(mimeTypeData[0], mimeTypeData[1]));
+                      imageUploadRequest.fields['ext'] = mimeTypeData[1];
+                      imageUploadRequest.fields['user_id'] = userID;
+                      imageUploadRequest.fields['username'] = username;
+                      imageUploadRequest.fields['description'] = 'a bolt';
+                      imageUploadRequest.fields['imageUrl'] = bolt.path;
+                      imageUploadRequest.fields['parent_bolt_id'] = '';
+                      imageUploadRequest.files.add(file);
+                      final streamedResponse = await imageUploadRequest.send();
+                      var res =
+                          await http.Response.fromStream(streamedResponse);
+                      res = json.decode(res.body);
+                      print('res' + res.toString());
+
+                      // http.post(url, body: {
+                      //   'imageUrl':
+                      //       'https://i.pinimg.com/originals/23/ea/f4/23eaf478ef5045c041b415bab66220c9.jpg',
+                      //   'username': username,
+                      //   'user_id': userID,
+                      //   'description': 'a bolt'
+                      // });
                       getData();
                       Navigator.pop(context);
                     }),

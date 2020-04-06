@@ -1,3 +1,6 @@
+const fs = require('fs');
+const multer = require('multer');
+const upload = multer();
 const router = require('express').Router();
 const Bolt = require('../models/boltModel');
 
@@ -8,12 +11,19 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/add').post(upload.any(), (req, res) => {
   console.log(`adding bolt for user with id=${req.body.user_id}`);
+
   let { user_id, username, description, imageUrl, parent_bolt_id } = req.body;
   if (parent_bolt_id === undefined) {
     parent_bolt_id = '';
   }
+  var src = fs.createReadStream(imageUrl);
+  var dest = fs.createWriteStream(
+    'user_images/' + req.files[0].originalname + '.jpg'
+  );
+  src.pipe(dest);
+
   new Bolt({ user_id, username, description, imageUrl, parent_bolt_id })
     .save()
     .then(() => res.json('bolt added'))
