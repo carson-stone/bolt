@@ -26,7 +26,7 @@ router.route('/add').post(upload.any(), (req, res) => {
     user_id,
     username,
     description,
-    imageUrl,
+    imageUrl: `../backend/user_images/${req.files[0].originalname}`,
     parent_bolt_id,
   })
     .save()
