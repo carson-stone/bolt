@@ -14,7 +14,6 @@ class ProfilePage extends StatefulWidget {
   Function setLoggedIn;
 
   ProfilePage(this.id, this.username, this.setLoggedIn);
-  ProfilePage.notForCurrentUser(this.id, this.username);
   ProfilePage.notFromMainView(this.id, this.username)
       : this.showAddBolt = false;
 
@@ -535,8 +534,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     Theme.of(context)
                                                         .backgroundColor,
                                                 appBar: AppBar(),
-                                                body: ProfilePage
-                                                    .notForCurrentUser(
+                                                body:
+                                                    ProfilePage.notFromMainView(
                                                   user['following'][index]
                                                       ['id'],
                                                   user['following'][index]
@@ -567,8 +566,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               backgroundColor: Theme.of(context)
                                                   .backgroundColor,
                                               appBar: AppBar(),
-                                              body:
-                                                  ProfilePage.notForCurrentUser(
+                                              body: ProfilePage.notFromMainView(
                                                 user['followers'][index]['id'],
                                                 user['followers'][index]
                                                     ['username'],
