@@ -19,12 +19,16 @@ router.route('/add').post(upload.any(), (req, res) => {
     parent_bolt_id = '';
   }
   var src = fs.createReadStream(imageUrl);
-  var dest = fs.createWriteStream(
-    'user_images/' + req.files[0].originalname + '.jpg'
-  );
+  var dest = fs.createWriteStream('user_images/' + req.files[0].originalname);
   src.pipe(dest);
 
-  new Bolt({ user_id, username, description, imageUrl, parent_bolt_id })
+  new Bolt({
+    user_id,
+    username,
+    description,
+    imageUrl: `https://raw.githubusercontent.com/carson-stone/bolt/master/backend/user_images/${imageUrl}`,
+    parent_bolt_id,
+  })
     .save()
     .then(() => res.json('bolt added'))
     .catch((err) => res.status(400).json(err));

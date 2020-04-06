@@ -74,7 +74,6 @@ class _AddingBoltState extends State<AddingBolt> {
                     onPressed: () async {
                       String url = 'http://localhost:6000/bolts/add';
 
-                      // testing stuff out
                       final mimeTypeData =
                           lookupMimeType(bolt.path, headerBytes: [0xFF, 0xD8])
                               .split('/');
@@ -92,18 +91,7 @@ class _AddingBoltState extends State<AddingBolt> {
                       imageUploadRequest.fields['parent_bolt_id'] = '';
                       imageUploadRequest.files.add(file);
                       final streamedResponse = await imageUploadRequest.send();
-                      var res =
-                          await http.Response.fromStream(streamedResponse);
-                      res = json.decode(res.body);
-                      print('res' + res.toString());
 
-                      // http.post(url, body: {
-                      //   'imageUrl':
-                      //       'https://i.pinimg.com/originals/23/ea/f4/23eaf478ef5045c041b415bab66220c9.jpg',
-                      //   'username': username,
-                      //   'user_id': userID,
-                      //   'description': 'a bolt'
-                      // });
                       getData();
                       Navigator.pop(context);
                     }),
