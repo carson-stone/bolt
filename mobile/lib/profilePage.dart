@@ -213,28 +213,99 @@ class _ProfilePageState extends State<ProfilePage> {
     Random randomGen = Random();
     int randomColorIndex = randomGen.nextInt(randomizedProfilePics.length);
 
-    Widget profilePic = user == {}
-        ? Container(
-            color: randomizedProfilePics[randomColorIndex][0],
-            padding: EdgeInsets.all(12),
-            child: Image.asset(
-              randomizedProfilePics[randomColorIndex][1],
+    Widget settingsWidget = setLoggedIn == null
+        ? Container()
+        : Container(
+            padding: EdgeInsets.only(
+              left: 25,
             ),
+            child: SizedBox(
+              width: 30,
+              child: GestureDetector(
+                child: Icon(
+                  Icons.settings,
+                  size: 30,
+                  color: Theme.of(context).splashColor,
+                ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutPage(setLoggedIn),
+                  ),
+                ),
+              ),
+            ),
+          );
+
+    double profilePicAreaWidth = setLoggedIn == null ? 80 : 25;
+
+    Widget profilePic = user == {}
+        ? Row(
+            children: <Widget>[
+              SizedBox(
+                width: profilePicAreaWidth,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: Container(
+                    color: randomizedProfilePics[randomColorIndex][0],
+                    padding: EdgeInsets.all(12),
+                    child: Image.asset(
+                      randomizedProfilePics[randomColorIndex][1],
+                    ),
+                  ),
+                ),
+              ),
+              settingsWidget,
+            ],
           )
         : user['profilePic'] == ''
-            ? Container(
-                color: randomizedProfilePics[randomColorIndex][0],
-                padding: EdgeInsets.all(12),
-                child: Image.asset(
-                  randomizedProfilePics[randomColorIndex][1],
-                ),
+            ? Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: profilePicAreaWidth,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: SizedBox(
+                      height: 80,
+                      width: 80,
+                      child: Container(
+                        color: randomizedProfilePics[randomColorIndex][0],
+                        padding: EdgeInsets.all(12),
+                        child: Image.asset(
+                          randomizedProfilePics[randomColorIndex][1],
+                        ),
+                      ),
+                    ),
+                  ),
+                  settingsWidget,
+                ],
               )
-            : Container(
-                child: Image.network(
-                  // user['profilePic'],
-                  'https://i.telegraph.co.uk/multimedia/archive/03439/dude6_3439641b.jpg',
-                  fit: BoxFit.cover,
-                ),
+            : Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: profilePicAreaWidth,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: SizedBox(
+                      height: 80,
+                      width: 80,
+                      child: Container(
+                        child: Image.network(
+                          // user['profilePic'],
+                          'https://i.telegraph.co.uk/multimedia/archive/03439/dude6_3439641b.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  settingsWidget,
+                ],
               );
 
     Widget boltWidget = bolt == null
@@ -370,32 +441,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  width: 25,
-                ),
-                sparkWidget(
-                  context,
-                  child: profilePic,
-                ),
-                SizedBox(
-                  width: 25,
-                ),
-                SizedBox(
-                  width: 30,
-                  child: GestureDetector(
-                    child: Icon(
-                      Icons.settings,
-                      size: 30,
-                      color: Theme.of(context).splashColor,
-                    ),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AboutPage(setLoggedIn),
-                      ),
-                    ),
-                  ),
-                ),
+                profilePic,
               ],
             ),
             decoration: BoxDecoration(
