@@ -182,7 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Container(
                     child: sparkWidget(
                       context,
-                      child: Image.network(
+                      child: Image.asset(
                         sparks[index]['imageUrl'],
                         fit: BoxFit.cover,
                       ),
@@ -378,7 +378,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: GestureDetector(
                 child: Hero(
                   tag: 'bolt',
-                  child: Image.network(
+                  child: Image.asset(
                     bolt['imageUrl'],
                     fit: BoxFit.cover,
                   ),

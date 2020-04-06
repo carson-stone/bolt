@@ -94,7 +94,7 @@ class _BoltDetailState extends State<BoltDetail> {
                               tag: heroTag,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
+                                child: Image.asset(
                                   parentBolt['imageUrl'],
                                   fit: BoxFit.cover,
                                 ),
@@ -188,7 +188,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     tag: heroTag,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
+                                      child: Image.asset(
                                         sparks[index]['imageUrl'],
                                         fit: BoxFit.cover,
                                       ),
@@ -298,7 +298,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                   tag: heroTag,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
+                                    child: Image.asset(
                                       imageUrl,
                                       fit: BoxFit.cover,
                                     ),
@@ -395,7 +395,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     tag: heroTag,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
+                                      child: Image.asset(
                                         sparks[index]['imageUrl'],
                                         fit: BoxFit.cover,
                                       ),
@@ -518,7 +518,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                       tag: heroTag,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
+                                        child: Image.asset(
                                           imageUrl,
                                           fit: BoxFit.cover,
                                         ),
@@ -620,7 +620,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          child: Image.network(
+                                          child: Image.asset(
                                             sparks[index]['imageUrl'],
                                             fit: BoxFit.cover,
                                           ),

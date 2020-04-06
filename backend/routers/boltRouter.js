@@ -26,7 +26,7 @@ router.route('/add').post(upload.any(), (req, res) => {
     user_id,
     username,
     description,
-    imageUrl: `https://raw.githubusercontent.com/carson-stone/bolt/master/backend/user_images/${imageUrl}`,
+    imageUrl,
     parent_bolt_id,
   })
     .save()
