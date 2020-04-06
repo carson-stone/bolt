@@ -11,14 +11,16 @@ import './aboutPage.dart';
 class ProfilePage extends StatefulWidget {
   String id, username;
   bool showAddBolt = true;
+  Function setLoggedIn;
 
-  ProfilePage(this.id, this.username);
+  ProfilePage(this.id, this.username, this.setLoggedIn);
+  ProfilePage.notForCurrentUser(this.id, this.username);
   ProfilePage.notFromMainView(this.id, this.username)
       : this.showAddBolt = false;
 
   @override
   _ProfilePageState createState() =>
-      _ProfilePageState(id, username, showAddBolt);
+      _ProfilePageState(id, username, showAddBolt, setLoggedIn);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -28,8 +30,9 @@ class _ProfilePageState extends State<ProfilePage> {
   var bolt;
   List sparks = [];
   bool showAddBolt;
+  Function setLoggedIn;
 
-  _ProfilePageState(this.id, this.username, this.showAddBolt);
+  _ProfilePageState(this.id, this.username, this.showAddBolt, this.setLoggedIn);
 
   Widget sparkWidget(context, {child}) {
     var ch = child == null
@@ -388,7 +391,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AboutPage(),
+                        builder: (context) => AboutPage(setLoggedIn),
                       ),
                     ),
                   ),
@@ -486,7 +489,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     Theme.of(context)
                                                         .backgroundColor,
                                                 appBar: AppBar(),
-                                                body: ProfilePage(
+                                                body: ProfilePage
+                                                    .notForCurrentUser(
                                                   user['following'][index]
                                                       ['id'],
                                                   user['following'][index]
@@ -517,7 +521,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                               backgroundColor: Theme.of(context)
                                                   .backgroundColor,
                                               appBar: AppBar(),
-                                              body: ProfilePage(
+                                              body:
+                                                  ProfilePage.notForCurrentUser(
                                                 user['followers'][index]['id'],
                                                 user['followers'][index]
                                                     ['username'],

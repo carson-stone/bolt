@@ -90,7 +90,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                     title: Text(users[index]['username'] +
                                         "'s profile"),
                                   ),
-                                  body: ProfilePage(users[index]['_id'],
+                                  body: ProfilePage.notForCurrentUser(
+                                      users[index]['_id'],
                                       users[index]['username']),
                                 ),
                               ));
