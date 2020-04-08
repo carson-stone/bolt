@@ -24,7 +24,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String id, username;
+  String id, username, bolt_id;
   int followingCount = 0, followerCount = 0;
   var user = {};
   var bolt;
@@ -86,6 +86,9 @@ class _ProfilePageState extends State<ProfilePage> {
       followingCount = userData['following'].length;
       followerCount = userData['followers'].length;
       bolt = usersBolt;
+      if (usersBolt != null) {
+        bolt_id = usersBolt['_id'];
+      }
       sparks = usersSparks;
     });
   }
@@ -201,6 +204,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 sparks[index]['description'],
                                 '',
                                 parentBoltId: sparks[index]['parent_bolt_id'],
+                                user: {
+                                  'id': id,
+                                  'username': username,
+                                },
                               ),
                             ),
                           );
@@ -329,7 +336,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         Container(
                           width: 115,
                           height: 115,
-                          child: Camera(id, username, getData),
+                          child: Camera(
+                            id,
+                            bolt_id,
+                            username,
+                            getData,
+                            make: 'bolt',
+                          ),
                         ),
                         SizedBox(
                           height: 20,
@@ -395,6 +408,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         id,
                         bolt['description'],
                         'bolt',
+                        user: {
+                          'id': id,
+                          'username': username,
+                        },
                       ),
                     ),
                   );

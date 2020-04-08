@@ -5,18 +5,20 @@ import './boltDetail.dart';
 
 class HomePage extends StatefulWidget {
   List content = [];
+  var user;
 
-  HomePage(this.content);
+  HomePage(this.content, {@required this.user});
   HomePage.fromLogin();
 
   @override
-  _HomePageState createState() => _HomePageState(content);
+  _HomePageState createState() => _HomePageState(content, user);
 }
 
 class _HomePageState extends State<HomePage> {
   List content = [];
+  var user;
 
-  _HomePageState(this.content);
+  _HomePageState(this.content, this.user);
 
   Widget hotnessWidget() => Container(
         height: 50,
@@ -66,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                               content[index]['description'],
                               'bolt',
                               parentBoltId: content[index]['parent_bolt_id'],
+                              user: this.user,
                             ),
                           ));
                     },

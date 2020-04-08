@@ -75,7 +75,13 @@ class _AppState extends State<App> {
               ),
               body: TabBarView(
                 children: <Widget>[
-                  HomePage(user['feed']),
+                  HomePage(
+                    user['feed'],
+                    user: {
+                      'username': user['name'],
+                      'id': user['id'],
+                    },
+                  ),
                   DiscoverPage(user['id'], user['name'], updateFeed),
                   ProfilePage(user['id'], user['name'], setLoggedIn),
                 ],

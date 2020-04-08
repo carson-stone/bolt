@@ -30,7 +30,7 @@ router.route('/add').post(upload.any(), (req, res) => {
     parent_bolt_id,
   })
     .save()
-    .then(() => res.json('bolt added'))
+    .then((bolt) => res.json(bolt['id']))
     .catch((err) => res.status(400).json(err));
 });
 

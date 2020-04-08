@@ -3,26 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Camera extends StatefulWidget {
-  Color backgroundColor;
-  String id, username;
+  String id, parentBolt_id, username, make;
   Function getData;
 
-  Camera(this.id, this.username, this.getData,
-      {this.backgroundColor = Colors.white});
+  Camera(this.id, this.parentBolt_id, this.username, this.getData,
+      {@required this.make});
 
   @override
   _CameraState createState() =>
-      _CameraState(id, username, getData, backgroundColor);
+      _CameraState(id, parentBolt_id, username, getData, make);
 }
 
 class _CameraState extends State<Camera> {
   var picture;
-  String id, username;
+  String id, parentBolt_id, username, make;
   Color backgroundColor;
   Function getData;
   bool useCamera;
 
-  _CameraState(this.id, this.username, this.getData, this.backgroundColor);
+  _CameraState(
+      this.id, this.parentBolt_id, this.username, this.getData, this.make) {
+    this.make == 'bolt'
+        ? this.backgroundColor = Colors.white
+        : this.backgroundColor = Colors.white24;
+  }
 
   void selectImageFromSource() async {
     var newPicture;
@@ -45,7 +49,9 @@ class _CameraState extends State<Camera> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddingBolt(newPicture, id, username, getData),
+        builder: (context) => AddingBolt(
+            newPicture, parentBolt_id, id, username, getData,
+            make: this.make),
       ),
     );
   }

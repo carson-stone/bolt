@@ -6,28 +6,36 @@ import './profilePage.dart';
 import './camera.dart';
 
 class BoltDetail extends StatefulWidget {
+  var user;
   String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
   bool fromAnotherBolt;
 
   BoltDetail(this._id, this.username, this.imageUrl, this.user_id,
       this.description, this.heroTag,
-      {fromAnotherBolt: false, parentBoltId})
-      : this.fromAnotherBolt = fromAnotherBolt,
-        this.parentBoltId = parentBoltId;
+      {fromAnotherBolt: false, this.parentBoltId, @required this.user})
+      : this.fromAnotherBolt = fromAnotherBolt;
 
   @override
   _BoltDetailState createState() => _BoltDetailState(_id, username, imageUrl,
-      user_id, description, heroTag, fromAnotherBolt, parentBoltId);
+      user_id, description, heroTag, fromAnotherBolt, parentBoltId, user);
 }
 
 class _BoltDetailState extends State<BoltDetail> {
   String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
   bool fromAnotherBolt;
   List sparks = [];
-  var parentBolt;
+  var parentBolt, user;
 
-  _BoltDetailState(this._id, this.username, this.imageUrl, this.user_id,
-      this.description, this.heroTag, this.fromAnotherBolt, this.parentBoltId);
+  _BoltDetailState(
+      this._id,
+      this.username,
+      this.imageUrl,
+      this.user_id,
+      this.description,
+      this.heroTag,
+      this.fromAnotherBolt,
+      this.parentBoltId,
+      this.user);
 
   @override
   void initState() {
@@ -373,20 +381,12 @@ class _BoltDetailState extends State<BoltDetail> {
                       Align(
                         alignment: Alignment(0, 0.95),
                         child: Camera(
-                          user_id,
-                          username,
+                          user['id'],
+                          _id,
+                          user['username'],
                           getData,
-                          backgroundColor: Theme.of(context).canvasColor,
+                          make: 'spark',
                         ),
-                        // child: FloatingActionButton(
-                        //   heroTag: null,
-                        //   backgroundColor: Colors.white24,
-                        //   child: Container(
-                        //     padding: EdgeInsets.all(5),
-                        //     child: Image.asset('assets/transparent-bolt.png'),
-                        //   ),
-                        //   onPressed: () {},
-                        // ),
                       ),
                     ],
                   ),
