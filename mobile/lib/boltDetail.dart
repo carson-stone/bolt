@@ -78,11 +78,6 @@ class _BoltDetailState extends State<BoltDetail> {
       initialPage: 0,
     );
 
-    print('from another bolt? ' +
-        fromAnotherBolt.toString() +
-        '\nparent bolt id: ' +
-        parentBoltId.toString());
-
     Widget detailsWidget = fromAnotherBolt
         ? parentBolt == null
             ? Container()
