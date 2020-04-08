@@ -7,7 +7,8 @@ class Camera extends StatefulWidget {
   String id, username;
   Function getData;
 
-  Camera(this.id, this.username, this.getData, {this.backgroundColor});
+  Camera(this.id, this.username, this.getData,
+      {this.backgroundColor = Colors.white});
 
   @override
   _CameraState createState() =>
