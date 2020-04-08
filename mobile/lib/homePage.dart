@@ -18,6 +18,14 @@ class _HomePageState extends State<HomePage> {
 
   _HomePageState(this.content);
 
+  Widget hotnessWidget() => Container(
+        height: 50,
+        padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+        child: Image.asset(
+          'assets/transparent-bolt.png',
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     content = widget.content;
@@ -80,12 +88,25 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    child: Text(
-                      content[index]['username'],
-                      style: Theme.of(context).textTheme.body2,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          content[index]['username'],
+                          style: Theme.of(context).textTheme.body2,
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          hotnessWidget(),
+                          hotnessWidget(),
+                          hotnessWidget(),
+                          hotnessWidget(),
+                          hotnessWidget(),
+                        ],
+                      ),
+                    ],
                   ),
                   Container(
                     width: double.infinity,
