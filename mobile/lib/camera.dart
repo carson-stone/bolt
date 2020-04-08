@@ -3,22 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Camera extends StatefulWidget {
+  Color backgroundColor;
   String id, username;
   Function getData;
 
-  Camera(this.id, this.username, this.getData);
+  Camera(this.id, this.username, this.getData, {this.backgroundColor});
 
   @override
-  _CameraState createState() => _CameraState(id, username, getData);
+  _CameraState createState() =>
+      _CameraState(id, username, getData, backgroundColor);
 }
 
 class _CameraState extends State<Camera> {
   var picture;
   String id, username;
+  Color backgroundColor;
   Function getData;
   bool useCamera;
 
-  _CameraState(this.id, this.username, this.getData);
+  _CameraState(this.id, this.username, this.getData, this.backgroundColor);
 
   void selectImageFromSource() async {
     var newPicture;
@@ -98,7 +101,7 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       onPressed: () {
         selectImageSource();
       },

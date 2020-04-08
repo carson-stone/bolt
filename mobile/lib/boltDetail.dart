@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import './profilePage.dart';
+import './camera.dart';
 
 class BoltDetail extends StatefulWidget {
   String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
@@ -371,15 +372,21 @@ class _BoltDetailState extends State<BoltDetail> {
                       ),
                       Align(
                         alignment: Alignment(0, 0.95),
-                        child: FloatingActionButton(
-                          heroTag: null,
-                          backgroundColor: Colors.white24,
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            child: Image.asset('assets/transparent-bolt.png'),
-                          ),
-                          onPressed: () {},
+                        child: Camera(
+                          user_id,
+                          username,
+                          getData,
+                          backgroundColor: Theme.of(context).canvasColor,
                         ),
+                        // child: FloatingActionButton(
+                        //   heroTag: null,
+                        //   backgroundColor: Colors.white24,
+                        //   child: Container(
+                        //     padding: EdgeInsets.all(5),
+                        //     child: Image.asset('assets/transparent-bolt.png'),
+                        //   ),
+                        //   onPressed: () {},
+                        // ),
                       ),
                     ],
                   ),
