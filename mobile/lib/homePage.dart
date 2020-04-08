@@ -88,25 +88,28 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          content[index]['username'],
-                          style: Theme.of(context).textTheme.body2,
+                  Hero(
+                    tag: 'row',
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            content[index]['username'],
+                            style: Theme.of(context).textTheme.body2,
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          hotnessWidget(),
-                          hotnessWidget(),
-                          hotnessWidget(),
-                          hotnessWidget(),
-                          hotnessWidget(),
-                        ],
-                      ),
-                    ],
+                        Row(
+                          children: <Widget>[
+                            hotnessWidget(),
+                            hotnessWidget(),
+                            hotnessWidget(),
+                            hotnessWidget(),
+                            hotnessWidget(),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                       // width: double.infinity,

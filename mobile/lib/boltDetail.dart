@@ -322,45 +322,48 @@ class _BoltDetailState extends State<BoltDetail> {
                                   ),
                                 ),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  GestureDetector(
-                                    child: Container(
-                                      child: Text(
-                                        username,
-                                        style:
-                                            Theme.of(context).textTheme.body2,
+                              child: Hero(
+                                tag: 'row',
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    GestureDetector(
+                                      child: Container(
+                                        child: Text(
+                                          username,
+                                          style:
+                                              Theme.of(context).textTheme.body2,
+                                        ),
                                       ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Scaffold(
-                                            backgroundColor: Theme.of(context)
-                                                .backgroundColor,
-                                            appBar: AppBar(),
-                                            body: ProfilePage.notFromMainView(
-                                              user_id,
-                                              username,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Scaffold(
+                                              backgroundColor: Theme.of(context)
+                                                  .backgroundColor,
+                                              appBar: AppBar(),
+                                              body: ProfilePage.notFromMainView(
+                                                user_id,
+                                                username,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                    ],
-                                  ),
-                                ],
+                                        );
+                                      },
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        hotnessWidget(),
+                                        hotnessWidget(),
+                                        hotnessWidget(),
+                                        hotnessWidget(),
+                                        hotnessWidget(),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
