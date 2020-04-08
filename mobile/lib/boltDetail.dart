@@ -171,15 +171,12 @@ class _BoltDetailState extends State<BoltDetail> {
                   ),
                   Align(
                     alignment: Alignment(0, 0.95),
-                    child: FloatingActionButton(
-                      heroTag: null,
-                      backgroundColor: Colors.white24,
-                      // backgroundColor: Theme.of(context).splashColor,
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        child: Image.asset('assets/transparent-bolt.png'),
-                      ),
-                      onPressed: () {},
+                    child: Camera(
+                      user['id'],
+                      _id,
+                      user['username'],
+                      getData,
+                      make: 'spark',
                     ),
                   ),
                   ...List.generate(
@@ -273,14 +270,12 @@ class _BoltDetailState extends State<BoltDetail> {
                         ),
                         Align(
                           alignment: Alignment(0, 0.95),
-                          child: FloatingActionButton(
-                            heroTag: null,
-                            backgroundColor: Colors.white24,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              child: Image.asset('assets/transparent-bolt.png'),
-                            ),
-                            onPressed: () {},
+                          child: Camera(
+                            user['id'],
+                            _id,
+                            user['username'],
+                            getData,
+                            make: 'spark',
                           ),
                         ),
                       ],
@@ -481,14 +476,12 @@ class _BoltDetailState extends State<BoltDetail> {
                         ),
                         Align(
                           alignment: Alignment(0, 0.95),
-                          child: FloatingActionButton(
-                            heroTag: null,
-                            backgroundColor: Colors.white24,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              child: Image.asset('assets/transparent-bolt.png'),
-                            ),
-                            onPressed: () {},
+                          child: Camera(
+                            user['id'],
+                            _id,
+                            user['username'],
+                            getData,
+                            make: 'spark',
                           ),
                         ),
                       ],
@@ -600,16 +593,12 @@ class _BoltDetailState extends State<BoltDetail> {
                           ),
                           Align(
                             alignment: Alignment(0, 0.95),
-                            child: FloatingActionButton(
-                              heroTag: null,
-                              backgroundColor: Colors.white24,
-                              // backgroundColor: Theme.of(context).splashColor,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                child:
-                                    Image.asset('assets/transparent-bolt.png'),
-                              ),
-                              onPressed: () {},
+                            child: Camera(
+                              user['id'],
+                              _id,
+                              user['username'],
+                              getData,
+                              make: 'spark',
                             ),
                           ),
                         ],
@@ -709,16 +698,12 @@ class _BoltDetailState extends State<BoltDetail> {
                             ),
                             Align(
                               alignment: Alignment(0, 0.95),
-                              child: FloatingActionButton(
-                                heroTag: null,
-                                backgroundColor: Colors.white24,
-                                // backgroundColor: Theme.of(context).splashColor,
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  child: Image.asset(
-                                      'assets/transparent-bolt.png'),
-                                ),
-                                onPressed: () {},
+                              child: Camera(
+                                user['id'],
+                                _id,
+                                user['username'],
+                                getData,
+                                make: 'spark',
                               ),
                             ),
                           ],

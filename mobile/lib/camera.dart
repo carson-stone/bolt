@@ -108,6 +108,7 @@ class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: null,
       backgroundColor: backgroundColor,
       onPressed: () {
         selectImageSource();
