@@ -109,12 +109,12 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Container(
-                    width: double.infinity,
-                    child: Text(
-                      content[index]['description'],
-                      style: Theme.of(context).textTheme.body1,
-                    ),
-                  ),
+                      // width: double.infinity,
+                      // child: Text(
+                      //   content[index]['description'],
+                      //   style: Theme.of(context).textTheme.body1,
+                      // ),
+                      ),
                 ],
               ),
             ],

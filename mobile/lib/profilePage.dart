@@ -529,22 +529,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                       onTap: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => Scaffold(
-                                                backgroundColor:
-                                                    Theme.of(context)
-                                                        .backgroundColor,
-                                                appBar: AppBar(),
-                                                body:
-                                                    ProfilePage.notFromMainView(
-                                                  user['following'][index]
-                                                      ['id'],
-                                                  user['following'][index]
-                                                      ['username'],
-                                                ),
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Scaffold(
+                                              backgroundColor: Theme.of(context)
+                                                  .backgroundColor,
+                                              appBar: AppBar(),
+                                              body: ProfilePage.notFromMainView(
+                                                user['following'][index]['id'],
+                                                user['following'][index]
+                                                    ['username'],
                                               ),
-                                            ));
+                                            ),
+                                          ),
+                                        );
                                       },
                                     ),
                                   ),

@@ -336,18 +336,19 @@ class _BoltDetailState extends State<BoltDetail> {
                                     ),
                                     onTap: () {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Scaffold(
-                                              backgroundColor: Theme.of(context)
-                                                  .backgroundColor,
-                                              appBar: AppBar(),
-                                              body: ProfilePage.notFromMainView(
-                                                user_id,
-                                                username,
-                                              ),
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Scaffold(
+                                            backgroundColor: Theme.of(context)
+                                                .backgroundColor,
+                                            appBar: AppBar(),
+                                            body: ProfilePage.notFromMainView(
+                                              user_id,
+                                              username,
                                             ),
-                                          ));
+                                          ),
+                                        ),
+                                      );
                                     },
                                   ),
                                   Row(
