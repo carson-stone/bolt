@@ -503,6 +503,7 @@ class _BoltDetailState extends State<BoltDetail> {
                     '',
                     fromAnotherBolt: true,
                     parentBoltId: parentBoltId,
+                    user: this.user,
                   ),
                   PageView(
                     controller: controller,
