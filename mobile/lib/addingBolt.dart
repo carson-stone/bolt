@@ -112,7 +112,6 @@ class _AddingBoltState extends State<AddingBolt> {
                             'bolt_id': parentBoltId
                           },
                         );
-                        print(json.decode(res.body).toString());
                       }
 
                       getData();
