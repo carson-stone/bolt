@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io' as io;
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
@@ -90,7 +91,7 @@ class _AddingBoltState extends State<AddingBolt> {
                       imageUploadRequest.fields['imageUrl'] = bolt.path;
                       imageUploadRequest.fields['parent_bolt_id'] = '';
                       imageUploadRequest.files.add(file);
-                      final streamedResponse = await imageUploadRequest.send();
+                      await imageUploadRequest.send();
 
                       getData();
                       Navigator.pop(context);

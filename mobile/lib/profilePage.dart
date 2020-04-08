@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math';
+import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -176,36 +177,35 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(
-                sparks.length,
-                (index) => GestureDetector(
-                  child: Container(
-                    child: sparkWidget(
-                      context,
-                      child: Image.asset(
-                        sparks[index]['imageUrl'],
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BoltDetail(
-                          sparks[index]['_id'],
-                          username,
-                          sparks[index]['imageUrl'],
-                          id,
-                          sparks[index]['description'],
-                          '',
-                          parentBoltId: sparks[index]['parent_bolt_id'],
+                  sparks.length,
+                  (index) => GestureDetector(
+                        child: Container(
+                          child: sparkWidget(
+                            context,
+                            child: Image.asset(
+                              sparks[index]['imageUrl'],
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BoltDetail(
+                                sparks[index]['_id'],
+                                username,
+                                sparks[index]['imageUrl'],
+                                id,
+                                sparks[index]['description'],
+                                '',
+                                parentBoltId: sparks[index]['parent_bolt_id'],
+                              ),
+                            ),
+                          );
+                        },
+                      )),
             ),
           );
 
@@ -377,9 +377,11 @@ class _ProfilePageState extends State<ProfilePage> {
               child: GestureDetector(
                 child: Hero(
                   tag: 'bolt',
-                  child: Image.asset(
-                    bolt['imageUrl'],
-                    fit: BoxFit.cover,
+                  child: Container(
+                    child: Image.asset(
+                      bolt['imageUrl'],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 onTap: () {
