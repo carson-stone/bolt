@@ -374,7 +374,6 @@ class _BoltDetailState extends State<BoltDetail> {
                         child: FloatingActionButton(
                           heroTag: null,
                           backgroundColor: Colors.white24,
-                          // backgroundColor: Theme.of(context).splashColor,
                           child: Container(
                             padding: EdgeInsets.all(5),
                             child: Image.asset('assets/transparent-bolt.png'),
