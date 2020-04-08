@@ -31,6 +31,9 @@ class _BoltDetailState extends State<BoltDetail> {
   @override
   void initState() {
     super.initState();
+    if (parentBoltId == '') {
+      parentBoltId = null;
+    }
     getData();
   }
 
@@ -74,6 +77,11 @@ class _BoltDetailState extends State<BoltDetail> {
     PageController controller = PageController(
       initialPage: 0,
     );
+
+    print('from another bolt? ' +
+        fromAnotherBolt.toString() +
+        '\nparent bolt id: ' +
+        parentBoltId.toString());
 
     Widget detailsWidget = fromAnotherBolt
         ? parentBolt == null
@@ -483,7 +491,7 @@ class _BoltDetailState extends State<BoltDetail> {
                   ),
                 ],
               )
-            // oarent bolt id is not null
+            // parent bolt id is not null
             : PageView(
                 scrollDirection: Axis.vertical,
                 controller: PageController(initialPage: 1),
