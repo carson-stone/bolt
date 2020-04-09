@@ -143,15 +143,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     );
                                   },
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    Hotness(),
-                                    Hotness(),
-                                    Hotness(),
-                                    Hotness(),
-                                    Hotness(),
-                                  ],
-                                ),
+                                Hotness(5),
                               ],
                             ),
                           ),
@@ -243,15 +235,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     );
                                   },
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    Hotness(),
-                                    Hotness(),
-                                    Hotness(),
-                                    Hotness(),
-                                    Hotness(),
-                                  ],
-                                ),
+                                Hotness(5),
                               ],
                             ),
                           ),
@@ -355,15 +339,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                       );
                                     },
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Hotness(),
-                                      Hotness(),
-                                      Hotness(),
-                                      Hotness(),
-                                      Hotness(),
-                                    ],
-                                  ),
+                                  Hotness(5),
                                 ],
                               ),
                             ),
@@ -454,15 +430,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                               ));
                                         },
                                       ),
-                                      Row(
-                                        children: <Widget>[
-                                          Hotness(),
-                                          Hotness(),
-                                          Hotness(),
-                                          Hotness(),
-                                          Hotness(),
-                                        ],
-                                      ),
+                                      Hotness(5),
                                     ],
                                   ),
                                 ),
@@ -559,15 +527,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                             );
                                           },
                                         ),
-                                        Row(
-                                          children: <Widget>[
-                                            Hotness(),
-                                            Hotness(),
-                                            Hotness(),
-                                            Hotness(),
-                                            Hotness(),
-                                          ],
-                                        ),
+                                        Hotness(5),
                                       ],
                                     ),
                                   ),

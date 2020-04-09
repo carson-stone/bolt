@@ -441,15 +441,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: Theme.of(context).textTheme.body1,
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Hotness(),
-                        Hotness(),
-                        Hotness(),
-                        Hotness(),
-                        Hotness(),
-                      ],
-                    ),
+                    Hotness(5),
                   ],
                 ),
                 profilePic,

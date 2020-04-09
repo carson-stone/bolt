@@ -96,15 +96,7 @@ class _HomePageState extends State<HomePage> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Hotness(),
-                            Hotness(),
-                            Hotness(),
-                            Hotness(),
-                            Hotness(),
-                          ],
-                        ),
+                        Hotness(5),
                       ],
                     ),
                   ),
