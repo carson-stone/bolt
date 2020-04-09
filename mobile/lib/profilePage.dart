@@ -413,6 +413,12 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
 
+    Widget hotnessWidget = bolt == null
+        ? Container(
+            height: 50,
+          )
+        : Hotness(bolt['sparks'].length);
+
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -441,7 +447,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: Theme.of(context).textTheme.body1,
                       ),
                     ),
-                    Hotness(5),
+                    hotnessWidget,
                   ],
                 ),
                 profilePic,
