@@ -143,7 +143,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     );
                                   },
                                 ),
-                                Hotness(5),
+                                Hotness(sparks.length),
                               ],
                             ),
                           ),
@@ -235,7 +235,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     );
                                   },
                                 ),
-                                Hotness(5),
+                                Hotness(sparks[index]['sparks'].length),
                               ],
                             ),
                           ),
@@ -263,7 +263,6 @@ class _BoltDetailState extends State<BoltDetail> {
             ? Container()
             //parent loaded
             : PageView(
-                //parent loaded
                 controller: verticalController,
                 scrollDirection: Axis.vertical,
                 children: <Widget>[
@@ -339,7 +338,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                       );
                                     },
                                   ),
-                                  Hotness(5),
+                                  Hotness(parentBolt['sparks'].length),
                                 ],
                               ),
                             ),
@@ -430,7 +429,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                               ));
                                         },
                                       ),
-                                      Hotness(5),
+                                      Hotness(sparks.length),
                                     ],
                                   ),
                                 ),
@@ -527,7 +526,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                             );
                                           },
                                         ),
-                                        Hotness(5),
+                                        Hotness(sparks[index]['sparks'].length),
                                       ],
                                     ),
                                   ),
