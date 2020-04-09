@@ -58,33 +58,34 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BoltDetail(
-                              content[index]['_id'],
-                              content[index]['username'],
-                              content[index]['imageUrl'],
-                              content[index]['user_id'],
-                              content[index]['description'],
-                              'bolt',
-                              parentBoltId: content[index]['parent_bolt_id'],
-                              user: this.user,
-                            ),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BoltDetail(
+                            content[index]['_id'],
+                            content[index]['username'],
+                            content[index]['imageUrl'],
+                            content[index]['user_id'],
+                            content[index]['description'],
+                            'bolt',
+                            parentBoltId: content[index]['parent_bolt_id'],
+                            user: this.user,
+                          ),
+                        ),
+                      );
                     },
                     onLongPress: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              backgroundColor:
-                                  Theme.of(context).backgroundColor,
-                              appBar: AppBar(),
-                              body: ProfilePage.notFromMainView(
-                                  content[index]['user_id'],
-                                  content[index]['username']),
-                            ),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                            appBar: AppBar(),
+                            body: ProfilePage.notFromMainView(
+                                content[index]['user_id'],
+                                content[index]['username']),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),

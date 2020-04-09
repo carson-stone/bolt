@@ -8,34 +8,23 @@ import './camera.dart';
 class BoltDetail extends StatefulWidget {
   var user;
   String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
-  bool fromAnotherBolt;
 
   BoltDetail(this._id, this.username, this.imageUrl, this.user_id,
       this.description, this.heroTag,
-      {fromAnotherBolt: false, this.parentBoltId, @required this.user})
-      : this.fromAnotherBolt = fromAnotherBolt;
+      {this.parentBoltId, @required this.user});
 
   @override
   _BoltDetailState createState() => _BoltDetailState(_id, username, imageUrl,
-      user_id, description, heroTag, fromAnotherBolt, parentBoltId, user);
+      user_id, description, heroTag, parentBoltId, user);
 }
 
 class _BoltDetailState extends State<BoltDetail> {
   String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
-  bool fromAnotherBolt;
   List sparks = [];
   var parentBolt, user;
 
-  _BoltDetailState(
-      this._id,
-      this.username,
-      this.imageUrl,
-      this.user_id,
-      this.description,
-      this.heroTag,
-      this.fromAnotherBolt,
-      this.parentBoltId,
-      this.user);
+  _BoltDetailState(this._id, this.username, this.imageUrl, this.user_id,
+      this.description, this.heroTag, this.parentBoltId, this.user);
 
   @override
   void initState() {
@@ -83,14 +72,19 @@ class _BoltDetailState extends State<BoltDetail> {
 
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController(
+    PageController horizontalController = PageController(
       initialPage: 0,
     );
+    PageController verticalController = PageController(
+      initialPage: 1,
+    );
 
-    Widget detailsWidget = fromAnotherBolt
-        ? parentBolt == null
-            ? Container()
-            : Stack(
+    return parentBoltId == null
+        ? PageView(
+            controller: horizontalController,
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              Stack(
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
@@ -107,7 +101,7 @@ class _BoltDetailState extends State<BoltDetail> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
-                                  parentBolt['imageUrl'],
+                                  imageUrl,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -127,43 +121,46 @@ class _BoltDetailState extends State<BoltDetail> {
                               ),
                             ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              GestureDetector(
-                                child: Container(
-                                  child: Text(
-                                    parentBolt['username'],
-                                    style: Theme.of(context).textTheme.body2,
+                          child: Hero(
+                            tag: 'row',
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Container(
+                                    child: Text(
+                                      username,
+                                      style: Theme.of(context).textTheme.body2,
+                                    ),
                                   ),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Scaffold(
-                                        backgroundColor:
-                                            Theme.of(context).backgroundColor,
-                                        appBar: AppBar(),
-                                        body: ProfilePage.notFromMainView(
-                                          parentBolt['user_id'],
-                                          parentBolt['username'],
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Scaffold(
+                                          backgroundColor:
+                                              Theme.of(context).backgroundColor,
+                                          appBar: AppBar(),
+                                          body: ProfilePage.notFromMainView(
+                                            user_id,
+                                            username,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  hotnessWidget(),
-                                  hotnessWidget(),
-                                  hotnessWidget(),
-                                  hotnessWidget(),
-                                  hotnessWidget(),
-                                ],
-                              ),
-                            ],
+                                    );
+                                  },
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -179,115 +176,119 @@ class _BoltDetailState extends State<BoltDetail> {
                       make: 'spark',
                     ),
                   ),
-                  ...List.generate(
-                    sparks.length,
-                    (index) => Stack(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
-                          color: Theme.of(context).backgroundColor,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                height: 775,
-                                padding: EdgeInsets.only(bottom: 10),
-                                width: double.infinity,
-                                child: GestureDetector(
-                                  child: Hero(
-                                    tag: heroTag,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        sparks[index]['imageUrl'],
-                                        fit: BoxFit.cover,
-                                      ),
+                ],
+              ),
+              ...List.generate(
+                sparks.length,
+                (index) => Stack(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
+                      color: Theme.of(context).backgroundColor,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            height: 775,
+                            padding: EdgeInsets.only(bottom: 10),
+                            width: double.infinity,
+                            child: GestureDetector(
+                              child: Hero(
+                                tag: heroTag,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(
+                                    sparks[index]['imageUrl'],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                horizontalController.animateToPage(
+                                  0,
+                                  duration: Duration(
+                                    milliseconds: 300,
+                                  ),
+                                  curve: Curves.easeOut,
+                                );
+                              },
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                top: BorderSide(
+                                  color: Theme.of(context).accentColor,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Container(
+                                    child: Text(
+                                      sparks[index]['username'],
+                                      style: Theme.of(context).textTheme.body2,
                                     ),
                                   ),
                                   onTap: () {
-                                    controller.animateToPage(
-                                      0,
-                                      duration: Duration(
-                                        milliseconds: 300,
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Scaffold(
+                                          backgroundColor:
+                                              Theme.of(context).backgroundColor,
+                                          appBar: AppBar(),
+                                          body: ProfilePage.notFromMainView(
+                                            sparks[index]['user_id'],
+                                            sparks[index]['username'],
+                                          ),
+                                        ),
                                       ),
-                                      curve: Curves.easeOut,
                                     );
                                   },
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    top: BorderSide(
-                                      color: Theme.of(context).accentColor,
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                Row(
                                   children: <Widget>[
-                                    GestureDetector(
-                                      child: Container(
-                                        child: Text(
-                                          sparks[index]['username'],
-                                          style:
-                                              Theme.of(context).textTheme.body2,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Scaffold(
-                                              backgroundColor: Theme.of(context)
-                                                  .backgroundColor,
-                                              appBar: AppBar(),
-                                              body: ProfilePage.notFromMainView(
-                                                sparks[index]['user_id'],
-                                                sparks[index]['username'],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                      ],
-                                    ),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
+                                    hotnessWidget(),
                                   ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Align(
-                          alignment: Alignment(0, 0.95),
-                          child: Camera(
-                            user['id'],
-                            _id,
-                            user['username'],
-                            getData,
-                            make: 'spark',
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )
-        //not from another bolt
-        : parentBoltId == null
-            ? PageView(
-                controller: controller,
-                scrollDirection: Axis.horizontal,
+                    Align(
+                      alignment: Alignment(0, 0.95),
+                      child: Camera(
+                        user['id'],
+                        _id,
+                        user['username'],
+                        getData,
+                        make: 'spark',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        // parent bolt id is not null
+        : parentBolt == null
+            //didn't load yet
+            ? Container()
+            //parent loaded
+            : PageView(
+                //parent loaded
+                controller: verticalController,
+                scrollDirection: Axis.vertical,
                 children: <Widget>[
                   Stack(
                     children: <Widget>[
@@ -306,13 +307,19 @@ class _BoltDetailState extends State<BoltDetail> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Image.asset(
-                                      imageUrl,
+                                      parentBolt['imageUrl'],
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                                 onTap: () {
-                                  Navigator.pop(context);
+                                  verticalController.animateToPage(
+                                    1,
+                                    duration: Duration(
+                                      milliseconds: 300,
+                                    ),
+                                    curve: Curves.easeOut,
+                                  );
                                 },
                               ),
                             ),
@@ -326,48 +333,45 @@ class _BoltDetailState extends State<BoltDetail> {
                                   ),
                                 ),
                               ),
-                              child: Hero(
-                                tag: 'row',
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    GestureDetector(
-                                      child: Container(
-                                        child: Text(
-                                          username,
-                                          style:
-                                              Theme.of(context).textTheme.body2,
-                                        ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Container(
+                                      child: Text(
+                                        parentBolt['username'],
+                                        style:
+                                            Theme.of(context).textTheme.body2,
                                       ),
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Scaffold(
-                                              backgroundColor: Theme.of(context)
-                                                  .backgroundColor,
-                                              appBar: AppBar(),
-                                              body: ProfilePage.notFromMainView(
-                                                user_id,
-                                                username,
-                                              ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Scaffold(
+                                            backgroundColor: Theme.of(context)
+                                                .backgroundColor,
+                                            appBar: AppBar(),
+                                            body: ProfilePage.notFromMainView(
+                                              parentBolt['user_id'],
+                                              parentBolt['username'],
                                             ),
                                           ),
-                                        );
-                                      },
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      hotnessWidget(),
+                                      hotnessWidget(),
+                                      hotnessWidget(),
+                                      hotnessWidget(),
+                                      hotnessWidget(),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -385,128 +389,8 @@ class _BoltDetailState extends State<BoltDetail> {
                       ),
                     ],
                   ),
-                  ...List.generate(
-                    sparks.length,
-                    (index) => Stack(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
-                          color: Theme.of(context).backgroundColor,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                height: 775,
-                                padding: EdgeInsets.only(bottom: 10),
-                                width: double.infinity,
-                                child: GestureDetector(
-                                  child: Hero(
-                                    tag: heroTag,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        sparks[index]['imageUrl'],
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    controller.animateToPage(
-                                      0,
-                                      duration: Duration(
-                                        milliseconds: 300,
-                                      ),
-                                      curve: Curves.easeOut,
-                                    );
-                                  },
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    top: BorderSide(
-                                      color: Theme.of(context).accentColor,
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    GestureDetector(
-                                      child: Container(
-                                        child: Text(
-                                          sparks[index]['username'],
-                                          style:
-                                              Theme.of(context).textTheme.body2,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Scaffold(
-                                              backgroundColor: Theme.of(context)
-                                                  .backgroundColor,
-                                              appBar: AppBar(),
-                                              body: ProfilePage.notFromMainView(
-                                                sparks[index]['user_id'],
-                                                sparks[index]['username'],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                        hotnessWidget(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment(0, 0.95),
-                          child: Camera(
-                            user['id'],
-                            _id,
-                            user['username'],
-                            getData,
-                            make: 'spark',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )
-            // parent bolt id is not null
-            : PageView(
-                scrollDirection: Axis.vertical,
-                controller: PageController(initialPage: 1),
-                children: <Widget>[
-                  BoltDetail(
-                    _id,
-                    username,
-                    imageUrl,
-                    user_id,
-                    description,
-                    '',
-                    fromAnotherBolt: true,
-                    parentBoltId: parentBoltId,
-                    user: this.user,
-                  ),
                   PageView(
-                    controller: controller,
+                    controller: horizontalController,
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       Stack(
@@ -630,7 +514,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                         ),
                                       ),
                                       onTap: () {
-                                        controller.animateToPage(
+                                        horizontalController.animateToPage(
                                           0,
                                           duration: Duration(
                                             milliseconds: 300,
@@ -714,7 +598,5 @@ class _BoltDetailState extends State<BoltDetail> {
                   ),
                 ],
               );
-
-    return detailsWidget;
   }
 }
