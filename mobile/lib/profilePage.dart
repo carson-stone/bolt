@@ -8,6 +8,7 @@ import 'dart:convert';
 import './boltDetail.dart';
 import './camera.dart';
 import './aboutPage.dart';
+import './hotness.dart';
 
 class ProfilePage extends StatefulWidget {
   String id, username;
@@ -51,14 +52,6 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
-  Widget hotnessWidget() => Container(
-        height: 50,
-        padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-        child: Image.asset(
-          'assets/transparent-bolt.png',
-        ),
-      );
 
   @override
   void initState() {
@@ -450,11 +443,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Row(
                       children: <Widget>[
-                        hotnessWidget(),
-                        hotnessWidget(),
-                        hotnessWidget(),
-                        hotnessWidget(),
-                        hotnessWidget(),
+                        Hotness(),
+                        Hotness(),
+                        Hotness(),
+                        Hotness(),
+                        Hotness(),
                       ],
                     ),
                   ],

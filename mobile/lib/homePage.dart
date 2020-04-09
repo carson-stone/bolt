@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './profilePage.dart';
 import './boltDetail.dart';
+import './hotness.dart';
 
 class HomePage extends StatefulWidget {
   List content = [];
@@ -19,14 +20,6 @@ class _HomePageState extends State<HomePage> {
   var user;
 
   _HomePageState(this.content, this.user);
-
-  Widget hotnessWidget() => Container(
-        height: 50,
-        padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-        child: Image.asset(
-          'assets/transparent-bolt.png',
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +98,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Row(
                           children: <Widget>[
-                            hotnessWidget(),
-                            hotnessWidget(),
-                            hotnessWidget(),
-                            hotnessWidget(),
-                            hotnessWidget(),
+                            Hotness(),
+                            Hotness(),
+                            Hotness(),
+                            Hotness(),
+                            Hotness(),
                           ],
                         ),
                       ],

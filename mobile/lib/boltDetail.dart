@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import './profilePage.dart';
 import './camera.dart';
+import './hotness.dart';
 
 class BoltDetail extends StatefulWidget {
   var user;
@@ -61,14 +62,6 @@ class _BoltDetailState extends State<BoltDetail> {
       }
     });
   }
-
-  Widget hotnessWidget() => Container(
-        height: 50,
-        padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-        child: Image.asset(
-          'assets/transparent-bolt.png',
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -152,11 +145,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                 ),
                                 Row(
                                   children: <Widget>[
-                                    hotnessWidget(),
-                                    hotnessWidget(),
-                                    hotnessWidget(),
-                                    hotnessWidget(),
-                                    hotnessWidget(),
+                                    Hotness(),
+                                    Hotness(),
+                                    Hotness(),
+                                    Hotness(),
+                                    Hotness(),
                                   ],
                                 ),
                               ],
@@ -252,11 +245,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                 ),
                                 Row(
                                   children: <Widget>[
-                                    hotnessWidget(),
-                                    hotnessWidget(),
-                                    hotnessWidget(),
-                                    hotnessWidget(),
-                                    hotnessWidget(),
+                                    Hotness(),
+                                    Hotness(),
+                                    Hotness(),
+                                    Hotness(),
+                                    Hotness(),
                                   ],
                                 ),
                               ],
@@ -364,11 +357,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                   ),
                                   Row(
                                     children: <Widget>[
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                      hotnessWidget(),
-                                      hotnessWidget(),
+                                      Hotness(),
+                                      Hotness(),
+                                      Hotness(),
+                                      Hotness(),
+                                      Hotness(),
                                     ],
                                   ),
                                 ],
@@ -463,11 +456,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                       ),
                                       Row(
                                         children: <Widget>[
-                                          hotnessWidget(),
-                                          hotnessWidget(),
-                                          hotnessWidget(),
-                                          hotnessWidget(),
-                                          hotnessWidget(),
+                                          Hotness(),
+                                          Hotness(),
+                                          Hotness(),
+                                          Hotness(),
+                                          Hotness(),
                                         ],
                                       ),
                                     ],
@@ -568,11 +561,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                         ),
                                         Row(
                                           children: <Widget>[
-                                            hotnessWidget(),
-                                            hotnessWidget(),
-                                            hotnessWidget(),
-                                            hotnessWidget(),
-                                            hotnessWidget(),
+                                            Hotness(),
+                                            Hotness(),
+                                            Hotness(),
+                                            Hotness(),
+                                            Hotness(),
                                           ],
                                         ),
                                       ],
