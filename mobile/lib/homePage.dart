@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                             style: Theme.of(context).textTheme.body2,
                           ),
                         ),
-                        Hotness(5),
+                        Hotness(content[index]['sparks'].length),
                       ],
                     ),
                   ),
