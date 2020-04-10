@@ -414,10 +414,16 @@ class _ProfilePageState extends State<ProfilePage> {
           );
 
     Widget hotnessWidget;
-    if (bolt == null) {
+    if (bolt == null && sparks.length == 0) {
       hotnessWidget = Container(
         height: 50,
       );
+    } else if (bolt == null && sparks.length > 0) {
+      int hotnessAmount = 0;
+      for (int i = 0; i < sparks.length; ++i) {
+        hotnessAmount += sparks[i]['sparks'].length;
+      }
+      hotnessWidget = Hotness(hotnessAmount);
     } else {
       int hotnessAmount = bolt['sparks'].length;
       for (int i = 0; i < sparks.length; ++i) {
