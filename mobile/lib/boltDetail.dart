@@ -9,26 +9,37 @@ import './hotness.dart';
 
 class BoltDetail extends StatefulWidget {
   var user;
-  String _id, username, imageUrl, user_id, description, parentBoltId;
+  String _id, username, imageUrl, user_id, description, parentBoltId, heroTag;
   int hotnessAmount;
 
   BoltDetail(
       this._id, this.username, this.imageUrl, this.user_id, this.description,
-      {this.parentBoltId, this.hotnessAmount, @required this.user});
+      {this.parentBoltId,
+      this.hotnessAmount,
+      this.heroTag = 'bolt',
+      @required this.user});
 
   @override
   _BoltDetailState createState() => _BoltDetailState(_id, username, imageUrl,
-      user_id, description, parentBoltId, hotnessAmount, user);
+      user_id, description, parentBoltId, hotnessAmount, heroTag, user);
 }
 
 class _BoltDetailState extends State<BoltDetail> {
-  String _id, username, imageUrl, user_id, description, parentBoltId;
+  String _id, username, imageUrl, user_id, description, parentBoltId, heroTag;
   List sparks = [];
   var parentBolt, user;
   int hotnessAmount;
 
-  _BoltDetailState(this._id, this.username, this.imageUrl, this.user_id,
-      this.description, this.parentBoltId, this.hotnessAmount, this.user);
+  _BoltDetailState(
+      this._id,
+      this.username,
+      this.imageUrl,
+      this.user_id,
+      this.description,
+      this.parentBoltId,
+      this.hotnessAmount,
+      this.heroTag,
+      this.user);
 
   @override
   void initState() {
@@ -95,7 +106,7 @@ class _BoltDetailState extends State<BoltDetail> {
                           width: double.infinity,
                           child: GestureDetector(
                             child: Hero(
-                              tag: 'bolt',
+                              tag: heroTag,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.file(
@@ -279,7 +290,7 @@ class _BoltDetailState extends State<BoltDetail> {
                           width: double.infinity,
                           child: GestureDetector(
                             child: Hero(
-                              tag: 'bolt',
+                              tag: heroTag,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.file(
@@ -466,7 +477,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                   width: double.infinity,
                                   child: GestureDetector(
                                     child: Hero(
-                                      tag: 'bolt',
+                                      tag: heroTag,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Image.file(

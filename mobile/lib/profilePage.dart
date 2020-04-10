@@ -42,7 +42,6 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Text(''),
           )
         : child;
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: SizedBox(
@@ -198,6 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 sparks[index]['description'],
                                 parentBoltId: sparks[index]['parent_bolt_id'],
                                 hotnessAmount: sparks[index]['sparks'].length,
+                                heroTag: 'none',
                                 user: {
                                   'id': id,
                                   'username': username,
@@ -382,14 +382,11 @@ class _ProfilePageState extends State<ProfilePage> {
               width: double.infinity,
               height: 400,
               child: GestureDetector(
-                child: Hero(
-                  tag: 'bolt',
-                  child: Container(
-                    child: Image.file(
-                      File('/Users/carson/programming/bolt/mobile/' +
-                          bolt['imageUrl']),
-                      fit: BoxFit.cover,
-                    ),
+                child: Container(
+                  child: Image.file(
+                    File('/Users/carson/programming/bolt/mobile/' +
+                        bolt['imageUrl']),
+                    fit: BoxFit.cover,
                   ),
                 ),
                 onTap: () {
@@ -491,7 +488,10 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    boltWidget,
+                    Hero(
+                      tag: 'bolt',
+                      child: boltWidget,
+                    ),
                     SizedBox(
                       height: 60,
                     ),
