@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
                             content[index]['user_id'],
                             content[index]['description'],
                             parentBoltId: content[index]['parent_bolt_id'],
+                            hotnessAmount: content[index]['sparks'].length,
                             user: this.user,
                           ),
                         ),

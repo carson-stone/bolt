@@ -9,23 +9,25 @@ import './hotness.dart';
 class BoltDetail extends StatefulWidget {
   var user;
   String _id, username, imageUrl, user_id, description, parentBoltId;
+  int hotnessAmount;
 
   BoltDetail(
       this._id, this.username, this.imageUrl, this.user_id, this.description,
-      {this.parentBoltId, @required this.user});
+      {this.parentBoltId, this.hotnessAmount, @required this.user});
 
   @override
-  _BoltDetailState createState() => _BoltDetailState(
-      _id, username, imageUrl, user_id, description, parentBoltId, user);
+  _BoltDetailState createState() => _BoltDetailState(_id, username, imageUrl,
+      user_id, description, parentBoltId, hotnessAmount, user);
 }
 
 class _BoltDetailState extends State<BoltDetail> {
   String _id, username, imageUrl, user_id, description, parentBoltId;
   List sparks = [];
   var parentBolt, user;
+  int hotnessAmount;
 
   _BoltDetailState(this._id, this.username, this.imageUrl, this.user_id,
-      this.description, this.parentBoltId, this.user);
+      this.description, this.parentBoltId, this.hotnessAmount, this.user);
 
   @override
   void initState() {
@@ -145,7 +147,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     );
                                   },
                                 ),
-                                Hotness(sparks.length),
+                                Hotness(hotnessAmount),
                               ],
                             ),
                           ),
@@ -325,7 +327,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                     );
                                   },
                                 ),
-                                Hotness(sparks.length),
+                                Hotness(hotnessAmount),
                               ],
                             ),
                           ),
@@ -479,39 +481,43 @@ class _BoltDetailState extends State<BoltDetail> {
                                       ),
                                     ),
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      GestureDetector(
-                                        child: Container(
-                                          child: Text(
-                                            username,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .body2,
+                                  child: Hero(
+                                    tag: 'row',
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        GestureDetector(
+                                          child: Container(
+                                            child: Text(
+                                              username,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .body2,
+                                            ),
                                           ),
-                                        ),
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => Scaffold(
-                                                  backgroundColor:
-                                                      Theme.of(context)
-                                                          .backgroundColor,
-                                                  appBar: AppBar(),
-                                                  body: ProfilePage
-                                                      .notFromMainView(
-                                                    user_id,
-                                                    username,
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Scaffold(
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .backgroundColor,
+                                                    appBar: AppBar(),
+                                                    body: ProfilePage
+                                                        .notFromMainView(
+                                                      user_id,
+                                                      username,
+                                                    ),
                                                   ),
-                                                ),
-                                              ));
-                                        },
-                                      ),
-                                      Hotness(sparks.length),
-                                    ],
+                                                ));
+                                          },
+                                        ),
+                                        Hotness(sparks.length),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
