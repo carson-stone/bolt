@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 import './profilePage.dart';
 import './boltDetail.dart';
@@ -44,8 +45,9 @@ class _HomePageState extends State<HomePage> {
                   child: GestureDetector(
                     child: Hero(
                       tag: 'bolt',
-                      child: Image.asset(
-                        content[index]['imageUrl'],
+                      child: Image.file(
+                        File('/Users/carson/programming/bolt/mobile/' +
+                            content[index]['imageUrl']),
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 import 'dart:convert';
 
 import './profilePage.dart';
@@ -97,8 +98,10 @@ class _BoltDetailState extends State<BoltDetail> {
                               tag: 'bolt',
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  imageUrl,
+                                child: Image.file(
+                                  File(
+                                      '/Users/carson/programming/bolt/mobile/' +
+                                          imageUrl),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -183,8 +186,10 @@ class _BoltDetailState extends State<BoltDetail> {
                             child: GestureDetector(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  sparks[index]['imageUrl'],
+                                child: Image.file(
+                                  File(
+                                      '/Users/carson/programming/bolt/mobile/' +
+                                          sparks[index]['imageUrl']),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -277,8 +282,10 @@ class _BoltDetailState extends State<BoltDetail> {
                               tag: 'bolt',
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  imageUrl,
+                                child: Image.file(
+                                  File(
+                                      '/Users/carson/programming/bolt/mobile/' +
+                                          imageUrl),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -366,8 +373,10 @@ class _BoltDetailState extends State<BoltDetail> {
                               child: GestureDetector(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    parentBolt['imageUrl'],
+                                  child: Image.file(
+                                    File(
+                                        '/Users/carson/programming/bolt/mobile/' +
+                                            parentBolt['imageUrl']),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -460,8 +469,10 @@ class _BoltDetailState extends State<BoltDetail> {
                                       tag: 'bolt',
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          imageUrl,
+                                        child: Image.file(
+                                          File(
+                                              '/Users/carson/programming/bolt/mobile/' +
+                                                  imageUrl),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -551,8 +562,10 @@ class _BoltDetailState extends State<BoltDetail> {
                                     child: GestureDetector(
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          sparks[index]['imageUrl'],
+                                        child: Image.file(
+                                          File(
+                                              '/Users/carson/programming/bolt/mobile/' +
+                                                  sparks[index]['imageUrl']),
                                           fit: BoxFit.cover,
                                         ),
                                       ),

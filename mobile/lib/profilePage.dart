@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math';
-import 'dart:io' as io;
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -178,8 +178,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Container(
                           child: sparkWidget(
                             context,
-                            child: Image.asset(
-                              sparks[index]['imageUrl'],
+                            child: Image.file(
+                              File('/Users/carson/programming/bolt/mobile/' +
+                                  sparks[index]['imageUrl']),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -384,8 +385,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Hero(
                   tag: 'bolt',
                   child: Container(
-                    child: Image.asset(
-                      bolt['imageUrl'],
+                    child: Image.file(
+                      File('/Users/carson/programming/bolt/mobile/' +
+                          bolt['imageUrl']),
                       fit: BoxFit.cover,
                     ),
                   ),
