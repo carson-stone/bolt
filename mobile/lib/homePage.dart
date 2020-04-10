@@ -59,7 +59,6 @@ class _HomePageState extends State<HomePage> {
                             content[index]['imageUrl'],
                             content[index]['user_id'],
                             content[index]['description'],
-                            'bolt',
                             parentBoltId: content[index]['parent_bolt_id'],
                             user: this.user,
                           ),

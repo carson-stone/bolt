@@ -195,7 +195,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 sparks[index]['imageUrl'],
                                 id,
                                 sparks[index]['description'],
-                                '',
                                 parentBoltId: sparks[index]['parent_bolt_id'],
                                 user: {
                                   'id': id,
@@ -400,7 +399,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         bolt['imageUrl'],
                         id,
                         bolt['description'],
-                        'bolt',
                         user: {
                           'id': id,
                           'username': username,

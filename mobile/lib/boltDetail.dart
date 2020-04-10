@@ -8,24 +8,24 @@ import './hotness.dart';
 
 class BoltDetail extends StatefulWidget {
   var user;
-  String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
+  String _id, username, imageUrl, user_id, description, parentBoltId;
 
-  BoltDetail(this._id, this.username, this.imageUrl, this.user_id,
-      this.description, this.heroTag,
+  BoltDetail(
+      this._id, this.username, this.imageUrl, this.user_id, this.description,
       {this.parentBoltId, @required this.user});
 
   @override
-  _BoltDetailState createState() => _BoltDetailState(_id, username, imageUrl,
-      user_id, description, heroTag, parentBoltId, user);
+  _BoltDetailState createState() => _BoltDetailState(
+      _id, username, imageUrl, user_id, description, parentBoltId, user);
 }
 
 class _BoltDetailState extends State<BoltDetail> {
-  String _id, username, imageUrl, user_id, description, heroTag, parentBoltId;
+  String _id, username, imageUrl, user_id, description, parentBoltId;
   List sparks = [];
   var parentBolt, user;
 
   _BoltDetailState(this._id, this.username, this.imageUrl, this.user_id,
-      this.description, this.heroTag, this.parentBoltId, this.user);
+      this.description, this.parentBoltId, this.user);
 
   @override
   void initState() {
@@ -54,6 +54,8 @@ class _BoltDetailState extends State<BoltDetail> {
       res = await http.get(url);
       sparksParentBolt = json.decode(res.body);
     }
+
+    await Future.delayed(const Duration(milliseconds: 300));
 
     setState(() {
       sparks = boltsSparks;
@@ -90,7 +92,7 @@ class _BoltDetailState extends State<BoltDetail> {
                           width: double.infinity,
                           child: GestureDetector(
                             child: Hero(
-                              tag: heroTag,
+                              tag: 'bolt',
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
@@ -177,14 +179,11 @@ class _BoltDetailState extends State<BoltDetail> {
                             padding: EdgeInsets.only(bottom: 10),
                             width: double.infinity,
                             child: GestureDetector(
-                              child: Hero(
-                                tag: heroTag,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    sparks[index]['imageUrl'],
-                                    fit: BoxFit.cover,
-                                  ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  sparks[index]['imageUrl'],
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                               onTap: () {
@@ -260,7 +259,92 @@ class _BoltDetailState extends State<BoltDetail> {
         // parent bolt id is not null
         : parentBolt == null
             //didn't load yet
-            ? Container()
+            ? Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(2, 40, 2, 0),
+                    color: Theme.of(context).backgroundColor,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 775,
+                          padding: EdgeInsets.only(bottom: 10),
+                          width: double.infinity,
+                          child: GestureDetector(
+                            child: Hero(
+                              tag: 'bolt',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              top: BorderSide(
+                                color: Theme.of(context).accentColor,
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                          child: Hero(
+                            tag: 'row',
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Container(
+                                    child: Text(
+                                      username,
+                                      style: Theme.of(context).textTheme.body2,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Scaffold(
+                                          backgroundColor:
+                                              Theme.of(context).backgroundColor,
+                                          appBar: AppBar(),
+                                          body: ProfilePage.notFromMainView(
+                                            user_id,
+                                            username,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Hotness(sparks.length),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment(0, 0.95),
+                    child: Camera(
+                      user['id'],
+                      _id,
+                      user['username'],
+                      getData,
+                      make: 'spark',
+                    ),
+                  ),
+                ],
+              )
             //parent loaded
             : PageView(
                 controller: verticalController,
@@ -278,14 +362,11 @@ class _BoltDetailState extends State<BoltDetail> {
                               padding: EdgeInsets.only(bottom: 10),
                               width: double.infinity,
                               child: GestureDetector(
-                                child: Hero(
-                                  tag: heroTag,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      parentBolt['imageUrl'],
-                                      fit: BoxFit.cover,
-                                    ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(
+                                    parentBolt['imageUrl'],
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                                 onTap: () {
@@ -374,7 +455,7 @@ class _BoltDetailState extends State<BoltDetail> {
                                   width: double.infinity,
                                   child: GestureDetector(
                                     child: Hero(
-                                      tag: heroTag,
+                                      tag: 'bolt',
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Image.asset(
@@ -462,15 +543,11 @@ class _BoltDetailState extends State<BoltDetail> {
                                     padding: EdgeInsets.only(bottom: 10),
                                     width: double.infinity,
                                     child: GestureDetector(
-                                      child: Hero(
-                                        tag: heroTag,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.asset(
-                                            sparks[index]['imageUrl'],
-                                            fit: BoxFit.cover,
-                                          ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.asset(
+                                          sparks[index]['imageUrl'],
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                       onTap: () {
