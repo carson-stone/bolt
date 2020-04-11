@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import './menu.dart';
 
 class AboutPage extends StatelessWidget {
-  Function setLoggedIn;
+  String id;
+  Function getdata, setLoggedIn;
   final _formKey = GlobalKey<FormState>();
   final bioController = TextEditingController();
 
-  AboutPage(this.setLoggedIn);
+  AboutPage(this.id, this.getdata, this.setLoggedIn);
+
+  void updateUser(BuildContext context, String bio) async {
+    String url = 'http://localhost:6000/users/$id/updatebio';
+    var response = await http.post(url, body: {'bio': bio});
+    if (jsonDecode(response.body) == 'bio updated') {
+      getdata();
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +56,32 @@ class AboutPage extends StatelessWidget {
                     maxLines: 2,
                     style: Theme.of(context).textTheme.body1,
                     controller: bioController,
-                    validator: (value) {
-                      return null;
-                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: RaisedButton(
+                      color: Theme.of(context).accentColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Text(
+                        'Save Changes',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      onPressed: () {
+                        if (bioController.text != '' &&
+                            bioController.text != '\n') {
+                          updateUser(context, bioController.text.trim());
+                        }
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(

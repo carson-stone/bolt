@@ -42,8 +42,10 @@ class _MenuState extends State<Menu> {
       ListTile(
         title: Text('about bolt'),
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AboutPage(setLoggedIn)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AboutPage(id, () {}, setLoggedIn)));
         },
       ),
       ListTile(

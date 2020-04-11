@@ -230,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AboutPage(setLoggedIn),
+                    builder: (context) => AboutPage(id, getData, setLoggedIn),
                   ),
                 ),
               ),
