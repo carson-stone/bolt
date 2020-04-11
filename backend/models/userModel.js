@@ -9,53 +9,57 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      minlength: 4
+      minlength: 4,
     },
     following: [
       {
         id: {
           type: String,
-          required: false
+          required: false,
         },
         username: {
           type: String,
-          required: false
-        }
-      }
+          required: false,
+        },
+      },
     ],
     followers: [
       {
         id: {
           type: String,
-          required: false
+          required: false,
         },
         username: {
           type: String,
-          required: false
-        }
-      }
+          required: false,
+        },
+      },
     ],
     name: {
       type: String,
-      required: false
+      required: false,
     },
     email: {
       type: String,
       required: false,
-      trim: true
+      trim: true,
     },
     phone: {
       type: String,
       required: false,
-      trim: true
+      trim: true,
     },
     profilePic: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
+    bio: {
+      type: String,
+      required: false,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
