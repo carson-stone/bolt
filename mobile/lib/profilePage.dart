@@ -431,6 +431,8 @@ class _ProfilePageState extends State<ProfilePage> {
       hotnessWidget = Hotness(hotnessAmount);
     }
 
+    String bioText = user.containsKey('bio') ? user['bio'] : 'no bio yet';
+
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -505,7 +507,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: <Widget>[
                       Container(
                         child: Text(
-                          'sndfksndfk kjdsnfk jnsdfjknfkj n wdwn kdn kn knk en rkerngk enfkj n wdwn kdn kn knk en rkerngk enf',
+                          bioText,
                           textAlign: TextAlign.center,
                         ),
                         height: 80,
