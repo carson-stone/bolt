@@ -4,6 +4,8 @@ import './menu.dart';
 
 class AboutPage extends StatelessWidget {
   Function setLoggedIn;
+  final _formKey = GlobalKey<FormState>();
+  final bioController = TextEditingController();
 
   AboutPage(this.setLoggedIn);
 
@@ -11,11 +13,13 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Center(
+      body: Form(
+        key: _formKey,
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            Column(
+            ListView(
+              scrollDirection: Axis.vertical,
               children: <Widget>[
                 SizedBox(
                   height: 75,
@@ -25,30 +29,56 @@ class AboutPage extends StatelessWidget {
                   child: Image.asset('assets/transparent-bolt.png'),
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 50,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'bio:',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                  child: TextFormField(
+                    maxLines: 2,
+                    style: Theme.of(context).textTheme.body1,
+                    controller: bioController,
+                    validator: (value) {
+                      return null;
+                    },
+                  ),
                 ),
                 SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      border: Border.all(
-                          color: Theme.of(context).accentColor, width: 4),
-                    ),
-                    child: RaisedButton(
-                      color: Theme.of(context).backgroundColor,
-                      shape: RoundedRectangleBorder(
+                  height: 100,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(40),
+                        border: Border.all(
+                            color: Theme.of(context).accentColor, width: 4),
                       ),
-                      child: Text(
-                        'Log Out',
-                        style: Theme.of(context).textTheme.button,
+                      child: RaisedButton(
+                        color: Theme.of(context).backgroundColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Text(
+                          'Log Out',
+                          style: Theme.of(context).textTheme.button,
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            setLoggedIn(false, "", "");
+                            Navigator.pop(context);
+                          }
+                        },
                       ),
-                      onPressed: () {
-                        setLoggedIn(false, "", "");
-                        Navigator.pop(context);
-                      },
                     ),
                   ),
                 ),
